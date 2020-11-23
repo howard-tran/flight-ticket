@@ -67,10 +67,7 @@ public class ConversationService implements LogService {
   public Optional<VoidObject> deleteConversation(Conversation conversation) {
     return this.run(() -> {
       var con1 = this.conversationDao.getConversation(conversation.getSenderId(), conversation.getReceiverId()).get(0);
-      var con2 = this.conversationDao.getConversation(conversation.getReceiverId(), conversation.getSenderId()).get(0);
-
       this.conversationDao.deleteConversation(con1.get_id().toString());
-      this.conversationDao.deleteConversation(con2.get_id().toString());
 
       return VoidObject.create();
     });

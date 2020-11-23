@@ -6,13 +6,13 @@ public class Message extends MongoIdModel {
 	private String senderId;
 	private String receiverId;
 	private String textContent;
-	private String fileContent;
+	private Object fileContent;
 	private MessageContentType fileContentType;
 
 	public Message() {
 	}
 
-	public Message(String senderId, String receiverId, String textContent, String fileContent,
+	public Message(String senderId, String receiverId, String textContent, Object fileContent,
 			MessageContentType contentType) throws Exception {
 		this.senderId = senderId;
 		this.receiverId = receiverId;
@@ -21,7 +21,7 @@ public class Message extends MongoIdModel {
 		this.fileContentType = contentType;
 	}
 
-	public Message(ObjectId _id, String senderId, String receiverId, String textContent, String fileContent,
+	public Message(ObjectId _id, String senderId, String receiverId, String textContent, Object fileContent,
 			MessageContentType contentType) {
 		this._id = _id;
 		this.senderId = senderId;
@@ -55,11 +55,11 @@ public class Message extends MongoIdModel {
 		this.textContent = textContent;
 	}
 
-	public String getFileContent() {
+	public Object getFileContent() {
 		return this.fileContent;
 	}
 
-	public void setFileContent(String fileContent) {
+	public void setFileContent(Object fileContent) {
 		this.fileContent = fileContent;
 	}
 
