@@ -22,55 +22,42 @@ public class ConversationDaoImpl implements IConversationDao {
 
   @Override
   public List<Conversation> getAllConversation() throws Exception {
-    return (ArrayList<Conversation>) this.run(
-        PropertyHelper.GetMongoDBChat(),
-        "Conversation",
-        collection -> {
-          List<Conversation> res = new ArrayList();
-          for (Document doc : collection.find()) {
-            res.add((Conversation) this.parseWithId(doc, Conversation.class));
-          }
-          return res;
-        }
-      );
+    return this.run(PropertyHelper.getMongoDBChat(), "Conversation", collection -> {
+      var res = new ArrayList<Conversation>();
+
+      for (var doc : collection.find()) {
+        res.add(this.parseWithId(doc, Conversation.class));
+      }
+      return res;
+    });
   }
 
   @Override
   public List<Conversation> getConversation(String senderId) throws Exception {
-    return (ArrayList<Conversation>) this.run(
-        PropertyHelper.GetMongoDBChat(),
-        "Conversation",
-        collection -> {
-          Document filter = new Document("senderId", senderId);
+    return this.run(PropertyHelper.getMongoDBChat(), "Conversation", collection -> {
+      var filter = new Document("senderId", senderId);
+      var res = new ArrayList<Conversation>();
 
-          List<Conversation> res = new ArrayList();
-          for (Document doc : collection.find(filter)) {
-            res.add((Conversation) this.parseWithId(doc, Conversation.class));
-          }
-          return res;
-        }
-      );
+      for (var doc : collection.find(filter)) {
+        res.add(this.parseWithId(doc, Conversation.class));
+      }
+      return res;
+    });
   }
 
   @Override
   public List<Conversation> getConversation(String senderId, String receiverId) throws Exception {
-    return (ArrayList<Conversation>) this.run(
-        PropertyHelper.GetMongoDBChat(),
-        "Conversation",
-        collection -> {
-          Document con1 = new Document("senderId", senderId);
-          Document con2 = new Document("receiverId", receiverId);
-          Document filter = Document.parse(
-            String.format("{$and: [%s, %s]}", con1.toJson(), con2.toJson())
-          );
+    return (ArrayList<Conversation>) this.run(PropertyHelper.getMongoDBChat(), "Conversation", collection -> {
+      var con1 = new Document("senderId", senderId);
+      var con2 = new Document("receiverId", receiverId);
+      var filter = Document.parse(String.format("{$and: [%s, %s]}", con1.toJson(), con2.toJson()));
 
-          List<Conversation> res = new ArrayList();
-          for (Document doc : collection.find(filter)) {
-            res.add((Conversation) this.parseWithId(doc, Conversation.class));
-          }
-          return res;
-        }
-      );
+      var res = new ArrayList<Conversation>();
+      for (var doc : collection.find(filter).sort(new Document("_id", -1))) {
+        res.add(this.parseWithId(doc, Conversation.class));
+      }
+      return res;
+    });
   }
 
   @Override
@@ -79,29 +66,23 @@ public class ConversationDaoImpl implements IConversationDao {
   }
 
   @Override
-  public void insertConversation(Conversation data) throws Exception {
-    this.run(
-        PropertyHelper.GetMongoDBChat(),
-        "Conversation",
-        collection -> {
-          String json = new Gson().toJson(data);
-          collection.insertOne(Document.parse(json));
+  public String insertConversation(Conversation data) throws Exception {
+    return (String) this.run(PropertyHelper.getMongoDBChat(), "Conversation", collection -> {
+      var json = new Gson().toJson(data);
+      var doc = Document.parse(json);
 
-          return null;
-        }
-      );
+      collection.insertOne(doc);
+
+      return doc.get("_id").toString();
+    });
   }
 
   @Override
   public void deleteConversation(String _id) throws Exception {
-    this.run(
-        PropertyHelper.GetMongoDBChat(),
-        "Conversation",
-        collection -> {
-          collection.deleteOne(new Document("_id", new ObjectId(_id)));
+    this.run(PropertyHelper.getMongoDBChat(), "Conversation", collection -> {
+      collection.deleteOne(new Document("_id", new ObjectId(_id)));
 
-          return null;
-        }
-      );
+      return null;
+    });
   }
 }

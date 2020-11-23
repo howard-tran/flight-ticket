@@ -2,30 +2,22 @@ package com.helper;
 
 public class SocketService {
 
-  public class ChatSupplier {
-    /**
-     * socket interface
-     */
-    public static final String prefix = "/chat-socket";
+	public class ChatSupplier {
+
+		public static final String socketPrefix = "/chat-socket";
     public static final String appPrefix = "/chat";
+    
+    public static final String chatHanlder = "/handle";
 
-    /**
-     * socket services
-     */
-    public static final String messageService = appPrefix + "/message";
-    public static final String roomService = appPrefix + "/room";
-  }
+		public static final String messageBrocker = appPrefix + "/message";
+    public static final String roomBrocker = appPrefix + "/room";
+	}
 
-  public class NotificationSupplier {
-    /**
-     * socket interface
-     */
-    public static final String prefix = "/notification-socket";
-    public static final String appPrefix = "/notification";
+	public class NotificationSupplier {
 
-    /**
-     * socket services
-     */
-    public static final String messageService = appPrefix + "/message";
-  }
+		public static final String socketPrefix = "/notification-socket";
+		public static final String appPrefix = "/notification";
+
+		public static final String notificationBrocker = appPrefix + "/message";
+	}
 }
