@@ -1,29 +1,30 @@
-import React from 'react';
-import Switch from 'react-bootstrap/esm/Switch';
-import { Route } from 'react-router';
+import React from "react";
+import Switch from "react-bootstrap/esm/Switch";
+import { Route } from "react-router";
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
-import "../src/resource/font-awesome/css/font-awesome.min.css"
+import "../src/resource/font-awesome/css/font-awesome.min.css";
 //import Login from './components/Login';
-import "./App.css"
-import Login from './components/Login';
-import { BrowserRouter, Link } from 'react-router-dom';
-import Header from './components/header/Header';
-import Footer from './components/footer/Footer';
-import CategoryView from './components/CategoryView'
-import Home from './screen/home';
-
-
+import "./App.css";
+import Login from "./components/Login";
+import { BrowserRouter, Link } from "react-router-dom";
+import Header from "./components/header/Header";
+import Footer from "./components/footer/Footer";
+import CategoryView from "./components/CategoryView";
+import Home from "./screen/home";
+import ProductScreen from "./screen/ProductScreen";
+import AddProductScreen from "./screen/AddProductScreen";
 
 function App() {
-  
   return (
     <div className="container">
-        <BrowserRouter>
-          <Switch>
-            <Route path="/login" exact component = {Login}/>
-            <Route path = "/" exact component = {Home}/>
-          </Switch>
-        </BrowserRouter>
+      <BrowserRouter>
+        <Switch>
+          <Route path="/login" exact component={Login} />
+          <Route path="/" exact component={Home} />
+          <Route path="/product/:id" component={ProductScreen} exact></Route>
+          <Route path="/addProduct" component={AddProductScreen} exact></Route>
+        </Switch>
+      </BrowserRouter>
     </div>
   );
 }
