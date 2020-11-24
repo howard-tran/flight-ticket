@@ -12,6 +12,7 @@ Backend/Database/data/*
 #javabackend
 Backend/JavaBackend/.vscode/*
 Backend/JavaBackend/target/*
+Backend/JavaBackend/node_modules/*
 
 #frontend
 Frontend/**/node_modules/*

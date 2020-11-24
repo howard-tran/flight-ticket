@@ -5,7 +5,7 @@ public class Tuple2<par1, par2> {
   private par2 data2;
 
   public Tuple2(par1 data1, par2 data2) {
-    this.data1 = data1; 
+    this.data1 = data1;
     this.data2 = data2;
   }
 

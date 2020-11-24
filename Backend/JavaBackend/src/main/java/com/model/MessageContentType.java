@@ -1,17 +1,22 @@
 package com.model;
 
 public enum MessageContentType {
-	CONTENT_NONE("none"), CONTENT_PRODUCT_INFO("productInfo"), CONTENT_SOUND("sound"), CONTENT_IMAGE("image"),
-	CONTENT_PLAINTEXT("txt"), CONTENT_ZIP("zip"), CONTENT_RAR("rar");
+  CONTENT_NONE("none"),
+  CONTENT_PRODUCT_INFO("productInfo"),
+  CONTENT_SOUND("sound"),
+  CONTENT_IMAGE("image"),
+  CONTENT_PLAINTEXT("txt"),
+  CONTENT_ZIP("zip"),
+  CONTENT_RAR("rar");
 
-	private String contentType;
+  private String contentType;
 
-	MessageContentType(String value) {
-		this.contentType = value;
-	}
+  MessageContentType(String value) {
+    this.contentType = value;
+  }
 
-	@Override
-	public String toString() {
-		return this.contentType;
-	}
+  @Override
+  public String toString() {
+    return this.contentType;
+  }
 }

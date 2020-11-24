@@ -22,42 +22,56 @@ public class ConversationDaoImpl implements IConversationDao {
 
   @Override
   public List<Conversation> getAllConversation() throws Exception {
-    return this.run(PropertyHelper.getMongoDBChat(), "Conversation", collection -> {
-      var res = new ArrayList<Conversation>();
+    return this.run(
+        PropertyHelper.getMongoDBChat(),
+        "Conversation",
+        collection -> {
+          var res = new ArrayList<Conversation>();
 
-      for (var doc : collection.find()) {
-        res.add(this.parseWithId(doc, Conversation.class));
-      }
-      return res;
-    });
+          for (var doc : collection.find()) {
+            res.add(this.parseWithId(doc, Conversation.class));
+          }
+          return res;
+        }
+      );
   }
 
   @Override
   public List<Conversation> getConversation(String senderId) throws Exception {
-    return this.run(PropertyHelper.getMongoDBChat(), "Conversation", collection -> {
-      var filter = new Document("senderId", senderId);
-      var res = new ArrayList<Conversation>();
+    return this.run(
+        PropertyHelper.getMongoDBChat(),
+        "Conversation",
+        collection -> {
+          var filter = new Document("senderId", senderId);
+          var res = new ArrayList<Conversation>();
 
-      for (var doc : collection.find(filter)) {
-        res.add(this.parseWithId(doc, Conversation.class));
-      }
-      return res;
-    });
+          for (var doc : collection.find(filter)) {
+            res.add(this.parseWithId(doc, Conversation.class));
+          }
+          return res;
+        }
+      );
   }
 
   @Override
   public List<Conversation> getConversation(String senderId, String receiverId) throws Exception {
-    return (ArrayList<Conversation>) this.run(PropertyHelper.getMongoDBChat(), "Conversation", collection -> {
-      var con1 = new Document("senderId", senderId);
-      var con2 = new Document("receiverId", receiverId);
-      var filter = Document.parse(String.format("{$and: [%s, %s]}", con1.toJson(), con2.toJson()));
+    return (ArrayList<Conversation>) this.run(
+        PropertyHelper.getMongoDBChat(),
+        "Conversation",
+        collection -> {
+          var con1 = new Document("senderId", senderId);
+          var con2 = new Document("receiverId", receiverId);
+          var filter = Document.parse(
+            String.format("{$and: [%s, %s]}", con1.toJson(), con2.toJson())
+          );
 
-      var res = new ArrayList<Conversation>();
-      for (var doc : collection.find(filter).sort(new Document("_id", -1))) {
-        res.add(this.parseWithId(doc, Conversation.class));
-      }
-      return res;
-    });
+          var res = new ArrayList<Conversation>();
+          for (var doc : collection.find(filter).sort(new Document("_id", -1))) {
+            res.add(this.parseWithId(doc, Conversation.class));
+          }
+          return res;
+        }
+      );
   }
 
   @Override
@@ -67,22 +81,30 @@ public class ConversationDaoImpl implements IConversationDao {
 
   @Override
   public String insertConversation(Conversation data) throws Exception {
-    return (String) this.run(PropertyHelper.getMongoDBChat(), "Conversation", collection -> {
-      var json = new Gson().toJson(data);
-      var doc = Document.parse(json);
+    return (String) this.run(
+        PropertyHelper.getMongoDBChat(),
+        "Conversation",
+        collection -> {
+          var json = new Gson().toJson(data);
+          var doc = Document.parse(json);
 
-      collection.insertOne(doc);
+          collection.insertOne(doc);
 
-      return doc.get("_id").toString();
-    });
+          return doc.get("_id").toString();
+        }
+      );
   }
 
   @Override
   public void deleteConversation(String _id) throws Exception {
-    this.run(PropertyHelper.getMongoDBChat(), "Conversation", collection -> {
-      collection.deleteOne(new Document("_id", new ObjectId(_id)));
+    this.run(
+        PropertyHelper.getMongoDBChat(),
+        "Conversation",
+        collection -> {
+          collection.deleteOne(new Document("_id", new ObjectId(_id)));
 
-      return null;
-    });
+          return null;
+        }
+      );
   }
 }

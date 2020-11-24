@@ -1,12 +1,10 @@
 package com.controller;
 
-import java.util.Optional;
-
 import com.App;
 import com.helper.SocketService;
 import com.model.Message;
 import com.service.MessageService;
-
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
@@ -23,11 +21,11 @@ public class MessageController {
   @Autowired
   private SimpMessagingTemplate simpMessagingTemplate;
 
-  private void sendToUser(String userId, Object message){
+  private void sendToUser(String userId, Object message) {
     this.simpMessagingTemplate.convertAndSend(
-      String.format("%s/%s", SocketService.ChatSupplier.messageBrocker, userId),
-      message
-    );
+        String.format("%s/%s", SocketService.ChatSupplier.messageBrocker, userId),
+        message
+      );
   }
 
   @MessageMapping(SocketService.ChatSupplier.chatHanlder)
