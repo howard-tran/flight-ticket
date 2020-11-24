@@ -1,39 +1,53 @@
 import React from 'react'
+import "../../styles/Footer.scss"
 
-const Footer: React.FC = () => {
-    return (
-        <footer className="page-footer font-small cyan darken-3">
-        <div className="container">
-            <div className="row">
-            <div className="col-md-12 py-5">
-                <div className="mb-5 flex-center">
-                <a className="fb-ic">
-                    <i className="fab fa-facebook-f fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
-                </a>
-                <a className="tw-ic">
-                    <i className="fab fa-twitter fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
-                </a>
-                <a className="gplus-ic">
-                    <i className="fab fa-google-plus-g fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
-                </a>
-                <a className="li-ic">
-                    <i className="fab fa-linkedin-in fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
-                </a>
-                <a className="ins-ic">
-                    <i className="fab fa-instagram fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
-                </a>
-                <a className="pin-ic">
-                    <i className="fab fa-pinterest fa-lg white-text fa-2x"> </i>
-                </a>
+const FooterView:React.FC=()=>{
+    return(
+        <div className="FooterViewContainer">
+            <div className = "container">
+                <div className = "child-container content">
+                    <div className = "about">
+                        <div className = "title">
+                            <h4>About</h4>
+                        </div>
+                        <div className = "content-about">
+                            <p>There are a number of reasons you may need a block of text and when you do, a random paragraph can be the perfect solution.</p>
+                        </div>
+                    </div>
+                    <div className = "contact">
+                        <div className = "title">
+                            <h4>Contact</h4>
+                        </div>
+                        <div className="social-icon">
+                            <a href="#">
+                                <i className="fab fa-facebook-square"></i>
+                            </a>
+
+                            <a href="#">
+                                <i className="fab fa-twitter-square"></i> 
+                            </a>
+
+                            <a href="#">
+                                <i className="fab fa-github-square"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div className = "donate">
+                        <div className = "title">
+                            <h4>Donate</h4>
+                        </div>
+                        <img src = "/static/media/qr.jpg" alt = "qr-donate"/>                    </div>
+                </div>
+
+                <nav className = "nav-footer">
+
+                </nav>
+                <div className = "writer">
+                    <h6>@ This website is created by KTM</h6>
                 </div>
             </div>
-            </div>
         </div>
-        <div className="footer-copyright text-center py-3">© 2020 Copyright:
-            <a href="https://mdbootstrap.com/"> MDBootstrap.com</a>
-        </div>
-        </footer>
     );
 }
 
-export default Footer
+export default FooterView

@@ -1,14 +1,17 @@
 import React from 'react';
-import Switch from 'react-bootstrap/esm/Switch';
-import { Route } from 'react-router';
+import { Route,Switch } from 'react-router';
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 //import Login from './components/Login';
 import "../src/resource/font-awesome/css/font-awesome.min.css"
+import "../node_modules/popper.js/dist/popper"
+import "../node_modules/bootstrap/dist/js/bootstrap"
+import "../node_modules/jquery/dist/jquery"
 import "./App.css"
 import Login from './components/Login';
 import { BrowserRouter } from 'react-router-dom';
 import Header from './components/header/Header';
 import Home from './screen/home';
+import FooterView from './components/footer/Footer';
 
 
 
@@ -19,12 +22,13 @@ function App() {
         <div className = "headermain">
           <Header></Header>
         </div>
-        <div className="container">
-          <Switch>
-            <Route path="/login" exact component={Login} />
-            <Route path="/" exact component={Home} />
-            <Route path="/signup" exact component={Login} />
+          <Switch>          
+            <Route path="/" exact>{Home}</Route>
+            <Route path="/login" exact > <Login islogin = {true}/></Route> 
+            <Route path="/signup" exact> <Login islogin = {false}/></Route> 
           </Switch>
+        <div className = "footermain">
+          <FooterView></FooterView>
         </div>
       </BrowserRouter>
     </div>

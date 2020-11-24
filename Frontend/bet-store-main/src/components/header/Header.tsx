@@ -72,10 +72,10 @@ const Header: React.FC = () => {
                         </div>
                         <div className="dropdown-list">
                             <div>
-                                <Link to="/login">Đăng nhập</Link>
+                                <a href="/login">Đăng nhập</a>
                             </div>
                             <div>
-                                <Link to="/signup">Đăng kí</Link>
+                                <a href="/signup">Đăng kí</a>
                             </div>
                         </div>
 

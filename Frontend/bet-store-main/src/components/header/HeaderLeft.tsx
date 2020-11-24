@@ -13,27 +13,27 @@ const HeaderLeft: React.FC<Props> = (props) => {
         <div className= "menu-left-container">
             <div className="menu-left">
                 <div className="account-controller">
-                    <div className="item-list">
-                        <Link to="/login">Đăng nhập</Link>
-                    </div>
-                    <div className = "item-list">
-                        <Link to="/signup">Đăng kí</Link>
-                    </div>
+                    <a className="item-list" href="/login">
+                        <p>Đăng nhập</p>
+                    </a>
+                    <a className = "item-list" href="/signup">
+                        <p>Đăng kí</p>
+                    </a>
                 </div>
                 <hr/>
                 <div className="account-controller">
-                    <div className="item-list">
-                        <Link to="/">Home</Link>
-                    </div>
-                    <div className = "item-list">
-                        <Link to="/signup">Danh mục</Link>
-                    </div>
-                    <div className = "item-list">
-                        <Link to="/signup">Tin tức</Link>
-                    </div>
-                    <div className = "item-list">
-                        <Link to="/signup">Liên hệ</Link>
-                    </div>
+                    <Link className="item-list" to="/">
+                        <p>Home</p>
+                    </Link>
+                    <Link className = "item-list" to="/">
+                        <p >Danh mục</p>
+                    </Link>
+                    <Link className = "item-list" to="/">
+                        <p>Tin tức</p>
+                    </Link>
+                    <Link className = "item-list"  to="/">
+                        <p>Liên hệ</p>
+                    </Link>
                 </div>
             </div>
             <div className = "blur-container" onClick = {HandleOffNav}></div>
