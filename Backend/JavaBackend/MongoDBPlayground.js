@@ -28,7 +28,10 @@ db.Message.find();
 db.Message.deleteMany({});
 db.Conversation.deleteMany({});
 db.Message.find({
-  $or: [{ $and: [{ senderId: "a" }, { receiverId: "b" }] }, { $and: [{ senderId: "b" }, { receiverId: "a" }] }],
+  $or: [
+    { $and: [{ senderId: "a" }, { receiverId: "b" }] },
+    { $and: [{ senderId: "b" }, { receiverId: "a" }] },
+  ],
 }).sort({ _id: 1 });
 
 db.Message.find({ _id: ObjectId("5fb9362e1279553053ca4ed9") });

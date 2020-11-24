@@ -1,6 +1,7 @@
 package com.controller;
 
 public class ResponseHandler {
+
   public static Response<Object> ok(Object data) {
     return new Response<Object>(200, "ok", data);
   }
@@ -22,6 +23,6 @@ public class ResponseHandler {
   }
 
   public static Response<Object> conversationNotExisted(Object data) {
-    return new Response<Object>(1004, "conversation-not-existed", data)
+    return new Response<Object>(1004, "conversation-not-existed", data);
   }
 }
