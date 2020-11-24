@@ -45,11 +45,18 @@ const Accountreducer: React.Reducer<AccountEntity, AccountAction> = (state, acti
 
 
 
-const Login: React.FC = () => {
+const Login: React.FC<{islogin:boolean}> = ({islogin}) => {
 
     var [isLogin, changeisLogin] = React.useState<boolean>(true);
     var [isInfoWrong, setisInfoWrong] = React.useState<boolean>(false);
     var [NotiSignup, setNotiSignup] = React.useState<string[]>([]);
+    
+    React.useEffect(
+        ()=>{
+            changeisLogin(islogin);
+        }
+    ,[]);
+
     const transForm = (stateSetter: React.Dispatch<boolean>) => {
         stateSetter(!isLogin);
     }
