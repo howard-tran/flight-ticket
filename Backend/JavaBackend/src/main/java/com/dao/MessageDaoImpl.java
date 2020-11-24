@@ -63,7 +63,7 @@ public class MessageDaoImpl implements IMessageDao {
         PropertyHelper.getMongoDBChat(),
         "Message",
         collection -> {
-          var con1 =
+          var con1 = 
             this.createFilterConversation(conversation.getSenderId(), conversation.getReceiverId());
           var con2 =
             this.createFilterConversation(conversation.getReceiverId(), conversation.getSenderId());

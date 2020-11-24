@@ -55,7 +55,7 @@ public class ConversationDaoImpl implements IConversationDao {
 
   @Override
   public List<Conversation> getConversation(String senderId, String receiverId) throws Exception {
-    return (ArrayList<Conversation>) this.run(
+    return this.run(
         PropertyHelper.getMongoDBChat(),
         "Conversation",
         collection -> {
@@ -81,7 +81,7 @@ public class ConversationDaoImpl implements IConversationDao {
 
   @Override
   public String insertConversation(Conversation data) throws Exception {
-    return (String) this.run(
+    return this.run(
         PropertyHelper.getMongoDBChat(),
         "Conversation",
         collection -> {
