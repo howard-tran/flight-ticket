@@ -37,11 +37,7 @@ const SliderView: React.FC = () => {
 
     return (
         <div>
-
-
-
-
-            { linkdata.length > 0 && <div className="SliderViewContainer">
+            { linkdata?.length > 0 && <div className="SliderViewContainer">
                 <div id="carouselsliceview" className="carousel slide" data-ride="carousel">
                     <ol className="carousel-indicators">
                         {
