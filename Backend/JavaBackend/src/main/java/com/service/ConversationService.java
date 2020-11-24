@@ -19,30 +19,24 @@ public class ConversationService implements LogService {
 
   @Autowired
   ConversationService(
-    @Qualifier(
-      DatabaseSupplier.MongoDB.BetStore.Conversation
-    ) IConversationDao conversationDao
+    @Qualifier(DatabaseSupplier.MongoDB.BetStore.Conversation) IConversationDao conversationDao
   ) {
     this.conversationDao = conversationDao;
   }
 
-  public Optional<Tuple2<String, String>> addConversation(
-    Conversation conversation
-  ) {
+  public Optional<Tuple2<String, String>> addConversation(Conversation conversation) {
     return this.run(
         () -> {
           if (
+            // prettier-ignore
             this.conversationDao.getConversation(
-                conversation.getSenderId(),
-                conversation.getReceiverId()
-              )
-              .size() >
-            0
-          ) return new Tuple2<String, String>(null, null); else {
-            var conversationId1 =
-              this.conversationDao.insertConversation(conversation);
-            var conversationId2 =
-              this.conversationDao.insertConversation(conversation.reverse());
+                conversation.getSenderId(), conversation.getReceiverId()
+              ).size() > 0
+          ) {
+            return new Tuple2<String, String>(null, null);
+          } else {
+            var conversationId1 = this.conversationDao.insertConversation(conversation);
+            var conversationId2 = this.conversationDao.insertConversation(conversation.reverse());
 
             return new Tuple2<String, String>(conversationId1, conversationId2);
           }
@@ -57,10 +51,7 @@ public class ConversationService implements LogService {
    * @param index
    * @return
    */
-  public Optional<List<Conversation>> getConversation(
-    String senderId,
-    int index
-  ) {
+  public Optional<List<Conversation>> getConversation(String senderId, int index) {
     return this.run(
         () -> {
           var list = this.conversationDao.getConversation(senderId);
@@ -88,12 +79,12 @@ public class ConversationService implements LogService {
   public Optional<VoidObject> deleteConversation(Conversation conversation) {
     return this.run(
         () -> {
-          var con1 =
-            this.conversationDao.getConversation(
-                conversation.getSenderId(),
-                conversation.getReceiverId()
-              )
-              .get(0);
+          // prettier-ignore
+          var con1 = this.conversationDao.getConversation(
+              conversation.getSenderId(),
+              conversation.getReceiverId()
+            ).get(0);
+
           this.conversationDao.deleteConversation(con1.get_id().toString());
 
           return VoidObject.create();

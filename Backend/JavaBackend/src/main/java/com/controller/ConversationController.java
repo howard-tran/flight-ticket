@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(App.service + "/conversation")
 @RestController
 public class ConversationController {
+
   @Autowired
   private ConversationService conversationService;
 
