@@ -54,8 +54,11 @@ func test(t *testing.T) {
 		Name:       "haha",
 		Path:       "paht-csdc",
 		Properties: pro,
-		Avatar:     "etdrytufygiuhoi.png",
-		Image:      imgs,
+		Avatar: entity.ImageEntity{
+			Link: "dtryuvbijnl",
+			Alt:  "hello",
+		},
+		Image: imgs,
 	}
 	_, err = ca.CreateCategory(enti)
 
