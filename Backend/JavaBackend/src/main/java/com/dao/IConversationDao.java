@@ -6,7 +6,7 @@ import java.util.List;
 public interface IConversationDao extends IDbQueryLogic {
   public List<Conversation> getAllConversation() throws Exception;
 
-  public void insertConversation(Conversation data) throws Exception;
+  public String insertConversation(Conversation data) throws Exception;
 
   public void deleteConversation(String _id) throws Exception;
 

@@ -15,7 +15,8 @@ public enum MessageContentType {
     this.contentType = value;
   }
 
-  public String getContentType() {
+  @Override
+  public String toString() {
     return this.contentType;
   }
 }

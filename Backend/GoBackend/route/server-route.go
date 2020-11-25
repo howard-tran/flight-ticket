@@ -9,7 +9,9 @@ import (
 func SetRoute(app *gin.Engine) *gin.Engine {
 	RouteAccount(app)
 	RouteCategory(app)
+	RouteContentStatic(app)
 	RouteTest(app)
+
 	return app
 }
 
@@ -34,4 +36,9 @@ func RouteTest(app *gin.Engine) {
 		func(ctx *gin.Context) {
 			ctx.JSON(200, gin.H{"active": "true"})
 		})
+}
+
+func RouteContentStatic(app *gin.Engine) {
+	app.GET("/slider/", controller.LoadSlider)
+	app.POST("/slider/", controller.CreateSlider)
 }

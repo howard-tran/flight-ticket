@@ -1,19 +1,24 @@
 package com.model;
 
+import org.bson.types.ObjectId;
+
 public class Message extends MongoIdModel {
   private String senderId;
   private String receiverId;
   private String textContent;
-  private String fileContent;
+  private Object fileContent;
   private MessageContentType fileContentType;
+
+  public Message() {}
 
   public Message(
     String senderId,
     String receiverId,
     String textContent,
-    String fileContent,
+    Object fileContent,
     MessageContentType contentType
-  ) {
+  )
+    throws Exception {
     this.senderId = senderId;
     this.receiverId = receiverId;
     this.textContent = textContent;
@@ -22,13 +27,14 @@ public class Message extends MongoIdModel {
   }
 
   public Message(
-    String _id,
+    ObjectId _id,
     String senderId,
     String receiverId,
     String textContent,
-    String fileContent,
+    Object fileContent,
     MessageContentType contentType
   ) {
+    this._id = _id;
     this.senderId = senderId;
     this.receiverId = receiverId;
     this.textContent = textContent;
@@ -60,11 +66,11 @@ public class Message extends MongoIdModel {
     this.textContent = textContent;
   }
 
-  public String getFileContent() {
+  public Object getFileContent() {
     return this.fileContent;
   }
 
-  public void setFileContent(String fileContent) {
+  public void setFileContent(Object fileContent) {
     this.fileContent = fileContent;
   }
 
@@ -74,5 +80,31 @@ public class Message extends MongoIdModel {
 
   public void setContentType(MessageContentType contentType) {
     this.fileContentType = contentType;
+  }
+
+  @Override
+  public String toString() {
+    return (
+      "{" +
+      " _id='" +
+      get_id() +
+      "'" +
+      " senderId='" +
+      getSenderId() +
+      "'" +
+      ", receiverId='" +
+      getReceiverId() +
+      "'" +
+      ", textContent='" +
+      getTextContent() +
+      "'" +
+      ", fileContent='" +
+      getFileContent() +
+      "'" +
+      ", fileContentType='" +
+      getContentType().toString() +
+      "'" +
+      "}"
+    );
   }
 }

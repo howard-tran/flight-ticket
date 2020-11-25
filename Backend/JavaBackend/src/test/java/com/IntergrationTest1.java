@@ -11,7 +11,7 @@ import org.springframework.test.web.servlet.MockMvc;
 @SpringBootTest
 @ExtendWith(SpringExtension.class)
 @AutoConfigureMockMvc
-public class IntergrationTest {
+public class IntergrationTest1 {
   @Autowired
   MockMvc mockMvc;
 

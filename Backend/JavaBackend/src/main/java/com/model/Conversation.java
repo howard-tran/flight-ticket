@@ -21,6 +21,16 @@ public class Conversation extends MongoIdModel {
     this.receiverId = receiverId;
   }
 
+  @Override
+  public Conversation set_id(ObjectId _id) {
+    super.set_id(_id);
+    return this;
+  }
+
+  public Conversation reverse() {
+    return new Conversation(null, this.getReceiverId(), this.getSenderId());
+  }
+
   public String getSenderId() {
     return this.senderId;
   }

@@ -16,13 +16,13 @@ public class MessageDaoImpl implements IMessageDao {
 
   @Override
   public List<Message> getAllMessage() throws Exception {
-    return (ArrayList<Message>) this.run(
-        PropertyHelper.GetMongoDBChat(),
+    return this.run(
+        PropertyHelper.getMongoDBChat(),
         "Message",
         collection -> {
-          List<Message> res = new ArrayList<>();
-          for (Document doc : collection.find()) {
-            res.add((Message) this.parseWithId(doc, Message.class));
+          var res = new ArrayList<Message>();
+          for (var doc : collection.find()) {
+            res.add(this.parseWithId(doc, Message.class));
           }
           return res;
         }
@@ -31,20 +31,20 @@ public class MessageDaoImpl implements IMessageDao {
 
   @Override
   public List<Message> getMessage(String senderId, String receiverId) throws Exception {
-    return (ArrayList<Message>) this.run(
-        PropertyHelper.GetMongoDBChat(),
+    return this.run(
+        PropertyHelper.getMongoDBChat(),
         "Message",
         collection -> {
-          Document filter = Document.parse(
+          var filter = Document.parse(
             String.format(
               "{$and: [{senderId: \"%s\"}, {receiverId: \"%s\"}]}",
               senderId,
               receiverId
             )
           );
-          List<Message> res = new ArrayList<>();
-          for (Document doc : collection.find(filter)) {
-            res.add((Message) this.parseWithId(doc, Message.class));
+          var res = new ArrayList<Message>();
+          for (var doc : collection.find(filter)) {
+            res.add(this.parseWithId(doc, Message.class));
           }
           return res;
         }
@@ -59,21 +59,21 @@ public class MessageDaoImpl implements IMessageDao {
 
   @Override
   public List<Message> getMessageByConversation(Conversation conversation) throws Exception {
-    return (ArrayList<Message>) this.run(
-        PropertyHelper.GetMongoDBChat(),
+    return this.run(
+        PropertyHelper.getMongoDBChat(),
         "Message",
         collection -> {
-          Document con1 =
+          var con1 = 
             this.createFilterConversation(conversation.getSenderId(), conversation.getReceiverId());
-          Document con2 =
+          var con2 =
             this.createFilterConversation(conversation.getReceiverId(), conversation.getSenderId());
-          Document filter = Document.parse(
+          var filter = Document.parse(
             String.format("{$or: [%s, %s]}", con1.toJson(), con2.toJson())
           );
 
-          List<Message> res = new ArrayList<>();
-          for (Document doc : collection.find(filter).sort(new Document("_id", 1))) {
-            res.add((Message) this.parseWithId(doc, Message.class));
+          var res = new ArrayList<Message>();
+          for (var doc : collection.find(filter).sort(new Document("_id", -1))) {
+            res.add(this.parseWithId(doc, Message.class));
           }
           return res;
         }
@@ -82,13 +82,13 @@ public class MessageDaoImpl implements IMessageDao {
 
   @Override
   public List<Message> getMessageById(String _id) throws Exception {
-    return (ArrayList<Message>) this.run(
-        PropertyHelper.GetMongoDBChat(),
+    return this.run(
+        PropertyHelper.getMongoDBChat(),
         "Message",
         collection -> {
-          List<Message> res = new ArrayList<>();
-          for (Document doc : collection.find(new Document("_id", new ObjectId(_id)))) {
-            res.add((Message) this.parseWithId(doc, Message.class));
+          var res = new ArrayList<Message>();
+          for (var doc : collection.find(new Document("_id", new ObjectId(_id)))) {
+            res.add(this.parseWithId(doc, Message.class));
           }
           return res;
         }
@@ -96,14 +96,28 @@ public class MessageDaoImpl implements IMessageDao {
   }
 
   @Override
-  public void insertMessage(Message data) throws Exception {
-    this.run(
-        PropertyHelper.GetMongoDBChat(),
+  public String insertMessage(Message data) throws Exception {
+    return (String) this.run(
+        PropertyHelper.getMongoDBChat(),
         "Message",
         collection -> {
-          String json = new Gson().toJson(data);
-          collection.insertOne(Document.parse(json));
+          var json = new Gson().toJson(data);
+          var doc = Document.parse(json);
 
+          collection.insertOne(doc);
+
+          return doc.get("_id").toString();
+        }
+      );
+  }
+
+  @Override
+  public void deleteMessage(String _id) throws Exception {
+    this.run(
+        PropertyHelper.getMongoDBChat(),
+        "Message",
+        collection -> {
+          collection.deleteOne(new Document("_id", new ObjectId(_id)));
           return null;
         }
       );
