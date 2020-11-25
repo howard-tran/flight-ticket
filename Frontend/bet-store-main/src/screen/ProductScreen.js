@@ -4,11 +4,34 @@ import { Row, Col, Image, ListGroup, Card, Button } from "react-bootstrap";
 import axios from "axios";
 import AwesomeSlider from "react-awesome-slider";
 import "react-awesome-slider/dist/styles.css";
-
-const nodeServer = process.env.REACT_APP_NODE_SERVER;
-
+import { useDispatch, useSelector } from "react-redux";
+import { listProductDetails } from "../actions/productActions";
+import { listCategoryDetails } from "../actions/categoryActions";
 const ProductScreen = ({ match }) => {
-  const [product, setProduct] = useState({});
+  const dispatch = useDispatch();
+
+  const [propertyLabel, setPropertyLabel] = useState([]);
+  const [properties, setProperties] = useState([]);
+  const [images, setImages] = useState([]);
+
+  const productDetails = useSelector((state) => state.productDetails);
+  const { loading, error, product } = productDetails;
+
+  useEffect(() => {
+    dispatch(listProductDetails(match.params.id));
+  }, [dispatch, match]);
+
+  const categoryDetails = useSelector((state) => state.categoryDetails);
+  const { category } = categoryDetails;
+  useEffect(() => {
+    dispatch(listCategoryDetails(product.category));
+
+    setImages(product.image);
+    setProperties(product.properties);
+    setPropertyLabel(category.properties);
+  }, [dispatch, product]);
+
+  /*const [product, setProduct] = useState({});
   const [propertyLabel, setPropertyLabel] = useState([]);
   const [properties, setProperties] = useState([]);
   const [images, setImages] = useState([]);
@@ -30,7 +53,7 @@ const ProductScreen = ({ match }) => {
       setPropertyLabel(data.properties);
     };
     fetchLabel();
-  }, [match, product]);
+  }, [match, product]);*/
 
   return (
     <>
@@ -41,7 +64,7 @@ const ProductScreen = ({ match }) => {
         <Col md={6}>
           <AwesomeSlider>
             {images.map((img) => (
-              <div data-src={`http://localhost:8080/cdn/${img.link}`} />
+              <div data-src={`/cdn/${img.link}`} />
             ))}
           </AwesomeSlider>
         </Col>
@@ -97,6 +120,7 @@ const ProductScreen = ({ match }) => {
           ))}
         </ListGroup>
       </Row>
+      {console.log(propertyLabel)}
     </>
   );
 };
