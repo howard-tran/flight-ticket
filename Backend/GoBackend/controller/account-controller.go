@@ -4,10 +4,9 @@ import (
 	"GoBackend/entity"
 	"GoBackend/service"
 	mongodbservice "GoBackend/service/repository-service"
-	"GoBackend/utility"
 	"fmt"
 	"net/http"
-	"regexp"
+	"os"
 	"time"
 
 	"github.com/gin-gonic/gin"
@@ -23,7 +22,7 @@ type KeyCodeTel struct {
 func LoginHandle(ctx *gin.Context) {
 	var account entity.AccountEntity
 	ctx.BindJSON(&account)
-	fmt.Println(account)
+	//fmt.Println(account)
 	sec, err := mongodbservice.NewDBService()
 	if err != nil {
 		msg := fmt.Sprintf("[ERROR] Database connect faile: %s", err.Error())
@@ -32,14 +31,17 @@ func LoginHandle(ctx *gin.Context) {
 		return
 	}
 
-	c := sec.GetDatabase(utility.GetConfigServerbyKey(utility.Database).(utility.DatabaseStruct).NAME_DATABASE).C("Account")
+	c := sec.GetDatabase(os.Getenv("NAME_DATABASE")).C("Account")
 
 	query := c.Find(bson.M{"username": account.Username, "password": account.Password})
 
 	if n, _ := query.Count(); n == 1 {
 		serviceSecure := service.NewJwtService()
+		var acc entity.AccountEntity
+		query.One(&acc)
 
-		token := serviceSecure.GenerationToken(account.Username, account.Password)
+		token := serviceSecure.GenerationToken(acc.ID.Hex(),acc.Username)
+		//fmt.Println(acc)
 		ctx.JSON(http.StatusOK, service.CreateMsgSuccessJsonResponse(gin.H{"token": token})) //gin.H{"token": token})
 	} else {
 		ctx.JSON(http.StatusOK, service.CreateMsgErrorJsonResponse(http.StatusUnauthorized, "Infomation login incorrect"))
@@ -57,7 +59,7 @@ func SignupHandle(ctx *gin.Context) {
 		return
 	}
 
-	c := sec.GetDatabase(utility.GetConfigServerbyKey(utility.Database).(utility.DatabaseStruct).NAME_DATABASE).C("Account")
+	c := sec.GetDatabase(os.Getenv("NAME_DATABASE")).C("Account")
 
 	query := c.Find(bson.M{"username": account.Username})
 
@@ -74,7 +76,7 @@ func SignupHandle(ctx *gin.Context) {
 		ctx.JSON(http.StatusOK, service.CreateMsgSuccessJsonResponse(gin.H{"msg": "Account created"}))
 	}
 }
-
+/*
 func ConfirmTelbySMS(ctx *gin.Context) {
 	var account entity.AccountEntity
 	ctx.BindJSON(&account)
@@ -142,3 +144,4 @@ func CheckTelbySMS(ctx *gin.Context) {
 	}
 	ctx.JSON(http.StatusOK, gin.H{"msg": "Confirm tel success"})
 }
+*/

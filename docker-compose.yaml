@@ -6,6 +6,11 @@ services:
     build:
       context: ./Backend/GoBackend
       dockerfile: dockerfile.godev
+    environment:
+      MONGO_URI: mongodb://root:root@10.1.0.4:27017/
+      NAME_DATABASE: bet_store
+      Secretkey: TWluaCAoxJBvw6BuLCBLaMO0aSwgVGnhur9uKQ==
+      Issuer: localhost
     ports:
       - "8081:8080"
     depends_on: 
