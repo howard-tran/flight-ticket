@@ -26,6 +26,8 @@ function App() {
             <Route path="/" exact>{Home}</Route>
             <Route path="/login" exact > <Login islogin = {true}/></Route> 
             <Route path="/signup" exact> <Login islogin = {false}/></Route> 
+             <Route path="/product/:id" component={ProductScreen} exact></Route>
+          <Route path="/addProduct" component={AddProductScreen} exact></Route>
           </Switch>
         <div className = "footermain">
           <FooterView></FooterView>
@@ -37,3 +39,5 @@ function App() {
 }
 
 export default App;
+
+         
