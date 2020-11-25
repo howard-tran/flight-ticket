@@ -13,9 +13,9 @@ services:
       Issuer: localhost
     ports:
       - "8081:8080"
-    depends_on: 
-        - cdnserver
-        - database
+    depends_on:
+      - cdnserver
+      - database
     volumes:
       - ./Backend/GoBackend:/app/Backend/GoBackend
       - ./Backend/GoBackend/go.mod:/app/Backend/GoBackend/go.mod
@@ -61,9 +61,9 @@ services:
       dockerfile: dockerfile.javadev
     ports:
       - "8085:8081"
-    depends_on: 
-        - cdnserver
-        - database
+    depends_on:
+      - cdnserver
+      - database
     volumes:
       - ./Backend/JavaBackend:/app
       - /home/larryjason/project/bet-store/Backend/JavaBackend/logs:/app/logs
@@ -77,9 +77,9 @@ services:
       dockerfile: dockerfile.node
     ports:
       - "8086:5000"
-    depends_on: 
-        - cdnserver
-        - database
+    depends_on:
+      - cdnserver
+      - database
     environment:
       MONGO_URI: mongodb://root:root@10.1.0.4:27017/
     volumes:
@@ -87,7 +87,7 @@ services:
       - ./Backend/NodeJSBackend/controller:/app/controller
       - ./Backend/NodeJSBackend/middleware:/app/middleware
       - ./Backend/NodeJSBackend/models:/app/models
-      - ./Backend/NodeJSBackend/routers:/app/routers
+      - ./Backend/NodeJSBackend/routes:/app/routes
       - ./Backend/NodeJSBackend/server.js:/app/server.js
     networks:
       backend:
