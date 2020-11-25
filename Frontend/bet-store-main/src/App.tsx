@@ -10,8 +10,10 @@ import "./App.css"
 import Login from './components/Login';
 import { BrowserRouter } from 'react-router-dom';
 import Header from './components/header/Header';
-import Home from './screen/home';
+import Home from './screen/home/home';
 import FooterView from './components/footer/Footer';
+import ProductScreen from './screen/ProductScreen';
+import AddProductScreen from './screen/AddProductScreen';
 
 
 
@@ -26,6 +28,8 @@ function App() {
             <Route path="/" exact>{Home}</Route>
             <Route path="/login" exact > <Login islogin = {true}/></Route> 
             <Route path="/signup" exact> <Login islogin = {false}/></Route> 
+            <Route path="/product/:id" component={ProductScreen} exact></Route>
+            <Route path="/addProduct" component={AddProductScreen} exact></Route>
           </Switch>
         <div className = "footermain">
           <FooterView></FooterView>
@@ -37,3 +41,5 @@ function App() {
 }
 
 export default App;
+
+         

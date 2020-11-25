@@ -2,8 +2,9 @@ package route
 
 import (
 	"GoBackend/controller"
-
+	"GoBackend/server/middlewares"
 	"github.com/gin-gonic/gin"
+	"net/http"
 )
 
 func SetRoute(app *gin.Engine) *gin.Engine {
@@ -12,6 +13,10 @@ func SetRoute(app *gin.Engine) *gin.Engine {
 	RouteContentStatic(app)
 	RouteTest(app)
 
+	//Route have auth
+	appauth := app.Group("/a",middlewares.AuthorizeJWT())
+
+	RouteAuth(appauth)
 	return app
 }
 
@@ -20,14 +25,15 @@ func RouteAccount(app *gin.Engine) {
 
 	app.POST("api/account/signup", controller.SignupHandle)
 
-	app.POST("api/account/sendsms", controller.ConfirmTelbySMS)
+	//app.POST("api/account/sendsms", controller.ConfirmTelbySMS)
 
-	app.POST("api/account/checkkeycode", controller.CheckTelbySMS)
+	//app.POST("api/account/checkkeycode", controller.CheckTelbySMS)
 }
 
 func RouteCategory(app *gin.Engine) {
 	app.GET("/category/", controller.LoadCategory)
 	app.POST("/category/", controller.CreateCategory)
+
 }
 
 func RouteTest(app *gin.Engine) {
@@ -36,9 +42,28 @@ func RouteTest(app *gin.Engine) {
 		func(ctx *gin.Context) {
 			ctx.JSON(200, gin.H{"active": "true"})
 		})
+
+	//app.Use(middlewares.Logger())
+	app.GET(
+		"/testauth/",
+		middlewares.AuthorizeJWT(),
+		func(ctx *gin.Context) {
+			hh, _:= ctx.Get("ClaimJwt")
+			//var vive, _ = hh.(entity.JwtClaimEntity)
+
+			ctx.JSON(200, gin.H{"auth": hh})
+		})
 }
 
 func RouteContentStatic(app *gin.Engine) {
 	app.GET("/slider/", controller.LoadSlider)
 	app.POST("/slider/", controller.CreateSlider)
+}
+
+func RouteAuth(app *gin.RouterGroup)  {
+	app.GET(
+		"/secure/",
+		func(ctx *gin.Context) {
+			ctx.JSON(http.StatusOK, gin.H{"secure": "active"})
+		})
 }

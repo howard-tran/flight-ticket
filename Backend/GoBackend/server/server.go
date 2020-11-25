@@ -38,9 +38,15 @@ func NewServer() *gin.Engine {
 }
 
 func SetupWriteLogFile() {
+	err := os.MkdirAll("log", os.ModePerm)
+	if err != nil {
+		fmt.Printf("[SetupWriteLogger] %s\n", err.Error())
+		return
+	}
 	f, err := os.OpenFile("log/server.log", os.O_APPEND|os.O_CREATE|os.O_RDWR, 0777)
 	if err != nil {
 		fmt.Printf("[SetupWriteLogger] %s\n", err.Error())
+		return
 	}
 	unitLogger := "\n--------- GoServer Start at " + time.Now().Format("2006/01/02 15:04:05") + " ---------\n"
 	f.WriteString(unitLogger)
@@ -53,6 +59,7 @@ func WriteLogErrorFile() {
 	f, err := os.OpenFile("log/error.log", os.O_APPEND|os.O_CREATE|os.O_RDWR, 0777)
 	if err != nil {
 		fmt.Printf("[SetupWriteLogger] %s\n", err.Error())
+		return
 	}
 
 	gin.DefaultErrorWriter = io.MultiWriter(os.Stdout, f)

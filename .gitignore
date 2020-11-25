@@ -5,6 +5,8 @@ Backend/CDNServer/database/*
 #golang
 gin-bin
 go.sum
+Backend/GoBackend/.idea/*
+Backend/CDNServer/.idea/*
 
 #datamongo
 Backend/Database/data/*
@@ -12,6 +14,7 @@ Backend/Database/data/*
 #javabackend
 Backend/JavaBackend/.vscode/*
 Backend/JavaBackend/target/*
+Backend/JavaBackend/node_modules/*
 
 #frontend
 Frontend/**/node_modules/*
@@ -21,3 +24,5 @@ node_modules/
 .env
 seeder.js
 data/
+logs/
+

@@ -2,13 +2,11 @@ import mongoose from "mongoose";
 import Category from "../models/categoryModel.js";
 import asyncHandler from "express-async-handler";
 export const createCategory = asyncHandler(async (req, res) => {
-  const newCategory = new Category({
-    _id: mongoose.Types.ObjectId(),
-    name: req.body.name,
-    properties: req.body.properties,
-  });
-
   try {
+    const newCategory = new Category({
+      _id: mongoose.Types.ObjectId(),
+      ...req.body,
+    });
     await Category.insertMany(newCategory);
 
     console.log("Added new category");
@@ -16,8 +14,8 @@ export const createCategory = asyncHandler(async (req, res) => {
       message: "Category created successfully!",
     });
   } catch (error) {
-    console.error(`${error}`);
+    res.status(500);
+
+    throw new Error(error);
   }
-
-
 });

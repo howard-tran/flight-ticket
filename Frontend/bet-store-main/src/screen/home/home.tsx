@@ -1,7 +1,9 @@
+import classNames from "classnames";
 import { defaultCoreCipherList } from "constants";
 import React from "react";
 import { Link } from "react-router-dom";
-import SliderView from "../components/SliderContent";
+import style from "./home.module.scss";
+import SliderView from "../../components/SliderContent";
 
 
 export default function Home() {
