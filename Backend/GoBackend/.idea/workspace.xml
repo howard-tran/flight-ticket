@@ -20,21 +20,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0dbaac41-6d64-45f3-8f4e-38f1ce0c1143" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controller/account-controller.go" beforeDir="false" afterPath="$PROJECT_DIR$/controller/account-controller.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/entity/account-entity.go" beforeDir="false" afterPath="$PROJECT_DIR$/entity/account-entity.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/entity/jwt-claim-entity.go" beforeDir="false" afterPath="$PROJECT_DIR$/entity/jwt-claim-entity.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/error.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/server.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/route/server-route.go" beforeDir="false" afterPath="$PROJECT_DIR$/route/server-route.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/middlewares/jwt-auth.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/middlewares/jwt-auth.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/server.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/server.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/category-service.go" beforeDir="false" afterPath="$PROJECT_DIR$/service/category-service.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/jwt-service.go" beforeDir="false" afterPath="$PROJECT_DIR$/service/jwt-service.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/repository-service/db-service.go" beforeDir="false" afterPath="$PROJECT_DIR$/service/repository-service/db-service.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/slider-service.go" beforeDir="false" afterPath="$PROJECT_DIR$/service/slider-service.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/tel-auth-service.go" beforeDir="false" afterPath="$PROJECT_DIR$/service/tel-auth-service.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utility/utility.go" beforeDir="false" afterPath="$PROJECT_DIR$/utility/utility.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../docker-compose.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../../docker-compose.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/manager-controller.go" beforeDir="false" afterPath="$PROJECT_DIR$/controller/manager-controller.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/entity/msgreponse-entity.go" beforeDir="false" afterPath="$PROJECT_DIR$/entity/msgreponse-entity.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/log/server.log" beforeDir="false" afterPath="$PROJECT_DIR$/log/server.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/MsgReponse-service.go" beforeDir="false" afterPath="$PROJECT_DIR$/service/MsgReponse-service.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

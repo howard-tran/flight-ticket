@@ -4,7 +4,9 @@ import (
 	"GoBackend/entity"
 	"GoBackend/service"
 	mongodbservice "GoBackend/service/repository-service"
+
 	"fmt"
+	"golang.org/x/crypto/bcrypt"
 	"net/http"
 	"os"
 	"time"
@@ -22,6 +24,7 @@ type KeyCodeTel struct {
 func LoginHandle(ctx *gin.Context) {
 	var account entity.AccountEntity
 	ctx.BindJSON(&account)
+	//fmt.Println(account.Password)
 	//fmt.Println(account)
 	sec, err := mongodbservice.NewDBService()
 	if err != nil {
@@ -33,24 +36,31 @@ func LoginHandle(ctx *gin.Context) {
 
 	c := sec.GetDatabase(os.Getenv("NAME_DATABASE")).C("Account")
 
-	query := c.Find(bson.M{"username": account.Username, "password": account.Password})
+	query := c.Find(bson.M{"username": account.Username})
 
 	if n, _ := query.Count(); n == 1 {
 		serviceSecure := service.NewJwtService()
 		var acc entity.AccountEntity
 		query.One(&acc)
 
-		token := serviceSecure.GenerationToken(acc.ID.Hex(),acc.Username)
-		//fmt.Println(acc)
-		ctx.JSON(http.StatusOK, service.CreateMsgSuccessJsonResponse(gin.H{"token": token})) //gin.H{"token": token})
+		if CheckPasswordHash(account.Password,acc.Password) {
+			token := serviceSecure.GenerationToken(acc.ID.Hex(), acc.Username)
+			//fmt.Println(acc)
+			ctx.JSON(http.StatusOK, service.CreateMsgSuccessJsonResponse(gin.H{"token": token})) //gin.H{"token": token})
+		} else {
+			ctx.JSON(http.StatusOK, service.CreateMsgErrorJsonResponse(1006, "Password wrong!!!"))
+		}
+
 	} else {
-		ctx.JSON(http.StatusOK, service.CreateMsgErrorJsonResponse(http.StatusUnauthorized, "Infomation login incorrect"))
+		ctx.JSON(http.StatusOK, service.CreateMsgErrorJsonResponse(1005, "Username not exist!!!"))
 	}
 }
 
 func SignupHandle(ctx *gin.Context) {
 	var account entity.AccountEntity
 	ctx.BindJSON(&account)
+	account.Password,_ = HashPassword(account.Password)
+	//fmt.Println(account.Password)
 	sec, err := mongodbservice.NewDBService()
 	if err != nil {
 		msg := fmt.Sprintf("[ERROR] Database connect faile: %s", err.Error())
@@ -64,7 +74,7 @@ func SignupHandle(ctx *gin.Context) {
 	query := c.Find(bson.M{"username": account.Username})
 
 	if n, _ := query.Count(); n >= 1 {
-		ctx.JSON(http.StatusOK, service.CreateMsgErrorJsonResponse(http.StatusConflict, "Username already exists"))
+		ctx.JSON(http.StatusOK, service.CreateMsgErrorJsonResponse(1007, "Username already exists"))
 		return
 	}
 	account.ID = bson.NewObjectId()
@@ -76,6 +86,19 @@ func SignupHandle(ctx *gin.Context) {
 		ctx.JSON(http.StatusOK, service.CreateMsgSuccessJsonResponse(gin.H{"msg": "Account created"}))
 	}
 }
+
+
+func HashPassword(password string) (string, error) {
+	bytes, err := bcrypt.GenerateFromPassword([]byte(password), 14)
+	return string(bytes), err
+}
+
+
+func CheckPasswordHash(password, hash string) bool {
+	err := bcrypt.CompareHashAndPassword([]byte(hash), []byte(password))
+	return err == nil
+}
+
 /*
 func ConfirmTelbySMS(ctx *gin.Context) {
 	var account entity.AccountEntity
