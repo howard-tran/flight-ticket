@@ -112,6 +112,9 @@ const Login: React.FC<{islogin:boolean}> = ({islogin}) => {
                 res => {
                     if (res.data["status"] == 200) {
                         console.log(res.data.data["token"]);
+                        localStorage.setItem("Token", res.data.data.token);
+
+                        alert(localStorage.getItem("Token"));
                         window.localStorage.setItem("jwt_token", res.data["data"]["token"]);
                         setisInfoWrong(false);
                         window.location.href = "/";
