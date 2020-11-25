@@ -1,13 +1,11 @@
 package com.controller;
 
-import java.util.Optional;
-
 import com.App;
 import com.helper.SocketService;
 import com.helper.Tuple2;
 import com.model.Conversation;
 import com.service.ConversationService;
-
+import java.util.Optional;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
@@ -20,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(App.service + "/conversation")
 @RestController
 public class ConversationController {
+
   @Autowired
   private ConversationService conversationService;
 
@@ -29,17 +28,26 @@ public class ConversationController {
   private void podcastNewConversation(Conversation conversation, Tuple2<String, String> data) {
     this.sender.convertAndSend(
         String.format("%s/%s", SocketService.ChatSupplier.roomBrocker, conversation.getSenderId()),
-        ResponseHandler.createdConversation(conversation.set_id(new ObjectId(data.get_1()))));
+        ResponseHandler.createdConversation(conversation.set_id(new ObjectId(data.get_1())))
+      );
 
     this.sender.convertAndSend(
-        String.format("%s/%s", SocketService.ChatSupplier.roomBrocker, conversation.getReceiverId()),
-        ResponseHandler.createdConversation(conversation.reverse().set_id(new ObjectId(data.get_2()))));
+        String.format(
+          "%s/%s",
+          SocketService.ChatSupplier.roomBrocker,
+          conversation.getReceiverId()
+        ),
+        ResponseHandler.createdConversation(
+          conversation.reverse().set_id(new ObjectId(data.get_2()))
+        )
+      );
   }
 
   private void podcastDeletedConversation(Conversation conversation) {
     this.sender.convertAndSend(
         String.format("%s/%s", SocketService.ChatSupplier.roomBrocker, conversation.getSenderId()),
-        ResponseHandler.deletedConversation(conversation));
+        ResponseHandler.deletedConversation(conversation)
+      );
   }
 
   @PostMapping("/add")
