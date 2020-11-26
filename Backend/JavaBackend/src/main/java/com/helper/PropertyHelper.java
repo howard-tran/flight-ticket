@@ -49,7 +49,7 @@ public class PropertyHelper {
     return res;
   }
 
-  public static String getJWTKey() throws Exception {
+  public static String getJWTSecretKey() throws Exception {
     return getProperty("jwt-secret-key").get();
   }
 

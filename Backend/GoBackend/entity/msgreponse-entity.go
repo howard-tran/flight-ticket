@@ -2,7 +2,7 @@ package entity
 
 type MsgReponseErrorEntity struct {
 	Status int    `json:"status"`
-	Error  string `json:"error"`
+	Message  string `json:"message"`
 }
 type MsgReponseSuccessEntity struct {
 	Status int         `json:"status"`
