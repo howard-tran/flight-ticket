@@ -7,12 +7,15 @@ import com.model.Conversation;
 import com.service.ConversationService;
 import java.util.Optional;
 import org.bson.types.ObjectId;
+import org.jboss.logging.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RequestMapping(App.service + "/conversation")
@@ -30,7 +33,7 @@ public class ConversationController {
         String.format("%s/%s", SocketService.ChatSupplier.roomBrocker, conversation.getSenderId()),
         ResponseHandler.createdConversation(conversation.set_id(new ObjectId(data.get_1())))
       );
-
+      
     this.sender.convertAndSend(
         String.format(
           "%s/%s",
@@ -56,8 +59,24 @@ public class ConversationController {
 
     if (res.isEmpty()) {
       return ResponseHandler.error(null);
+    } else if (res.get().isEmpty()) {
+      return ResponseHandler.createdConversation(null);
     } else {
       this.podcastNewConversation(conversation, res.get());
+      return ResponseHandler.ok(res.get());
+    }
+  }
+
+  @GetMapping("/get")
+  public Response<Object> getConversation(
+    @RequestParam(name = "senderid", required = true) String senderId,
+    @RequestParam(name = "index", required = true) int index
+  ) {
+    var res = this.conversationService.getConversation(senderId, index);
+
+    if (res.isEmpty()) {
+      return ResponseHandler.error(null);
+    } else {
       return ResponseHandler.ok(res.get());
     }
   }

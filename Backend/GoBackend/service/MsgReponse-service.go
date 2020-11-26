@@ -7,7 +7,7 @@ import (
 func CreateMsgErrorJsonResponse(statuscode int, msg string) interface{} {
 	result := entity.MsgReponseErrorEntity{
 		Status: statuscode,
-		Error:  msg,
+		Message:  msg,
 	}
 	//b, _ := json.Marshal(result)
 	//return string(b)

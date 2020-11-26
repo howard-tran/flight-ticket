@@ -5,6 +5,9 @@ Backend/CDNServer/database/*
 #golang
 gin-bin
 go.sum
+Backend/GoBackend/.idea/*
+Backend/GoBackend/log/*
+Backend/CDNServer/.idea/*
 
 #datamongo
 Backend/Database/data/*
@@ -23,3 +26,4 @@ node_modules/
 seeder.js
 data/
 logs/
+

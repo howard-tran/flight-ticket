@@ -3,8 +3,8 @@ package service
 import (
 	"GoBackend/entity"
 	mongodbservice "GoBackend/service/repository-service"
-	"GoBackend/utility"
 	"fmt"
+	"os"
 
 	"gopkg.in/mgo.v2"
 	"gopkg.in/mgo.v2/bson"
@@ -29,7 +29,7 @@ func NewCategoryService() (CategoryService, error) {
 		return nil, err
 	}
 	return &categoryService{
-		collection: sec.GetDatabase(utility.GetConfigServerbyKey(utility.Database).(utility.DatabaseStruct).NAME_DATABASE).C(CategoryCollection),
+		collection: sec.GetDatabase(os.Getenv("NAME_DATABASE")).C(CategoryCollection),
 	}, nil
 }
 

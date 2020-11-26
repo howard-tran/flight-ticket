@@ -1,7 +1,7 @@
 package mongodbservice
 
 import (
-	"GoBackend/utility"
+	"os"
 
 	"gopkg.in/mgo.v2"
 )
@@ -19,8 +19,8 @@ var instance dbService
 
 func NewDBService() (*dbService, error) {
 	if instance == (dbService{}) {
-		configconnectDB := utility.GetConfigServerbyKey(utility.Database).(utility.DatabaseStruct)
-		sec, err := mgo.Dial(configconnectDB.Stringconnection)
+		//configconnectDB := utility.GetConfigServerbyKey(utility.Database).(utility.DatabaseStruct)
+		sec, err := mgo.Dial(os.Getenv("MONGO_URI"))
 		if err != nil {
 			return &dbService{session: nil}, err
 		}
@@ -29,6 +29,7 @@ func NewDBService() (*dbService, error) {
 	}
 	return &instance, nil
 }
+
 
 func (s *dbService) GetSession() *mgo.Session {
 	return s.session
@@ -41,3 +42,4 @@ func (s *dbService) CloseDBService() {
 func (s *dbService) GetDatabase(name string) *mgo.Database {
 	return s.session.DB(name)
 }
+
