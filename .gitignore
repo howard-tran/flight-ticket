@@ -6,6 +6,7 @@ Backend/CDNServer/database/*
 gin-bin
 go.sum
 Backend/GoBackend/.idea/*
+Backend/GoBackend/log/*
 Backend/CDNServer/.idea/*
 
 #datamongo
