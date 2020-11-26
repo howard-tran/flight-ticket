@@ -12,6 +12,7 @@ import { BrowserRouter } from 'react-router-dom';
 import Header from './components/header/Header';
 import Home from './screen/home/home';
 import FooterView from './components/footer/Footer';
+import { ChatBox } from './components/ChatBox';
 
 
 
@@ -27,6 +28,7 @@ function App() {
             <Route path="/login" exact > <Login islogin = {true}/></Route> 
             <Route path="/signup" exact> <Login islogin = {false}/></Route> 
           </Switch>
+          <ChatBox></ChatBox>
         <div className = "footermain">
           <FooterView></FooterView>
         </div>

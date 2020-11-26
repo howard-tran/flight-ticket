@@ -2,6 +2,7 @@ import axios from 'axios';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import "../styles/Login.css"
+import { copyToClipboard } from './Utils';
 
 let regexpTel: RegExp = /(09|01[2|6|8|9])+([0-9]{8})\b/;
 
@@ -105,14 +106,16 @@ const Login: React.FC<{islogin:boolean}> = ({islogin}) => {
                 }
             );
     }
+
     const HandleLoginSubmit = (evt: { preventDefault: () => void }) => {
         evt.preventDefault();
         axios.post(`/go/api/account/login`, account)
             .then(
                 res => {
                     if (res.data["status"] == 200) {
-                        console.log(res.data.data["token"]);
-                        window.localStorage.setItem("jwt_token", res.data["data"]["token"]);
+                        alert(res.data.data["token"]);
+                        copyToClipboard(res.data.data["token"]);
+                        window.sessionStorage.setItem("token", res.data["data"]["token"]);
                         setisInfoWrong(false);
                         window.location.href = "/";
                     } else {
