@@ -112,6 +112,7 @@ const Login: React.FC<{islogin:boolean}> = ({islogin}) => {
             .then(
                 res => {
                     if (res.data["status"] == 200) {
+                        console.log(res.data["data"]["token"]);
                         window.sessionStorage.setItem("token", res.data["data"]["token"]);
                         setisInfoWrong(false);
                         window.location.href = "/";
