@@ -2600,3 +2600,21 @@ Caused by: com.mongodb.MongoTimeoutException: Timed out after 500 ms while waiti
 [2020-11-26 09:36:22] [main] INFO  com.helper.LogUtils  - 
 ========== Service Restarted ==========
 
+[2020-11-26 10:18:04] [main] INFO  com.helper.LogUtils  - 
+========== Service Restarted ==========
+
+[2020-11-26 10:38:30] [main] INFO  com.helper.LogUtils  - 
+========== Service Restarted ==========
+
+[2020-11-26 10:45:09] [main] INFO  com.helper.LogUtils  - 
+========== Service Restarted ==========
+
+[2020-11-26 11:01:05] [main] INFO  com.helper.LogUtils  - 
+========== Service Restarted ==========
+
+[2020-11-26 11:04:37] [main] INFO  com.helper.LogUtils  - 
+========== Service Restarted ==========
+
+[2020-11-26 11:05:27] [main] INFO  com.helper.LogUtils  - 
+========== Service Restarted ==========
+

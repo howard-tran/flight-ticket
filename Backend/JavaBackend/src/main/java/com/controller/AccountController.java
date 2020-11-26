@@ -1,37 +1,38 @@
 package com.controller;
 
+import com.App;
+import com.helper.PropertyHelper;
+import com.testCasePrint;
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.JWTVerifier;
+import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.interfaces.DecodedJWT;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jws;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.security.Keys;
-
-import java.security.Key;
-import java.util.Base64;
-
-import com.App;
-import com.testCasePrint;
-import com.helper.PropertyHelper;
-
 @RequestMapping(App.service + "/account")
 @RestController
 public class AccountController {
+
   @GetMapping("/jwt-id")
   public Response<Object> getUserId(
     @RequestParam(name = "token", required = true) String token
-  ) throws Exception {
-    String secretKey = PropertyHelper.getJWTSecretKey();
-    testCasePrint.logErrorToTerminal(secretKey);
+  ) {
+    try {
+      testCasePrint.logErrorToTerminal(PropertyHelper.getJWTSecretKey());
 
-    Jws<Claims> result = Jwts
-      .parserBuilder()
-      .setSigningKey(Keys.hmacShaKeyFor(secretKey.getBytes()))
-      .build().parseClaimsJws(token);
-    
-    return ResponseHandler.ok(result.getBody());
+      Algorithm algorithm = Algorithm.HMAC256(PropertyHelper.getJWTSecretKey());
+      JWTVerifier verifier = JWT.require(algorithm)
+          .withIssuer("localhost")
+          .build();
+      DecodedJWT jwt = verifier.verify(token);
+
+      return ResponseHandler.ok(jwt);
+    } catch (Exception e) {
+      return ResponseHandler.error(null);
+    }
   }
 }
