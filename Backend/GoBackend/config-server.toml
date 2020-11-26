@@ -5,7 +5,7 @@ NAME_DATABASE = "bet_store"
 
 #Config secretkey auth 
 [Auth]
-Secretkey = "TWluaCAoxJBvw6BuLCBLaMO0aSwgVGnhur9uKQ=="
+Secretkey = "h-8QKnxCW6kTKoiXeDo1M-6VVcRF1bd-46Zm7ytu_ZMmd-MBHvqKz8SyQDg04XFQsMQa27k9rAUSEbUQl7j_GIy9xe4p37M8iK52im1p17ZVD3xm8UH-e_iLHmXwO2xpNXvqVIDcWHibxRg_lfsp_bbKEPBifpZQRjFpFIn3wYJnMtAAaL-IH2guYCRk3Z_X77cqh3MPHFS1CI8P7ubBPaeE5aMDrLl0S4Cen6uUR2lvh0JEg2A3yCy_O3aLloS0BI4Hp8NtRKKyZy-PuiHbsL2pg-8A3z04RL8YkLfMI3qjgd-8E_wpG5DCffcSNt2lk377545zWp3kV2HSrWtjcw"
 Issuer = "localhost"
 
 #Config tel auth server
