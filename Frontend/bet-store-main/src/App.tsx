@@ -1,5 +1,5 @@
-import React from 'react';
-import { Route,Switch } from 'react-router';
+import React from "react";
+import { Route, Switch } from "react-router";
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 //import Login from './components/Login';
 import "../src/resource/font-awesome/css/font-awesome.min.css"
@@ -20,7 +20,7 @@ function App() {
   return (
     <div>
       <BrowserRouter>
-        <div className = "headermain">
+        <div className="headermain">
           <Header></Header>
         </div>
           <Switch>          
@@ -36,10 +36,7 @@ function App() {
         </div>
       </BrowserRouter>
     </div>
-
   );
 }
 
 export default App;
-
-         
