@@ -1,5 +1,9 @@
 package com.controller;
 
+import com.App;
+import com.testCasePrint;
+import com.helper.PropertyHelper;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -9,13 +13,6 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
-
-import java.security.Key;
-import java.util.Base64;
-
-import com.App;
-import com.testCasePrint;
-import com.helper.PropertyHelper;
 
 @RequestMapping(App.service + "/account")
 @RestController
