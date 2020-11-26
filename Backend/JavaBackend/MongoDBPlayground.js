@@ -35,3 +35,7 @@ db.Message.find({
 }).sort({ _id: 1 });
 
 db.Message.find({ _id: ObjectId("5fb9362e1279553053ca4ed9") });
+
+db.Account.find();
+db.Conversation.deleteMany({$where: "this.senderId.length <= 7"})
+db.Conversation.find();

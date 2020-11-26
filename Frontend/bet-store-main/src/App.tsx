@@ -14,8 +14,7 @@ import Home from './screen/home/home';
 import FooterView from './components/footer/Footer';
 import ProductScreen from './screen/ProductScreen';
 import AddProductScreen from './screen/AddProductScreen';
-
-
+import { ChatBox } from './components/ChatBox';
 
 function App() {
   return (
@@ -31,6 +30,7 @@ function App() {
             <Route path="/product/:id" component={ProductScreen} exact></Route>
             <Route path="/addProduct" component={AddProductScreen} exact></Route>
           </Switch>
+          <ChatBox></ChatBox>
         <div className = "footermain">
           <FooterView></FooterView>
         </div>

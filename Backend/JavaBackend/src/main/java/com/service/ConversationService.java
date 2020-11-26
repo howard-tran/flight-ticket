@@ -36,7 +36,8 @@ public class ConversationService implements LogService {
             return new Tuple2<String, String>(null, null);
           } else {
             var conversationId1 = this.conversationDao.insertConversation(conversation);
-            var conversationId2 = this.conversationDao.insertConversation(conversation.reverse());
+            var conversationId2 =
+              this.conversationDao.insertConversation(conversation.reverse());
 
             return new Tuple2<String, String>(conversationId1, conversationId2);
           }
@@ -80,12 +81,20 @@ public class ConversationService implements LogService {
     return this.run(
         () -> {
           // prettier-ignore
-          var con1 = this.conversationDao.getConversation(
-              conversation.getSenderId(),
-              conversation.getReceiverId()
-            ).get(0);
+
+          var con1 = 
+            this.conversationDao.getConversation(
+                conversation.getSenderId(), 
+                conversation.getReceiverId()).get(0);
+
+          var con2 =
+            this.conversationDao.getConversation(
+                conversation.getReceiverId(),
+                conversation.getSenderId()
+              ).get(0);
 
           this.conversationDao.deleteConversation(con1.get_id().toString());
+          this.conversationDao.deleteConversation(con2.get_id().toString());
 
           return VoidObject.create();
         }
