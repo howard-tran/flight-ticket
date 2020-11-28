@@ -4,18 +4,19 @@ import React from "react";
 import { Link } from "react-router-dom";
 import style from "./home.module.scss";
 import SliderView from "../../components/SliderContent";
-
+import MainPage from "./mainPage";
 
 export default function Home() {
-    return (
-        <div className="hello">
-            <SliderView/>
-            <div className = "container">
-                <i className="fas fa-bell"></i>
-                <h1 className="hello">Hello World</h1>
-                <Link className="login-cs" to="/login">Login</Link>
-            </div>
-        </div>
-    );
-} 
-  
+  return (
+    <div className="hello">
+      <SliderView />
+      <div className="container">
+        <i className="fas fa-bell"></i>
+        <MainPage></MainPage>
+        <Link className="login-cs" to="/login">
+          Login
+        </Link>
+      </div>
+    </div>
+  );
+}
