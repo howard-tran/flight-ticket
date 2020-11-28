@@ -33,16 +33,10 @@ public class ConversationController {
         String.format("%s/%s", SocketService.ChatSupplier.roomBrocker, conversation.getSenderId()),
         ResponseHandler.createdConversation(conversation.set_id(new ObjectId(data.get_1())))
       );
-      
+
     this.sender.convertAndSend(
-        String.format(
-          "%s/%s",
-          SocketService.ChatSupplier.roomBrocker,
-          conversation.getReceiverId()
-        ),
-        ResponseHandler.createdConversation(
-          conversation.reverse().set_id(new ObjectId(data.get_2()))
-        )
+        String.format("%s/%s", SocketService.ChatSupplier.roomBrocker, conversation.getReceiverId()),
+        ResponseHandler.createdConversation(conversation.reverse().set_id(new ObjectId(data.get_2())))
       );
   }
 

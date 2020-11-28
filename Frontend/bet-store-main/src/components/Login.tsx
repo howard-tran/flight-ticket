@@ -43,8 +43,6 @@ const Accountreducer: React.Reducer<AccountEntity, AccountAction> = (state, acti
     return { ...state }
 }
 
-
-
 const Login: React.FC<{islogin:boolean}> = ({islogin}) => {
 
     var [isLogin, changeisLogin] = React.useState<boolean>(true);
