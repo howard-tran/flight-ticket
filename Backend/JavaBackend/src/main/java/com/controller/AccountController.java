@@ -17,7 +17,7 @@ import io.jsonwebtoken.security.Keys;
 @RequestMapping(App.service + "/account")
 @RestController
 public class AccountController {
-  @GetMapping("/jwt-id")
+  @GetMapping("/jwt")
   public Response<Object> getUserId(
     @RequestParam(name = "token", required = true) String token
   ) throws Exception {
