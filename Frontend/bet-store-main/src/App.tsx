@@ -14,7 +14,7 @@ import Home from './screen/home/home';
 import FooterView from './components/footer/Footer';
 import ProductScreen from './screen/ProductScreen';
 import AddProductScreen from './screen/AddProductScreen';
-import { ChatBox } from './components/ChatBox';
+import ChatBox from "./components/ChatBox";
 
 function App() {
   return (
