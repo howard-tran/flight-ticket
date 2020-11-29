@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 import Product from "../models/productModel.js";
 import asyncHandler from "express-async-handler";
 
-export const createProduct = asyncHandler(async (req, res) => {
+const createProduct = asyncHandler(async (req, res) => {
   try {
     const newProduct = new Product({
       _id: mongoose.Types.ObjectId(),
@@ -19,22 +19,60 @@ export const createProduct = asyncHandler(async (req, res) => {
   }
 });
 
-export const getProducts = asyncHandler(async (req, res) => {
-  let products;
-  if (req.body.constructor === Object && Object.keys(req.body).length === 0) {
-    products = await Product.find({});
-  } else {
-    products = await Product.find(req.body);
+const updateProduct = asyncHandler(async (req, res) => {
+  try {
+    const newInfo = new Product({
+      _id: req.params.id,
+      ...req.body,
+    });
+    const product = await Product.findById(req.params.id);
+    console.log(product);
+    if (product) {
+      product.overwrite(newInfo);
+      await product.save();
+      res.status(200).json({ message: "Product updated" });
+    } else {
+      res.status(404);
+    }
+    throw new Error("Product not found");
+  } catch (error) {
+    throw new Error(error);
   }
+});
+
+const getProducts = asyncHandler(async (req, res) => {
+  const products = await Product.find(req.body);
+
   res.json(products);
 });
 
-export const getProductById = asyncHandler(async (req, res) => {
+const getProductById = asyncHandler(async (req, res) => {
   const product = await Product.findById(req.params.id);
 
   if (product) {
     res.json(product);
   } else {
     res.status(404);
+    throw new Error("Product not found");
   }
 });
+
+const deleteProduct = asyncHandler(async (req, res) => {
+  const product = await Product.findById(req.params.id);
+
+  if (product) {
+    await product.remove();
+    res.json({ message: "Product removed" });
+  } else {
+    res.status(404);
+    throw new Error("Product not found");
+  }
+});
+
+export {
+  getProducts,
+  getProductById,
+  deleteProduct,
+  createProduct,
+  updateProduct,
+};
