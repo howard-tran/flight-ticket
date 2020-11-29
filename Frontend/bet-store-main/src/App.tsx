@@ -15,6 +15,9 @@ import FooterView from './components/footer/Footer';
 import ProductScreen from './screen/ProductScreen';
 import AddProductScreen from './screen/AddProductScreen';
 import ChatBox from "./components/ChatBox";
+import { Provider } from "react-redux";
+import { combineReducers, createStore } from "redux";
+import { accountInfoReducer, conversationControlReducer } from "./reducers/chatBoxReducer";
 
 function App() {
   return (
@@ -30,7 +33,17 @@ function App() {
             <Route path="/product/:id" component={ProductScreen} exact></Route>
             <Route path="/addProduct" component={AddProductScreen} exact></Route>
           </Switch>
-          <ChatBox></ChatBox>
+
+          <Provider
+            store={createStore(
+              combineReducers({
+                conversationControl: conversationControlReducer,
+                accountInfo: accountInfoReducer
+              })
+            )}
+          >
+            <ChatBox></ChatBox>
+          </Provider>
         <div className = "footermain">
           <FooterView></FooterView>
         </div>

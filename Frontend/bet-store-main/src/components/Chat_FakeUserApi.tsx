@@ -9,20 +9,32 @@ export interface IUser {
 
 export function requestUserInfo(id: String) {
   let userList : IUser[] = [];
-  userList.push({
-    _id: "mingkhoi",
-    username: "mingkhoi",
-    tel: "0938147189",
-    avatar: `https://www.telegraph.co.uk/content/dam/beauty/2017/10/16/VictoriaSecrets_trans_
-      NvBQzQNjv4Bqu6xIqhFH_HXhAThv0oG1A1lBnvQo6z5ZEvL4kLwTmGA.jpg`
-  });
-  userList.push({
-    _id: "MrSnoop",
-    username: "MrSnoop",
-    tel: "0947156720",
-    avatar: `https://footwearnews.com/wp-content/uploads/2017/11/victorias-secret-fashion-show-redhead.jpg`
-  })
-
+  userList.push(
+    {
+      _id: "5fbc0b21d32481017a769f16",
+      username: "fuck",
+      tel: "0938147189",
+      avatar: `https://footwearnews.com/wp-content/uploads/2017/11/victorias-secret-fashion-show-redhead.jpg`
+    },
+    {
+      _id: "5fbd3a3970cb4d0161112b1d",
+      username: "mingkhoi",
+      tel: "0938147189",
+      avatar: `https://footwearnews.com/wp-content/uploads/2017/11/victorias-secret-fashion-show-redhead.jpg`
+    },
+    {
+      _id: "5fbd43bb76af190165ad3f21",
+      username: "MrSnoop",
+      tel: "0947156720",
+      avatar: `https://footwearnews.com/wp-content/uploads/2017/11/victorias-secret-fashion-show-redhead.jpg`
+    },
+    {
+      _id: "5fbf6df930e7f6015fbdb1a1",
+      username: "ert",
+      tel: "0938147189",
+      avatar: `https://footwearnews.com/wp-content/uploads/2017/11/victorias-secret-fashion-show-redhead.jpg`
+    }
+  );
   for (let i = 0; i < userList.length; i++) {
     if (userList[i]._id == id) {
       return userList[i];
@@ -30,14 +42,3 @@ export function requestUserInfo(id: String) {
   }
   return null;
 };
-
-export function getUserInfo(fuckToken: String) {
-  Axios.get('/java/api/account/jwt-id', {params: {token: fuckToken}})
-    .then(
-      res => {
-        let id = res.data.data.id;
-        let user: IUser = requestUserInfo(id);
-        return user;
-      }
-    )
-}
