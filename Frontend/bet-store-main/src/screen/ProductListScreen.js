@@ -29,9 +29,8 @@ const ProductListScreen = ({ history, match }) => {
     _id: "5fa7fb0a62083e11ace57490",
   };
   useEffect(() => {
-    dispatch(listCategories());
     dispatch(listProducts());
-
+    dispatch(listCategories());
     /*if (userInfo) {
       dispatch(listProducts());
     } else {
@@ -62,7 +61,7 @@ const ProductListScreen = ({ history, match }) => {
       {loadingDelete && <h3>Loading</h3>}
 
       {errorDelete && <h3>{errorDelete}</h3>}
-      {loading && loadingCategories ? (
+      {loading || loadingCategories ? (
         <h3>Loading</h3>
       ) : error ? (
         <h3>{error}</h3>
