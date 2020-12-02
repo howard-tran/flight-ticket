@@ -34,7 +34,7 @@ public class testCasePrint {
     System.out.println();
   }
 
-  public void logErrorToTerminal(String message) {
+  public static void logErrorToTerminal(String message) {
     System.out.print(
       String.format(
         "[%sERROR_IN_TESTCASE%s] %s\n",

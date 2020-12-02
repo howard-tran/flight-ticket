@@ -35,3 +35,12 @@ db.Message.find({
 }).sort({ _id: 1 });
 
 db.Message.find({ _id: ObjectId("5fb9362e1279553053ca4ed9") });
+
+db.Account.find({_id: ObjectId("5fbd3a3970cb4d0161112b1d")});
+db.Conversation.deleteMany({$where: "this.senderId.length <= 7"})
+db.Conversation.find();
+
+db.Account.find();
+db.Account.updateMany({}, {
+  $set: { password: "$2a$14$UcUJzKQuSUwxCm6j3cc4cOi7Q//Iw41YNHeMJM.CEHV4gdax0Ole2" },
+});

@@ -1,5 +1,5 @@
-import React from 'react';
-import { Route,Switch } from 'react-router';
+import React from "react";
+import { Route, Switch } from "react-router";
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 //import Login from './components/Login';
 import "../src/resource/font-awesome/css/font-awesome.min.css"
@@ -14,14 +14,13 @@ import Home from './screen/home/home';
 import FooterView from './components/footer/Footer';
 import ProductScreen from './screen/ProductScreen';
 import AddProductScreen from './screen/AddProductScreen';
-
-
+import { ChatBox } from './components/ChatBox';
 
 function App() {
   return (
     <div>
       <BrowserRouter>
-        <div className = "headermain">
+        <div className="headermain">
           <Header></Header>
         </div>
           <Switch>          
@@ -31,15 +30,13 @@ function App() {
             <Route path="/product/:id" component={ProductScreen} exact></Route>
             <Route path="/addProduct" component={AddProductScreen} exact></Route>
           </Switch>
+          <ChatBox></ChatBox>
         <div className = "footermain">
           <FooterView></FooterView>
         </div>
       </BrowserRouter>
     </div>
-
   );
 }
 
 export default App;
-
-         

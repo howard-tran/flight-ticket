@@ -91,7 +91,7 @@ public class UnitTest2 extends testCasePrint {
           Tuple2<String, String> tuple = this.conversationService.addConversation(con).get();
 
           if (this.conversationService.deleteConversation(con).isEmpty()) {
-            this.logErrorToTerminal("delete conversation is empty");
+            testCasePrint.logErrorToTerminal("delete conversation is empty");
           }
 
           List<Message> mList = new ArrayList<>();
@@ -186,7 +186,7 @@ public class UnitTest2 extends testCasePrint {
           var t = Optional.of(Optional.empty());
 
           if (t.isEmpty()) {
-            this.logErrorToTerminal("optional libs error");
+            testCasePrint.logErrorToTerminal("optional libs error");
           }
           return null;
         },
