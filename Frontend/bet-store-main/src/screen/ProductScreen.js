@@ -29,43 +29,21 @@ const ProductScreen = ({ match }) => {
   }, [dispatch, match]);
 
   useEffect(() => {
-    setImages(product.image);
-    setProperties(product.properties);
-    if (product.category) {
-      dispatch(listCategoryDetails(product.category));
+    if (product) {
+      setImages(product.image);
+      setProperties(product.properties);
+      if (product.category) {
+        dispatch(listCategoryDetails(product.category));
+      }
     }
   }, [dispatch, productDetails.loading]);
 
-  /*const [product, setProduct] = useState({});
-  const [propertyLabel, setPropertyLabel] = useState([]);
-  const [properties, setProperties] = useState([]);
-  const [images, setImages] = useState([]);
-  useEffect(() => {
-    const fetchProduct = async () => {
-      const { data } = await axios.get(
-        `${nodeServer}/api/products/${match.params.id}`
-      );
-      setProduct(data);
-      setProperties(data.properties);
-      setImages(data.image);
-    };
-    fetchProduct();
-
-    const fetchLabel = async () => {
-      const { data } = await axios.get(
-        `${nodeServer}/api/categories/${product.category}`
-      );
-      setPropertyLabel(data.properties);
-    };
-    fetchLabel();
-  }, [match, product]);*/
-
   return (
     <>
-      <Link className="btn btn-light my-3" to="/">
+      {/*<Link className="btn btn-light my-3" to="/">
         Go Back
-      </Link>
-      {productDetails.loading ? (
+  </Link>*/}
+      {productDetails.loading || categoryDetails.loading ? (
         <h2>Loading...</h2>
       ) : productDetails.error ? (
         <h3>{productDetails.error}</h3>

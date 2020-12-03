@@ -22,8 +22,5 @@ Frontend/**/node_modules/*
 
 #nodejsbackend
 node_modules/
-.env
-seeder.js
-data/
 logs/
 

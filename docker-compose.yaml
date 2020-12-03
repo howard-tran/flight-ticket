@@ -82,6 +82,7 @@ services:
       - database
     environment:
       MONGO_URI: mongodb://root:root@10.1.0.4:27017/
+      NAME_DATABASE: bet_store
     volumes:
       - ./Backend/NodeJSBackend/config:/app/config
       - ./Backend/NodeJSBackend/controller:/app/controller
@@ -89,6 +90,7 @@ services:
       - ./Backend/NodeJSBackend/models:/app/models
       - ./Backend/NodeJSBackend/routes:/app/routes
       - ./Backend/NodeJSBackend/server.js:/app/server.js
+      - ./Backend/NodeJSBackend/seeder.js:/app/seeder.js
     networks:
       backend:
         ipv4_address: "10.1.0.6"

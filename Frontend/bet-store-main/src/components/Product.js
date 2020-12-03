@@ -4,9 +4,13 @@ import { Card } from "react-bootstrap";
 
 const Product = ({ product }) => {
   return (
-    <Card className="my-3 p-3 rounded">
+    <Card>
       <Link to={`/product/${product._id}`}>
-        <Card.Img src={`/cdn/cdn/${product.image[0].link}`} variant="top" />
+        {/* <Card.Img src={`/cdn/cdn/${product.image[0].link}`} variant="top" /> */}
+        <Card.Img
+          src="https://dummyimage.com/250x250.jpg/5fa2dd/ffffff"
+          variant="top"
+        />
       </Link>
       <Card.Body>
         <Link to={`/product/${product._id}`}>
@@ -15,7 +19,7 @@ const Product = ({ product }) => {
           </Card.Title>
         </Link>
 
-        <Card.Text as="h3">${product.price}</Card.Text>
+        <Card.Text as="h6">{product.price} ₫</Card.Text>
       </Card.Body>
     </Card>
   );

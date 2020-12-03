@@ -1,10 +1,15 @@
 import React, { useEffect } from "react";
 import { Button, Col, Row, Table } from "react-bootstrap";
 import { Link } from "react-router";
-import { listProducts, deleteProduct } from "../actions/productActions";
+import {
+  listProducts,
+  deleteProduct,
+  createProduct,
+} from "../actions/productActions";
 import { useDispatch, useSelector } from "react-redux";
 import { LinkContainer } from "react-router-bootstrap";
 import { listCategories } from "../actions/categoryActions";
+import { PRODUCT_CREATE_RESET } from "../constants/productConstants";
 const ProductListScreen = ({ history, match }) => {
   const dispatch = useDispatch();
 
@@ -29,6 +34,7 @@ const ProductListScreen = ({ history, match }) => {
     _id: "5fa7fb0a62083e11ace57490",
   };
   useEffect(() => {
+    dispatch({ type: PRODUCT_CREATE_RESET });
     dispatch(listProducts());
     dispatch(listCategories());
     /*if (userInfo) {
