@@ -2,6 +2,7 @@ import React from "react";
 import { Route, Switch } from "react-router";
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 //import Login from './components/Login';
+
 import "../src/resource/font-awesome/css/font-awesome.min.css"
 import "../node_modules/popper.js/dist/popper"
 import "../node_modules/bootstrap/dist/js/bootstrap"
@@ -18,6 +19,10 @@ import ChatBox from "./components/ChatBox";
 import { Provider } from "react-redux";
 import { combineReducers, createStore } from "redux";
 import { accountInfoReducer, conversationControlReducer } from "./reducers/chatBoxReducer";
+import { ChatBox } from "./components/ChatBox";
+import ProductListScreen from "./screen/ProductListScreen";
+import { BrowserRouter } from "react-router-dom";
+
 
 function App() {
   return (
@@ -26,6 +31,7 @@ function App() {
         <div className="headermain">
           <Header></Header>
         </div>
+
           <Switch>          
             <Route path="/" exact>{Home}</Route>
             <Route path="/login" exact > <Login islogin = {true}/></Route> 
