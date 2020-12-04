@@ -13,10 +13,21 @@ export interface IBrocker {
 
 class SocketManager {
   private static stompClient: Map<string, CompatClient> = new Map();
+  private static clientInfo : Map<String, ISocket> = new Map();
 
   public static addSocket(key: string, socketInfo: ISocket) {
-    if (SocketManager.stompClient.get(key) != null) {
+    if (this.clientInfo.get(key).socketUrl === socketInfo.socketUrl) {
       return false;
+    }
+
+    let _client = SocketManager.stompClient.get(key);
+    if (_client != null) {
+      _client.onConnect = (frame: IFrame) => {
+        for (let i = 0; i < socketInfo.brockers.length; i++) {
+          client.subscribe(socketInfo.brockers[i].brocker, socketInfo.brockers[i].receiveHandler);
+        }
+      };
+      return true;
     }
     let socket = new SockJS(socketInfo.socketUrl);
     let client = Stomp.over(socket);
@@ -27,11 +38,14 @@ class SocketManager {
       }
     };
     SocketManager.stompClient.set(key, client);
+    SocketManager.clientInfo.set(key, socketInfo);
     return true;
   }
 
   public static connect(key: string) {
-    SocketManager.stompClient.get(key)?.activate();
+    if (!SocketManager.stompClient.get(key).connected) {
+      SocketManager.stompClient.get(key)?.activate();
+    }
   }
 
   public static publish(key: string, data: { destination: string; headers: any; content: string }) {
