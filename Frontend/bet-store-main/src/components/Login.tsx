@@ -26,7 +26,6 @@ interface AccountAction {
     value: string
 }
 
-
 const Accountreducer: React.Reducer<AccountEntity, AccountAction> = (state, action) => {
     switch (action.type) {
         case "name":
