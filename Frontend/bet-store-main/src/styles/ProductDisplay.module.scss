@@ -1,0 +1,23 @@
+.productContainer {
+  flex: 1;
+  flex-direction: "row";
+  align-items: center;
+  justify-content: center;
+}
+
+.product {
+  flex: 1;
+}
+
+.categoryContainer {
+}
+
+.category {
+  width: 50px;
+}
+
+h4 {
+  text-align: left;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
