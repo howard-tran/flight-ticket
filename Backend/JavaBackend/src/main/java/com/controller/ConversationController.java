@@ -26,7 +26,7 @@ public class ConversationController {
 
   @Autowired
   private SimpMessagingTemplate sender;
-
+  
   private void podcastNewConversation(Conversation conversation, Tuple2<String, String> data) {
     this.sender.convertAndSend(
         String.format("%s/%s", SocketService.ChatSupplier.roomBrocker, conversation.getSenderId()),

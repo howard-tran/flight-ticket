@@ -38,7 +38,7 @@ public class MessageController {
   @MessageMapping(SocketService.ChatSupplier.chatHanlder)
   public void messageHandle(@Payload Message message) {
     Optional<Optional<String>> res = this.messageService.addMessage(message);
-
+    
     if (res.isEmpty()) {
       sendToUser(
         message.getSenderId(),

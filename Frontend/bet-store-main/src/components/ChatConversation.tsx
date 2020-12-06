@@ -1,11 +1,26 @@
-import React, { useCallback, useEffect, useLayoutEffect, useMemo, useReducer, useRef, useState } from "react";
+import React, {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useMemo,
+  useReducer,
+  useRef,
+  useState,
+} from "react";
 import reactElementToJSXString from "react-element-to-jsx-string";
 import { useDispatch, useSelector } from "react-redux";
-import { ChatActionType, getAccountInfoThunk, getConversationThunk } from "../actions/chatBoxAction";
+import {
+  ChatActionType,
+  getAccountInfoThunk,
+  getConversationThunk,
+  repalceCurrentReceiver,
+  switchToMessage,
+} from "../actions/chatBoxAction";
 import { Conversation, ConversationControl } from "../reducers/chatBoxReducer";
 import { AccountInfo, toDomNode } from "./Utils";
 import style from "../styles/ChatBox.module.scss";
 import { FakeUserApi } from "./Chat_FakeUserApi";
+import SocketManager from "./SocketManager";
 
 const ChatConversation: React.FC = () => {
   // state + dispatch
@@ -22,11 +37,12 @@ const ChatConversation: React.FC = () => {
   }, []);
 
   useEffect(() => {
+    if (accountState.id == "") return;
     getConversationThunk(dispatch, () => null, { senderId: accountState.id, index: 0 });
-  }, [accountState])
+  }, [accountState]);
 
   return (
-    <div className={style.conversationMain}>
+    <div style={{ width: "100%", height: "100%" }}>
       <div className={style.conversationHeader}>
         <h1>Message</h1>
         <div className={style.searchBar}>
@@ -44,7 +60,7 @@ const ChatConversation: React.FC = () => {
         ))}
         {() => {
           if (conversationState.conversationList.length <= 0) {
-            return <h5>You Have No Conversation</h5>
+            return <h5>Bạn chưa có cuộc hội thoại nào</h5>;
           }
         }}
       </div>
@@ -54,14 +70,11 @@ const ChatConversation: React.FC = () => {
 
 export const ChatConversationBox: React.FC<Conversation> = (conversation) => {
   const [userInfo, setUserInfo] = useState<AccountInfo>(null);
-  
+  const dispatch = useDispatch();
+
   useEffect(() => {
     setUserInfo(FakeUserApi.requestUser(conversation.receiverId));
   }, []);
-
-  if (userInfo == null) {
-    return <div></div>  
-  }
 
   const textHandle = (text: string) => {
     const maxCharacter = 30;
@@ -69,15 +82,21 @@ export const ChatConversationBox: React.FC<Conversation> = (conversation) => {
       return text.substring(0, maxCharacter - 1) + "...";
     }
     return text;
-  }
+  };
 
+  if (userInfo == null) {
+    return <div></div>;
+  }
   return (
-    <div className={style.conversationBox}>
+    <div className={style.conversationBox} onClick={() => {
+      dispatch(repalceCurrentReceiver(conversation.receiverId));
+      dispatch(switchToMessage());
+    }}>
       <img src={userInfo.avatar}></img>
       <div>
         <h4>{userInfo.user}</h4>
-        <p> {textHandle('Bạn: Ohaiyo Itadakimashu ouohueiuheiufh')}</p>
-        <hr></hr> 
+        <p> {textHandle("Bạn: Ohaiyo Itadakimashu ouohueiuheiufh")}</p>
+        <hr></hr>
         <h5>2 gio truoc</h5>
       </div>
     </div>

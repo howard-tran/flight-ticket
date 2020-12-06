@@ -18,7 +18,7 @@ import AddProductScreen from './screen/AddProductScreen';
 import ChatBox from "./components/ChatBox";
 import { Provider } from "react-redux";
 import { combineReducers, createStore } from "redux";
-import { accountInfoReducer, conversationControlReducer } from "./reducers/chatBoxReducer";
+import { accountInfoReducer, conversationControlReducer, socketInfoReducer, viewControlReducer } from "./reducers/chatBoxReducer";
 import ProductListScreen from "./screen/ProductListScreen";
 
 
@@ -42,7 +42,9 @@ function App() {
             store={createStore(
               combineReducers({
                 conversationControl: conversationControlReducer,
-                accountInfo: accountInfoReducer
+                accountInfo: accountInfoReducer,
+                viewControl: viewControlReducer,
+                socketInfo: socketInfoReducer
               })
             )}
           >
