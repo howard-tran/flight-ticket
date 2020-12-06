@@ -1,4 +1,4 @@
-import { ChatActionType, SET_ACCOUNT_INFO, GET_CONVERSATION } from "../actions/chatBoxAction";
+import { ChatActionType, SET_ACCOUNT_INFO, ADD_CONVERSATION } from "../actions/chatBoxAction";
 import { AccountInfo } from "../components/Utils";
 
 export interface Conversation {
@@ -17,7 +17,7 @@ const initConversationControl: ConversationControl = {
   requestIndex: 0
 }
 const initAccountInfo: AccountInfo = {
-  id: "", user: "", exp: 0, iat: 0, iss: "localhost"
+  id: "", user: "", exp: 0, iat: 0, iss: "localhost", avatar: ""
 }
 
 export const accountInfoReducer: React.Reducer<AccountInfo, ChatActionType<any>> = (
@@ -25,7 +25,9 @@ export const accountInfoReducer: React.Reducer<AccountInfo, ChatActionType<any>>
 
   switch (action.type) {
     case SET_ACCOUNT_INFO: {
-      return action.value;
+      return {
+        ...action.value
+      }
     }
     default: return state;
   }
@@ -35,12 +37,14 @@ export const conversationControlReducer: React.Reducer<ConversationControl, Chat
   state = initConversationControl, action) => {
 
   switch (action.type) {
-    case GET_CONVERSATION: {
-      let list = action.value as Conversation[];
-      state.conversationList = state.conversationList.concat(list);
-      state.requestIndex += list.length;
-
-      return state;
+    case ADD_CONVERSATION: {
+      let list = action.value as Conversation[];      
+      
+      state.conversationList.push(...list);
+      return {
+        conversationList: state.conversationList,
+        requestIndex: state.requestIndex + list.length
+      };
     }
     default: return state;
   }

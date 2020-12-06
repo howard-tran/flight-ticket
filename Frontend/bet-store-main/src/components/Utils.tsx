@@ -17,6 +17,7 @@ export function toDomNode(x : JSX.Element) {
 export interface AccountInfo {
   id: string;
   user: string;
+  avatar: string;
   exp: number;
   iat: number;
   iss: string;
