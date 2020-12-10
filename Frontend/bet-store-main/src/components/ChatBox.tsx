@@ -1,18 +1,15 @@
 import { IMessage } from "@stomp/stompjs";
-import { count } from "console";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { openChatBox, setSocketInfo } from "../actions/chatBoxAction";
-  import { ChatViewControl, CONVERSATION_VIEW, EMPTY_VIEW, MESSAGE_VIEW } from "../reducers/chatBoxReducer";
+import { getAccountInfoThunk, openChatBox, setSocketInfo } from "../actions/chatBoxAction";
+  import { ChatAccountInfo, ChatViewControl, CONVERSATION_VIEW, EMPTY_VIEW, MESSAGE_VIEW } from "../reducers/chatBoxReducer";
 import style from "../styles/ChatBox.module.scss";
 import ChatConversation from "./ChatConversation";
 import ChatMessage from "./ChatMessage";
 import { ISocket } from "./SocketManager";
-import { AccountInfo } from "./Utils";
 
 const ChatBox: React.FC = () => {
-  const accountState = useSelector((state: { accountInfo: AccountInfo }) => state.accountInfo);
-  const socketState = useSelector((state: { socketInfo: ISocket }) => state.socketInfo);
+  const accountState = useSelector((state: { chatAccountInfo: ChatAccountInfo }) => state.chatAccountInfo);
   const view = useSelector((state: { viewControl: ChatViewControl }) => state.viewControl);
   const [intervalId, setIntervalId] = useState<NodeJS.Timeout>();
 
@@ -62,6 +59,12 @@ const ChatBox: React.FC = () => {
       }, 500)
     );
   }, []);
+
+  useEffect(() => {
+    if (intervalId == null) {
+      getAccountInfoThunk(dispatch, () => null, sessionStorage.getItem("token"));
+    }
+  }, [intervalId])
 
   useEffect(() => {
     if (accountState.id == "") return;

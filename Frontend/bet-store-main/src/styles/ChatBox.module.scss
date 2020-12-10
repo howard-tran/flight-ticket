@@ -58,6 +58,13 @@ $white-smoke: #E8E8E8;
   }
 }
 
+.emojiPicker {
+  position: absolute;
+  display: none;
+  top: 28%;
+  left: 20%;
+}
+
 .mainPane {
   bottom: 120px;
   right: 15px;
@@ -66,15 +73,15 @@ $white-smoke: #E8E8E8;
   height: 72%;
   background-color: white;
   box-shadow: 5px 10px 18px 2px rgb(128, 128, 128);
-  animation-name: appear;
-  animation-duration: 0.2s;
+  animation-name: slideInFromRight;
+  animation-duration: 0.8s;
   display: none;
 }
 
 .conversationPannel {
   width: 100%;
   height: 100%;
-  animation-name: slideInFromRight;
+  animation-name: appear;
   animation-duration: 0.5s;
 }
 
@@ -166,7 +173,7 @@ $white-smoke: #E8E8E8;
 .messagePannel {
   width: 100%;
   height: 100%;
-  animation-name: slideInFromRight;
+  animation-name: appear;
   animation-duration: 0.5s;
   display: none;
 }
@@ -245,10 +252,10 @@ $white-smoke: #E8E8E8;
     }
 
     .toolBar {
-      animation: slideInFromBottom; 
+      animation: slideInFromBottom;  
       animation-duration: 0.5s;
-      padding: 5px;
-      display: flex;
+      display: none;
+      margin-bottom: 10px;
 
       .tool {
         cursor: pointer;

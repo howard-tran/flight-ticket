@@ -17,25 +17,20 @@ import {
   switchToConversation,
   switchToMessage,
 } from "../actions/chatBoxAction";
-import { Conversation, ConversationControl } from "../reducers/chatBoxReducer";
-import { AccountInfo, toDomNode } from "./Utils";
+import { ChatAccountInfo, Conversation, ConversationControl } from "../reducers/chatBoxReducer";
 import style from "../styles/ChatBox.module.scss";
 import { ChatApiUtils } from "./ChatApiUtils";
 import SocketManager from "./SocketManager";
 
 const ChatConversation = React.memo(() => {
   // state + dispatch
-  const accountState = useSelector((state: { accountInfo: AccountInfo }) => state.accountInfo);
+  const accountState = useSelector((state: { chatAccountInfo: ChatAccountInfo }) => state.chatAccountInfo);
   const conversationState = useSelector(
     (state: { conversationControl: ConversationControl }) => state.conversationControl
   );
   const [conversationFilter, setConversationFilter] = useState<Conversation[]>();
 
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    getAccountInfoThunk(dispatch, () => null, sessionStorage.getItem("token"));
-  }, []);
 
   useEffect(() => {
     if (accountState.id == "") return;
@@ -70,10 +65,11 @@ const ChatConversation = React.memo(() => {
 });
 
 export const ChatConversationBox: React.FC<Conversation> = (conversation) => {
-  const [userInfo, setUserInfo] = useState<AccountInfo>(null);
+  const [userInfo, setUserInfo] = useState<ChatAccountInfo>(null);
   const dispatch = useDispatch();
 
   useEffect(() => {
+    // get info from an api
     setUserInfo(ChatApiUtils.requestUser(conversation.receiverId));
   }, []);
 

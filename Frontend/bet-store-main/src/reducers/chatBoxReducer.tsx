@@ -10,7 +10,6 @@ import {
   SET_SOCKET_INFO,
 } from "../actions/chatBoxAction";
 import { ISocket } from "../components/SocketManager";
-import { AccountInfo } from "../components/Utils";
 
 // view
 export const EMPTY_VIEW = -1;
@@ -22,6 +21,12 @@ export const WELCOME_VIEW = 3;
 export const CHAT_HANDLER = "/chat/handle";
 
 // ====================================
+
+export interface ChatAccountInfo {
+  id: string;
+  user: string;
+  avatar: string;
+}
 
 export interface ChatViewControl {
   viewId: number;
@@ -44,16 +49,13 @@ const initConversationControl: ConversationControl = {
   conversationList: [],
   requestIndex: 0,
 };
-const initAccountInfo: AccountInfo = {
+const initAccountInfo: ChatAccountInfo = {
   id: "",
   user: "",
-  exp: 0,
-  iat: 0,
-  iss: "localhost",
   avatar: "",
-};
+};  
 
-export const accountInfoReducer: React.Reducer<AccountInfo, ChatActionType<any>> = (
+export const accountInfoReducer: React.Reducer<ChatAccountInfo, ChatActionType<any>> = (
   state = initAccountInfo,
   action
 ) => {

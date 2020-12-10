@@ -42,7 +42,7 @@ function App() {
             store={createStore(
               combineReducers({
                 conversationControl: conversationControlReducer,
-                accountInfo: accountInfoReducer,
+                chatAccountInfo: accountInfoReducer,
                 viewControl: viewControlReducer,
                 socketInfo: socketInfoReducer
               })

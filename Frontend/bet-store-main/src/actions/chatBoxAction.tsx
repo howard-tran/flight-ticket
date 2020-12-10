@@ -4,8 +4,7 @@ import { sep } from "path";
 import { Interface } from "readline";
 import { ThunkAction } from "redux-thunk";
 import SocketManager, { ISocket } from "../components/SocketManager";
-import { AccountInfo } from "../components/Utils";
-import { Conversation, ConversationControl, CONVERSATION_VIEW, socketInfoReducer } from "../reducers/chatBoxReducer";
+import { ChatAccountInfo, Conversation, ConversationControl, CONVERSATION_VIEW, socketInfoReducer } from "../reducers/chatBoxReducer";
 
 export const OPEN_CHAT_BOX = "OPEN_CHAT_BOX";
 export const CLOSE_CHAT_BOX = "CLOSE_CHAT_BOX";
@@ -25,16 +24,16 @@ export interface ChatActionType<T> {
 
 export const getAccountInfoThunk: ThunkAction<
   void,
-  AccountInfo,
+  ChatAccountInfo,
   string,
-  ChatActionType<AccountInfo>
+  ChatActionType<ChatAccountInfo>
 > = async (dispatch, getState, token) => {
   //
   let response = await Axios.get(`/java/api/account/jwt?token=${token}`);
   dispatch(setAccountInfo(response.data.data));
 };
 
-export const setAccountInfo = (account: AccountInfo): ChatActionType<AccountInfo> => {
+export const setAccountInfo = (account: ChatAccountInfo): ChatActionType<ChatAccountInfo> => {
   return {
     type: SET_ACCOUNT_INFO,
     value: account,

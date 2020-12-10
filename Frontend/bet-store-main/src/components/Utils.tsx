@@ -23,12 +23,3 @@ export const getTextWidth = (text: string, font: string) => {
   let metrics = context.measureText(text);
   return metrics.width;
 };
-
-export interface AccountInfo {
-  id: string;
-  user: string;
-  avatar: string;
-  exp: number;
-  iat: number;
-  iss: string;
-}
