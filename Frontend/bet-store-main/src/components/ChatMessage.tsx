@@ -5,6 +5,7 @@ import { ChatViewControl } from "../reducers/chatBoxReducer";
 import style from "../styles/ChatBox.module.scss";
 import { ChatApiUtils } from "./ChatApiUtils";
 import { AccountInfo, getTextWidth, toDomNode } from "./Utils";
+import { Picker } from "emoji-mart";
 
 const TEXT_EDITOR_MAX_ROW = 5;
 const INPUT_TEXT_HANDLER_DELAY = 5;
@@ -80,6 +81,8 @@ const ChatMessage = React.memo(() => {
   }
   return (
     <div style={{ width: "100%", height: "100%" }}>
+      <Picker style={{ position: 'absolute', top: '20px', left: '20px' }} />
+      
       <div className={style.textLenghtMeasure}></div>
       <div className={style.messageHeader}>
         <div>

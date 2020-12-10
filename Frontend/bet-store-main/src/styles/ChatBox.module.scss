@@ -293,6 +293,11 @@ $white-smoke: #E8E8E8;
           background-color: transparent;
           font-family: 'JetBrains Mono', monospace;
         }
+
+        .picker {
+          position: absolute;
+          
+        }
         i {
           transform: translateX(8px);
         }
