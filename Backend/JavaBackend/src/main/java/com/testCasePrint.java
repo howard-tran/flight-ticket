@@ -15,7 +15,7 @@ public class testCasePrint {
         ConsoleColors.WHITE_BOLD_BRIGHT,
         ++testCasePrint.testCount,
         ConsoleColors.RESET
-      )
+      ) 
     );
 
     for (int i = 0; i < descriptions.length; i++) {

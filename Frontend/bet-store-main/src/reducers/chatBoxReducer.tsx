@@ -88,7 +88,7 @@ export const conversationControlReducer: React.Reducer<ConversationControl, Chat
 };
 
 export const viewControlReducer: React.Reducer<ChatViewControl, ChatActionType<any>> = (
-  state = { viewId: CONVERSATION_VIEW, isOpen: false, currentReceiver: "" },
+  state = { viewId: EMPTY_VIEW, isOpen: false, currentReceiver: "" },
   action
 ) => {
   switch (action.type) {

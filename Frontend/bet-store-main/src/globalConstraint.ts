@@ -1,1 +1,0 @@
-export const javaSocket = 'http://localhost:8085/';

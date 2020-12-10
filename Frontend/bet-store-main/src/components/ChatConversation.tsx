@@ -14,15 +14,16 @@ import {
   getAccountInfoThunk,
   getConversationThunk,
   repalceCurrentReceiver,
+  switchToConversation,
   switchToMessage,
 } from "../actions/chatBoxAction";
 import { Conversation, ConversationControl } from "../reducers/chatBoxReducer";
 import { AccountInfo, toDomNode } from "./Utils";
 import style from "../styles/ChatBox.module.scss";
-import { FakeUserApi } from "./Chat_FakeUserApi";
+import { ChatApiUtils } from "./ChatApiUtils";
 import SocketManager from "./SocketManager";
 
-const ChatConversation: React.FC = () => {
+const ChatConversation = React.memo(() => {
   // state + dispatch
   const accountState = useSelector((state: { accountInfo: AccountInfo }) => state.accountInfo);
   const conversationState = useSelector(
@@ -66,14 +67,14 @@ const ChatConversation: React.FC = () => {
       </div>
     </div>
   );
-};
+});
 
 export const ChatConversationBox: React.FC<Conversation> = (conversation) => {
   const [userInfo, setUserInfo] = useState<AccountInfo>(null);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    setUserInfo(FakeUserApi.requestUser(conversation.receiverId));
+    setUserInfo(ChatApiUtils.requestUser(conversation.receiverId));
   }, []);
 
   const textHandle = (text: string) => {

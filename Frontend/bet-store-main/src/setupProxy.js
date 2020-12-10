@@ -17,6 +17,7 @@ module.exports = function (app) {
     app.use(
         '/java/*',
         createProxyMiddleware({
+            ws: true,
             target: 'http://localhost:8085',
             changeOrigin: true,
             pathRewrite: {

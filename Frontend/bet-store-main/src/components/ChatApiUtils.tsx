@@ -8,7 +8,7 @@ export interface IUser {
   avatar: String;
 }
 
-export class FakeUserApi {
+export class ChatApiUtils {
   static randomImg = () => {
     let imglist: string[] = [];
     imglist.push(
@@ -26,7 +26,7 @@ export class FakeUserApi {
     userList.push(
       {
         id: "5fbc0b21d32481017a769f16",
-        avatar: FakeUserApi.randomImg(),
+        avatar: ChatApiUtils.randomImg(),
         user: "fuck",
         exp: 0,
         iat: 0,
@@ -34,7 +34,7 @@ export class FakeUserApi {
       },
       {
         id: "5fbd3a3970cb4d0161112b1d",
-        avatar: FakeUserApi.randomImg(),
+        avatar: ChatApiUtils.randomImg(),
         user: "mingkhoi",
         exp: 0,
         iat: 0,
@@ -42,7 +42,7 @@ export class FakeUserApi {
       },
       {
         id: "5fbd43bb76af190165ad3f21",
-        avatar: FakeUserApi.randomImg(),
+        avatar: ChatApiUtils.randomImg(),
         user: "MrSnoop",
         exp: 0,
         iat: 0,
@@ -50,7 +50,7 @@ export class FakeUserApi {
       },
       {
         id: "5fbf6df930e7f6015fbdb1a1",
-        avatar: FakeUserApi.randomImg(),
+        avatar: ChatApiUtils.randomImg(),
         user: "ert",
         exp: 0,
         iat: 0,

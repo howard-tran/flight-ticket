@@ -1,3 +1,11 @@
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300&display=swap');
+}
+$main-color: #1f5c85;
+$white-smoke: #E8E8E8;
+
 .chatBox {
   right: 30px;
   bottom: 30px;
@@ -12,12 +20,16 @@
   transform: translateX(-5px);
   cursor: grabbing;
 
-  background-color: #1F5C85;
+  background-color: #2b64a5;
 }
 
 @keyframes appear {
-  from {opacity: 0;}
-  to {opacity: 1;}
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 @keyframes slideInFromLeft {
   0% {
@@ -33,6 +45,16 @@
   }
   100% {
     transform: translateX(0);
+  }
+}
+@keyframes slideInFromBottom {
+  0% {
+    transform: translateY(50%);
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
@@ -59,7 +81,7 @@
 .conversationHeader {
   height: 20%;
   width: 100%;
-  background-color: #1F5C85;
+  background-color: $main-color;
 
   h1 {
     color: white;
@@ -71,7 +93,7 @@
   .searchBar {
     border-radius: 25px;
     width: 80%;
-    background-color: #E8E8E8;
+    background-color: #e8e8e8;
     margin-left: 15px;
     padding: 10px;
     display: flex;
@@ -105,17 +127,17 @@
   margin: 5px;
   padding: 10px;
   display: flex;
-  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
   cursor: pointer;
 
   img {
     margin-right: 25px;
-    display: inline-block;
     border-radius: 50%;
     width: 100px;
     height: 100px;
   }
-  
+
   div {
     h4 {
       font-weight: bolder;
@@ -135,14 +157,11 @@
     h5 {
       font-size: medium;
     }
-    align-self: center;
-    display: inline-block;
   }
 }
 .conversationBox:hover {
-  background-color: #ECECEC;
+  background-color: #ececec;
 }
-
 
 .messagePannel {
   width: 100%;
@@ -153,23 +172,131 @@
 }
 
 .messageHeader {
-  background-color: #1F5C85;
+  height: 15%;
+  background-color: $main-color;
   padding: 10px;
-  i {
-    cursor: pointer;
-    color: white;
-  }
-  img {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
+
+  div {
+    height: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+    i {
+      margin-right: 35px;
+      cursor: pointer;
+      color: white;
+    }
+    img {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      margin-right: 10px;
+    }
+    div {
+      display: block;
+      h3 {
+        transform: translateY(5px);
+        color: white;
+        margin: 0px;
+      }
+      p {
+        transform: translateY(-5px);
+        line-height: 0px;
+        margin: 0px;
+        color: white;
+      }
+    }
   }
 }
 
-.messageBody {
+.messageMainPanel {
+  display: flex;
+  flex-flow: column;
+  height: 85%;
 
-}
+  .messageBody {
+    height: 90%;
+    background-color: white;
+  }
 
-.messageToolBar {
+  .messageToolBar {   
+    display: flex;
+    flex-flow: column;
+    height: fit-content;
+    padding: 10px;
 
+    .sampleMessage {
+      overflow-x: hidden;
+      overflow-y: hidden;
+      display: flex;
+      white-space: nowrap;
+      height: 60%;
+
+      .sampleMessageContent {
+        cursor: pointer;
+        padding: 2px;
+        margin: 3px;
+        border-radius: 15px;
+        border: 1px solid orange;
+        width: max-content;
+        height: fit-content;
+      }
+    }
+
+    .toolBar {
+      animation: slideInFromBottom; 
+      animation-duration: 0.5s;
+      padding: 5px;
+      display: flex;
+
+      .tool {
+        cursor: pointer;
+        display: flex;
+        flex-flow: row;
+        padding: 5px;
+        border-radius: 10px;
+        background-color: $white-smoke;
+        margin-right: 5px;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+
+    .textEditor {
+      height: 100%;
+      display: flex;
+      align-items: flex-end;
+      
+      i {
+        margin-right: 10px;
+        color: $main-color;
+        cursor: pointer;
+      }
+
+      .inputArea {
+        margin-right: 10px;
+        height: 100%;
+        width: 100%;
+        padding: 5px;
+        border-radius: 15px;
+        background-color: whitesmoke;
+        display: flex;
+        align-items: flex-end;
+        textarea {
+          width: 100%;
+          resize: none;
+          overflow-y: auto;
+          overflow-x: auto;
+          outline: none;
+          border: none;
+          background-color: transparent;
+          font-family: 'JetBrains Mono', monospace;
+        }
+        i {
+          transform: translateX(8px);
+        }
+      }
+    }
+  }
 }

@@ -2681,3 +2681,15 @@ Caused by: com.mongodb.MongoTimeoutException: Timed out after 500 ms while waiti
 [2020-12-06 20:16:36] [main] INFO  com.helper.LogUtils  - 
 ========== Service Restarted ==========
 
+[2020-12-09 00:45:04] [main] INFO  com.helper.LogUtils  - 
+========== Service Restarted ==========
+
+[2020-12-09 03:22:16] [main] INFO  com.helper.LogUtils  - 
+========== Service Restarted ==========
+
+[2020-12-09 07:02:42] [main] INFO  com.helper.LogUtils  - 
+========== Service Restarted ==========
+
+[2020-12-09 14:45:40] [main] INFO  com.helper.LogUtils  - 
+========== Service Restarted ==========
+

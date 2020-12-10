@@ -1,15 +1,9 @@
 import { IMessage } from "@stomp/stompjs";
 import { count } from "console";
-import React, {
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { openChatBox, setSocketInfo } from "../actions/chatBoxAction";
-import { javaSocket } from "../globalConstraint";
-import { ChatViewControl, CONVERSATION_VIEW, MESSAGE_VIEW } from "../reducers/chatBoxReducer";
+  import { ChatViewControl, CONVERSATION_VIEW, EMPTY_VIEW, MESSAGE_VIEW } from "../reducers/chatBoxReducer";
 import style from "../styles/ChatBox.module.scss";
 import ChatConversation from "./ChatConversation";
 import ChatMessage from "./ChatMessage";
@@ -18,7 +12,7 @@ import { AccountInfo } from "./Utils";
 
 const ChatBox: React.FC = () => {
   const accountState = useSelector((state: { accountInfo: AccountInfo }) => state.accountInfo);
-  const socketState = useSelector((state: {socketInfo: ISocket}) => state.socketInfo);
+  const socketState = useSelector((state: { socketInfo: ISocket }) => state.socketInfo);
   const view = useSelector((state: { viewControl: ChatViewControl }) => state.viewControl);
   const [intervalId, setIntervalId] = useState<NodeJS.Timeout>();
 
@@ -40,7 +34,7 @@ const ChatBox: React.FC = () => {
   const initSocketConnectionString = (): ISocket => {
     return {
       key: "chat-box",
-      socketUrl: `${javaSocket}chat-socket`,
+      socketUrl: `/java/chat-socket`,
       brockers: [
         {
           brocker: `/chat/message/${accountState.id}`,
@@ -53,7 +47,7 @@ const ChatBox: React.FC = () => {
         {
           brocker: `/testChannel`,
           receiveHandler: testReceiveHandler,
-        }
+        },
       ],
     };
   };
@@ -75,6 +69,9 @@ const ChatBox: React.FC = () => {
   }, [accountState]);
 
   useEffect(() => {
+    if (view.viewId == EMPTY_VIEW) {
+      return;
+    }
     if (view.viewId == CONVERSATION_VIEW) {
       (pannel.current[1] as HTMLDivElement).style.display = "block";
       (pannel.current[2] as HTMLDivElement).style.display = "none";
@@ -82,7 +79,7 @@ const ChatBox: React.FC = () => {
       (pannel.current[1] as HTMLDivElement).style.display = "none";
       (pannel.current[2] as HTMLDivElement).style.display = "block";
     }
-  }, [view])
+  }, [view]);
 
   if (sessionStorage.getItem("token") == null) {
     return <div />;
@@ -95,7 +92,7 @@ const ChatBox: React.FC = () => {
         </div>
 
         <div className={style.messagePannel} ref={setMessagePannel}>
-          <ChatMessage senderId={accountState.id} receiverId={view.currentReceiver}></ChatMessage>
+          <ChatMessage></ChatMessage>
         </div>
       </div>
       {view.isOpen === false && (
