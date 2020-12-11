@@ -6,7 +6,7 @@ import { ChatAccountInfo, ChatViewControl } from "../reducers/chatBoxReducer";
 import "emoji-mart/css/emoji-mart.css";
 import style from "../styles/ChatBox.module.scss";
 import { ChatApiUtils } from "./ChatApiUtils";
-import { getTextWidth, toDomNode } from "./Utils";
+import { fromPxToOffset, getTextWidth, toDomNode } from "./Utils";
 
 const TEXT_EDITOR_MAX_ROW = 5;
 const INPUT_TEXT_HANDLER_DELAY = 5;
@@ -19,35 +19,22 @@ const ChatMessage = React.memo(() => {
 
   const [chosenEmoji, setChosenEmoji] = useState<any>(null);
   const [userInfo, setUserInfo] = useState<ChatAccountInfo>(null);
+
   const dispatch = useDispatch();
 
-  const onInputChange = (e : Event) => {
+  const onInputChange = (e: Event) => {
     let node_t = inputArea.current as HTMLTextAreaElement;
+    let content = node_t.value;
 
-    window.setTimeout(() => {
-      let lineCount = (() => {
-        let lines: String[] = node_t.value.split(/\r*\n/);
+    content = content.replace(/\n/g, "<br>");
+    hiddenDiv.current.innerHTML = content;
 
-        let res = lines.length;
-        for (let i = 0; i < lines.length; i++) {
-          let t = lines[i].length / node_t.cols;
+    hiddenDiv.current.style.visibility = "hidden";
+    hiddenDiv.current.style.display = "block";
 
-          if (t >= 1) {
-            res += Math.trunc(t);
-
-            if (lines[i].length % node_t.cols == 0) {
-              res -= 1;
-            }
-          }
-        }
-        return res;
-      })();
-
-      if (lineCount <= TEXT_EDITOR_MAX_ROW) {
-        node_t.rows = lineCount;
-      }
-    }, INPUT_TEXT_HANDLER_DELAY);
-  }
+    node_t.style.height = hiddenDiv.current.offsetHeight + 'px';
+    hiddenDiv.current.style.display = "none";
+  };
 
   const inputArea = useRef<HTMLElement>();
   const setInputArea = useCallback((node) => {
@@ -61,18 +48,32 @@ const ChatMessage = React.memo(() => {
         e.preventDefault();
       }
       if (e.shiftKey && e.key == "Enter") {
-        node_t.textContent += "\n";
-        // event handler go after keydown
-        window.setTimeout(() => {
-          if (node_t.rows < TEXT_EDITOR_MAX_ROW) {
-            node_t.rows++;
-          }
-        }, INPUT_TEXT_HANDLER_DELAY);
+        node_t.value += "\n";
+        onInputChange(null);
       }
     };
-    node_t.oninput = onInputChange;
+    node_t.oninput = (e: Event) => {
+      onInputChange(e);
+    };
   }, []);
-  
+
+  const hiddenDiv = useRef<HTMLDivElement>(null);
+  const setHiddenDiv = useCallback((node) => {
+    let node_t = inputArea.current as HTMLTextAreaElement;
+    hiddenDiv.current = node;
+
+    hiddenDiv.current.style.overflowY = "scroll";
+    hiddenDiv.current.style.fontFamily = "inherit";
+    hiddenDiv.current.style.fontSize = "inherit";
+    hiddenDiv.current.style.lineHeight = "inherit";
+    hiddenDiv.current.style.width="290px";
+    hiddenDiv.current.style.maxHeight="130px";
+    hiddenDiv.current.style.padding="2px";
+    hiddenDiv.current.style.minHeight = "25px";
+    hiddenDiv.current.style.whiteSpace = "pre-wrap";
+    hiddenDiv.current.style.wordWrap = "break-word";
+    hiddenDiv.current.style.display = "none";
+  }, []);
 
   const toolBar = useRef<HTMLElement>();
   const setToolBar = useCallback((node) => {
@@ -113,7 +114,8 @@ const ChatMessage = React.memo(() => {
 
       (inputArea.current as HTMLTextAreaElement).value =
         txt.slice(0, cursorPos) + chosenEmoji.native + txt.slice(cursorPos);
-      (inputArea.current as HTMLTextAreaElement).selectionStart = cursorPos + (chosenEmoji.native as string).length;
+      (inputArea.current as HTMLTextAreaElement).selectionStart =
+        cursorPos + (chosenEmoji.native as string).length;
 
       onInputChange(null);
     }
@@ -183,13 +185,10 @@ const ChatMessage = React.memo(() => {
               }}
             ></i>
             <div className={style.inputArea}>
-              <textarea
-                rows={1}
-                cols={29}
-                ref={setInputArea}
-                placeholder="Aa"
-                style={{ whiteSpace: "pre-wrap" }}
-              ></textarea>
+              <div style={{ width: "100%" }}>
+                <textarea rows={1} ref={setInputArea} placeholder="Aa"></textarea>
+                <div ref={setHiddenDiv}></div>
+              </div>
 
               <div className={style.emojiPicker} ref={setEmojiPicker}>
                 <Picker

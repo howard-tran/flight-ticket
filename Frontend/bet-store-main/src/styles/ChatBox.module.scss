@@ -291,14 +291,15 @@ $white-smoke: #E8E8E8;
         display: flex;
         align-items: flex-end;
         textarea {
-          width: 100%;
+          max-height: 130px;
+          overflow-y: scroll;
+          width: 290px;
           resize: none;
-          overflow-y: auto;
-          overflow-x: auto;
           outline: none;
           border: none;
+          white-space: pre-wrap;
+          word-wrap: break-word;
           background-color: transparent;
-          font-family: 'JetBrains Mono', monospace;
         }
 
         .picker {
