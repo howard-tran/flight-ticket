@@ -8,6 +8,7 @@ import (
 var Databaseservice mongodbservice.DBService
 var categoryservice service.CategoryService
 var Sliderservice service.SliderService
+var Profileservice service.ProfileService
 
 func InitController() error {
 	//NewDatabaseService
@@ -31,6 +32,12 @@ func InitController() error {
 	}
 	Sliderservice = s
 
+	//NewSliderService
+	p, err := service.NewProfileService()
+	if err != nil {
+		return err
+	}
+	Profileservice = p
 
 	return nil
 }
