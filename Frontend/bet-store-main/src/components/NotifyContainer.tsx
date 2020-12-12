@@ -63,10 +63,6 @@ const NotifyContainer: React.FC = () => {
                     isDelAutoNoti = false;
                     return;
                 }
-                console.log("test nhanh");
-
-                
-
                 setnotiqueue(PopNotify(notiqueue));
             }, 3000
         );
@@ -76,7 +72,6 @@ const NotifyContainer: React.FC = () => {
         <div>
             <div aria-live="polite" aria-atomic="true" className={styles.NotifyContainer}>
                 <div ref={notifycontainer}>
-                    <p>{notiqueue.length}</p>
                     {
                         notiqueue.map(
                             (item: NotifyType) => {
