@@ -6,10 +6,11 @@ import (
 	mongodbservice "GoBackend/service/repository-service"
 
 	"fmt"
-	"golang.org/x/crypto/bcrypt"
 	"net/http"
 	"os"
 	"time"
+
+	"golang.org/x/crypto/bcrypt"
 
 	"github.com/gin-gonic/gin"
 	"gopkg.in/mgo.v2/bson"
@@ -43,7 +44,7 @@ func LoginHandle(ctx *gin.Context) {
 		var acc entity.AccountEntity
 		query.One(&acc)
 
-		if CheckPasswordHash(account.Password,acc.Password) {
+		if CheckPasswordHash(account.Password, acc.Password) {
 			token := serviceSecure.GenerationToken(acc.ID.Hex(), acc.Username)
 			//fmt.Println(acc)
 			ctx.JSON(http.StatusOK, service.CreateMsgSuccessJsonResponse(gin.H{"token": token})) //gin.H{"token": token})
@@ -56,10 +57,17 @@ func LoginHandle(ctx *gin.Context) {
 	}
 }
 
+type BsonAccountEntity struct {
+	ID       bson.ObjectId `json:"_id" bson:"_id"`
+	Username string        `json:"username" bson:"username"`
+	Password string        `json:"password" bson:"password"`
+	Tel      string        `json:"tel" bson:"tel"`
+}
+
 func SignupHandle(ctx *gin.Context) {
 	var account entity.AccountEntity
 	ctx.BindJSON(&account)
-	account.Password,_ = HashPassword(account.Password)
+	account.Password, _ = HashPassword(account.Password)
 	//fmt.Println(account.Password)
 	sec, err := mongodbservice.NewDBService()
 	if err != nil {
@@ -78,21 +86,33 @@ func SignupHandle(ctx *gin.Context) {
 		return
 	}
 	account.ID = bson.NewObjectId()
-	err = c.Insert(&account)
+	savedata := BsonAccountEntity{
+		ID:       account.ID,
+		Username: account.Username,
+		Password: account.Password,
+		Tel:      account.Tel,
+	}
+	err = c.Insert(&savedata)
+
+	if err != nil {
+		ctx.JSON(http.StatusOK, service.CreateMsgErrorJsonResponse(http.StatusConflict, err.Error()))
+	}
+	account.Profile.AccountID = account.ID
+	account.Profile.Username = account.Username
+	_, err = Profileservice.AddProfile(account.Profile)
 
 	if err != nil {
 		ctx.JSON(http.StatusOK, service.CreateMsgErrorJsonResponse(http.StatusConflict, err.Error()))
 	} else {
 		ctx.JSON(http.StatusOK, service.CreateMsgSuccessJsonResponse(gin.H{"msg": "Account created"}))
 	}
-}
 
+}
 
 func HashPassword(password string) (string, error) {
 	bytes, err := bcrypt.GenerateFromPassword([]byte(password), 14)
 	return string(bytes), err
 }
-
 
 func CheckPasswordHash(password, hash string) bool {
 	err := bcrypt.CompareHashAndPassword([]byte(hash), []byte(password))
