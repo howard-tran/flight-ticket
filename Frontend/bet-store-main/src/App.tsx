@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { Route, Switch } from "react-router";
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 //import Login from './components/Login';
+
 import "../src/resource/font-awesome/css/font-awesome.min.css"
 import "../node_modules/popper.js/dist/popper"
 import "../node_modules/bootstrap/dist/js/bootstrap"
@@ -14,7 +15,12 @@ import Home from './screen/home/home';
 import FooterView from './components/footer/Footer';
 import ProductScreen from './screen/ProductScreen';
 import AddProductScreen from './screen/AddProductScreen';
-import { ChatBox } from './components/ChatBox';
+import { Provider } from "react-redux";
+import { combineReducers, createStore } from "redux";
+import { accountInfoReducer, conversationControlReducer } from "./reducers/chatBoxReducer";
+import ProductListScreen from "./screen/ProductListScreen";
+
+import ChatBox from './components/ChatBox';
 import Profile from "./screen/profile/profile";
 import NotifyContainer from "./components/NotifyContainer";
 import { useDispatch } from "react-redux";
@@ -42,7 +48,17 @@ function App() {
             <Route path="/addProduct" component={AddProductScreen} exact></Route>
             <Route path="/profile" component={Profile} exact></Route>
           </Switch>
-          <ChatBox></ChatBox>
+
+          <Provider
+            store={createStore(
+              combineReducers({
+                conversationControl: conversationControlReducer,
+                accountInfo: accountInfoReducer
+              })
+            )}
+          >
+            <ChatBox></ChatBox>
+          </Provider>
         <div className = "footermain">
           <FooterView></FooterView>
         </div>

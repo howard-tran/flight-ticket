@@ -12,10 +12,8 @@ export default function Home() {
       <SliderView />
       <div className="container">
         <i className="fas fa-bell"></i>
+
         <MainPage></MainPage>
-        <Link className="login-cs" to="/login">
-          Login
-        </Link>
       </div>
     </div>
   );

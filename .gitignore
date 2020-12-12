@@ -11,19 +11,18 @@ Backend/CDNServer/.idea/*
 
 #datamongo
 Backend/Database/data/*
+Backend/Database/log/*
 
 #javabackend
 Backend/JavaBackend/.vscode/*
 Backend/JavaBackend/target/*
 Backend/JavaBackend/node_modules/*
+Backend/JavaBackend/logs/*
 
 #frontend
 Frontend/**/node_modules/*
 
 #nodejsbackend
 node_modules/
-.env
-seeder.js
-data/
 logs/
 
