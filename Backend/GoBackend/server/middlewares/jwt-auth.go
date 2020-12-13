@@ -14,7 +14,7 @@ import (
 func AuthorizeJWT() gin.HandlerFunc {
 	return func(ctx *gin.Context) {
 		tokenString := ctx.GetHeader("Authentication")
-		fmt.Println(tokenString)
+		//fmt.Println(tokenString)
 		if tokenString != "" {
 			bearerToken := strings.Split(tokenString, " ")
 			if len(bearerToken) == 2 {
