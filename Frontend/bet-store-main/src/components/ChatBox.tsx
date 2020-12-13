@@ -1,7 +1,7 @@
 import { IMessage } from "@stomp/stompjs";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAccountInfoThunk, openChatBox, setSocketInfo } from "../actions/chatBoxAction";
+import { getAccountInfoThunk, messageReceive, openChatBox, setSocketInfo } from "../actions/chatBoxAction";
   import { ChatAccountInfo, ChatViewControl, CONVERSATION_VIEW, EMPTY_VIEW, MESSAGE_VIEW } from "../reducers/chatBoxReducer";
 import style from "../styles/ChatBox.module.scss";
 import ChatConversation from "./ChatConversation";
@@ -25,8 +25,12 @@ const ChatBox: React.FC = () => {
   const setConversationPannel = useCallback((node) => (pannel.current[1] = node), []);
   const setMessagePannel = useCallback((node) => (pannel.current[2] = node), []);
 
-  const messageReceiveHandler = (payload: IMessage) => {};
-  const conversationReceiveHandler = (payload: IMessage) => {};
+  const messageReceiveHandler = (payload: IMessage) => {
+    dispatch(messageReceive(JSON.parse(payload.body).data));
+  };
+  const conversationReceiveHandler = (payload: IMessage) => {
+
+  };
   const testReceiveHandler = (payload: IMessage) => {
     alert(payload);
   };

@@ -19,6 +19,7 @@ export const CLOSE_CHAT_BOX = "CLOSE_CHAT_BOX";
 export const SET_ACCOUNT_INFO = "SET_ACCOUNT_INFO";
 export const LOAD_CONVERSATION = "LOAD_CONVERSATION";
 export const LOAD_PREV_CONVERSATION = "LOAD_PREV_CONVERSATION";
+export const RECEIVE_CONVERSATION = "RECEIVE_CONVERSATION";
 export const LOAD_MESSAGE = "LOAD_MESSAGE";
 export const LOAD_PREV_MESSAGE = "LOAD_PREV_MESSAGE";
 export const RECEIVE_MESSAGE = "RECEIVE_MESSAGE";
@@ -90,6 +91,13 @@ export const loadPrevConversation = (
     value: conversationList,
   };
 };
+
+export const conversationReceive = (conversation: Conversation): ChatActionType<Conversation> => {
+  return {
+    type: RECEIVE_CONVERSATION,
+    value: conversation,
+  }
+}
 
 export const getMessageThunk: ThunkAction<
   void,

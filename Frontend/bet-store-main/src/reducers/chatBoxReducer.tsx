@@ -11,6 +11,7 @@ import {
   LOAD_PREV_CONVERSATION,
   LOAD_MESSAGE,
   RECEIVE_MESSAGE,
+  RECEIVE_CONVERSATION,
 } from "../actions/chatBoxAction";
 import { ISocket } from "../components/SocketManager";
 
@@ -60,6 +61,7 @@ export interface ConversationControl {
 export interface MessageControl {
   messageList: Message[];
   requestIndex: number;
+  appendMessage: boolean;
 }
 
 const initConversationControl: ConversationControl = {
@@ -69,6 +71,7 @@ const initConversationControl: ConversationControl = {
 const initMessageControl : MessageControl = {
   messageList: [],
   requestIndex: 0,
+  appendMessage: false
 }
 const initAccountInfo: ChatAccountInfo = {
   id: "",
@@ -112,6 +115,14 @@ export const conversationControlReducer: React.Reducer<ConversationControl, Chat
         requestIndex: state.requestIndex + list.length,
       }
     }
+    case RECEIVE_CONVERSATION: {
+      state.conversationList.splice(0, 0, action.value);
+
+      return {
+        conversationList: state.conversationList,
+        requestIndex: state.requestIndex + 1,
+      }
+    }
     default:
       return state;
   }
@@ -127,6 +138,7 @@ export const messageControlReducer: React.Reducer<MessageControl, ChatActionType
       return {
         messageList: list,
         requestIndex: list.length,
+        appendMessage: false,
       };
     }
     case LOAD_PREV_CONVERSATION: {
@@ -136,14 +148,16 @@ export const messageControlReducer: React.Reducer<MessageControl, ChatActionType
       return {
         messageList: state.messageList,
         requestIndex: state.requestIndex + list.length,
+        appendMessage: false,
       }
     }
     case RECEIVE_MESSAGE: {
-      state.messageList.push(action.value as Message);
+      state.messageList.splice(0, 0, action.value);
 
       return {
         messageList: state.messageList,
         requestIndex: state.requestIndex + 1,
+        appendMessage: true,
       }
     }
     default:

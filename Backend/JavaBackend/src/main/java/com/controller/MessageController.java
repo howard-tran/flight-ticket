@@ -31,7 +31,7 @@ public class MessageController {
   private void sendToUser(String userId, Object message) {
     this.simpMessagingTemplate.convertAndSend(
         String.format("%s/%s", SocketService.ChatSupplier.messageBrocker, userId),
-        message
+        ResponseHandler.ok(message)
       );
   }
 
