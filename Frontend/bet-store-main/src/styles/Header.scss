@@ -65,12 +65,15 @@ a {
             border: solid transparent;
             opacity: .7;
             width: max-content;
-
             outline:none;
             h4 {
                 transform: translateY(10%) ;
                 padding-left: 15px;
                 font-size:20px;
+            }
+            img{
+                width: 25px;
+                height: auto;
             }
         }
         .noti-btn:hover{
@@ -142,19 +145,24 @@ a {
         width: max-content;
         z-index: 9999;
         transform: translateY(90px);
-        div{
+        background-color: #ffffff;
+        cursor: default;
+        a, span{
             padding: 10px;
             width: 100%;
             text-align: center;
+            display: flex;
+            cursor: pointer;
             &:hover{
                 background-color: #f2f2f2;
             }
-            a{
+            p{
                 text-align: start;
                 padding-left: 0px;
                 font-size: 20px;
                 font-weight: bold;
                 color: black;
+                margin: 0px;
             }    
         }
     }
