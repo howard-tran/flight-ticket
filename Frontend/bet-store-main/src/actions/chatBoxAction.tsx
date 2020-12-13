@@ -107,6 +107,7 @@ export const getMessageThunk: ThunkAction<
 > = async (dispatch, getState, param) => {
   let result: Message[] = [];
 
+  console.log(`/java/api/message/get?senderid=${param.senderId}&receiverid=${param.receiverId}&index=${param.index}`);
   let response = await Axios.get(
     `/java/api/message/get?senderid=${param.senderId}&receiverid=${param.receiverId}&index=${param.index}`
   );

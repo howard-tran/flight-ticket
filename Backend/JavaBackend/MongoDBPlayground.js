@@ -2,6 +2,8 @@
 
 // create message collection
 
+DBQuery.shellBatchSize = 1000;
+
 print("###################### Create Messagge Collection ######################");
 
 db = db.getSiblingDB("bet_store");

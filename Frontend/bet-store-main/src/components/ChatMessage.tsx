@@ -115,8 +115,8 @@ const ChatMessage = React.memo(() => {
   const messageBodyScrollup = (e: React.UIEvent<HTMLDivElement, UIEvent>) => {
     let node_t = e.target as HTMLDivElement;
 
-    if (node_t.scrollTop <= 2) {
-      node_t.scrollTop += 1;
+    if (node_t.scrollTop <= 1) {
+      node_t.scrollTop += 2;
 
       getMessageThunk(dispatch, () => null, {
         senderId: accountState.id,

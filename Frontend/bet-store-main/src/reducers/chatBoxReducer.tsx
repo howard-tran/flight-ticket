@@ -12,6 +12,7 @@ import {
   LOAD_MESSAGE,
   RECEIVE_MESSAGE,
   RECEIVE_CONVERSATION,
+  LOAD_PREV_MESSAGE,
 } from "../actions/chatBoxAction";
 import { ISocket } from "../components/SocketManager";
 
@@ -141,7 +142,7 @@ export const messageControlReducer: React.Reducer<MessageControl, ChatActionType
         appendMessage: false,
       };
     }
-    case LOAD_PREV_CONVERSATION: {
+    case LOAD_PREV_MESSAGE: {
       let list = action.value as Message[];
       state.messageList.push(...list);
 
