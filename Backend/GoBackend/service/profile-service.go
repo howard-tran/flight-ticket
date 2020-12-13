@@ -74,8 +74,6 @@ func (c *ProfileDataService) AddProfile(enti entity.ProfileEntity) (bson.ObjectI
 		fmt.Println(err.Error())
 	}
 	enti.Avatar = avatarRandom
-	//
-	//fmt.Print(enti)
 
 	err = c.collection.Insert(&enti)
 	if err != nil {
@@ -133,5 +131,4 @@ func GetAvatarRandomFromCDNServer(sex string) (string, error) {
 	fmt.Println(avatarJsonUnpack.Avatar)
 	fmt.Println("----------------------")
 	return string(avatarJsonUnpack.Avatar), nil
-
 }
