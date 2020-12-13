@@ -4,12 +4,24 @@ import { sep } from "path";
 import { Interface } from "readline";
 import { ThunkAction } from "redux-thunk";
 import SocketManager, { ISocket } from "../components/SocketManager";
-import { ChatAccountInfo, Conversation, ConversationControl, CONVERSATION_VIEW, socketInfoReducer } from "../reducers/chatBoxReducer";
+import {
+  ChatAccountInfo,
+  Conversation,
+  ConversationControl,
+  CONVERSATION_VIEW,
+  Message,
+  MessageControl,
+  socketInfoReducer,
+} from "../reducers/chatBoxReducer";
 
 export const OPEN_CHAT_BOX = "OPEN_CHAT_BOX";
 export const CLOSE_CHAT_BOX = "CLOSE_CHAT_BOX";
 export const SET_ACCOUNT_INFO = "SET_ACCOUNT_INFO";
 export const LOAD_CONVERSATION = "LOAD_CONVERSATION";
+export const LOAD_PREV_CONVERSATION = "LOAD_PREV_CONVERSATION";
+export const LOAD_MESSAGE = "LOAD_MESSAGE";
+export const LOAD_PREV_MESSAGE = "LOAD_PREV_MESSAGE";
+export const RECEIVE_MESSAGE = "RECEIVE_MESSAGE";
 export const GET_MESSAGE = "GET_MESSAGE";
 export const ADD_MESSAGE = "ADD_MESSAGE";
 export const SWITCH_TO_CONVERSATION = "SWITCH_TO_CONVERSATION";
@@ -19,7 +31,7 @@ export const SET_SOCKET_INFO = "SET_SOCKET_INFO";
 
 export interface ChatActionType<T> {
   type: string;
-  value: T; 
+  value: T;
 }
 
 export const getAccountInfoThunk: ThunkAction<
@@ -43,67 +55,127 @@ export const setAccountInfo = (account: ChatAccountInfo): ChatActionType<ChatAcc
 export const getConversationThunk: ThunkAction<
   void,
   ConversationControl,
-  { senderId: string; index: number },
+  { senderId: string; index: number; loadPrev: boolean },
   ChatActionType<Conversation[]>
 > = async (dispatch, getState, param) => {
   let result: Conversation[] = [];
 
-  let response = await Axios.get(`/java/api/conversation/get?senderid=${param.senderId}&index=${param.index}`);
+  let response = await Axios.get(
+    `/java/api/conversation/get?senderid=${param.senderId}&index=${param.index}`
+  );
   result = response.data.data;
 
-  dispatch(loadConversation(result));
+  if (!param.loadPrev) {
+    dispatch(loadConversation(result));
+  } else {
+    alert("this is not good");
+    dispatch(loadPrevConversation(result));
+  }
 };
 
 export const loadConversation = (
   conversationList: Conversation[]
 ): ChatActionType<Conversation[]> => {
-
   return {
     type: LOAD_CONVERSATION,
     value: conversationList,
   };
 };
 
-export const openChatBox = (flag: boolean) : ChatActionType<boolean> => {
+export const loadPrevConversation = (
+  conversationList: Conversation[]
+): ChatActionType<Conversation[]> => {
+  return {
+    type: LOAD_PREV_CONVERSATION,
+    value: conversationList,
+  };
+};
+
+export const getMessageThunk: ThunkAction<
+  void,
+  MessageControl,
+  { senderId: string; receiverId: string; index: number; loadPrev: boolean },
+  ChatActionType<Message[]>
+> = async (dispatch, getState, param) => {
+  let result: Message[] = [];
+
+  let response = await Axios.get(
+    `/java/api/message/get?senderid=${param.senderId}&receiverid=${param.receiverId}&index=${param.index}`
+  );
+  result = response.data.data;
+
+  if (!param.loadPrev) {
+    dispatch(loadMessage(result));
+  } else {
+    dispatch(loadPrevMessage(result));
+  }
+};
+
+export const loadMessage = (
+  messageList: Message[]
+): ChatActionType<Message[]> => {
+  return {
+    type: LOAD_MESSAGE,
+    value: messageList,
+  };
+};
+
+export const loadPrevMessage = (
+  messageList: Message[]
+): ChatActionType<Message[]> => {
+  return {
+    type: LOAD_PREV_MESSAGE,
+    value: messageList,
+  };
+};
+
+export const messageReceive = (message: Message): ChatActionType<Message> => {
+  return {
+    type: RECEIVE_MESSAGE,
+    value: message
+  }
+}
+
+export const openChatBox = (flag: boolean): ChatActionType<boolean> => {
   if (flag == true) {
     return {
       type: OPEN_CHAT_BOX,
-      value: null
-    }
+      value: null,
+    };
   } else {
     return {
       type: CLOSE_CHAT_BOX,
-      value: null
-    }
+      value: null,
+    };
   }
-}
+};
 
-export const switchToConversation = () : ChatActionType<any> => {
+export const switchToConversation = (): ChatActionType<any> => {
   return {
     type: SWITCH_TO_CONVERSATION,
-    value: null
-  }
-}
+    value: null,
+  };
+};
 
-export const switchToMessage = () : ChatActionType<any> => {
+export const switchToMessage = (): ChatActionType<any> => {
   return {
     type: SWITCH_TO_MESSAGE,
-    value: null
-  }
-}
+    value: null,
+  };
+};
 
-export const repalceCurrentReceiver = (accountId: string) : ChatActionType<any> => {
+export const repalceCurrentReceiver = (accountId: string): ChatActionType<any> => {
   return {
     type: REPLACE_CURRENT_RECEIVER,
-    value: accountId
-  }
-}
+    value: accountId,
+  };
+};
 
-export const setSocketInfo = (socketInfo: ISocket) : ChatActionType<ISocket> => {
+export const setSocketInfo = (socketInfo: ISocket): ChatActionType<ISocket> => {
   SocketManager.addSocket(socketInfo.key, socketInfo);
   SocketManager.connect(socketInfo.key);
   return {
     type: SET_SOCKET_INFO,
-    value: socketInfo
-  }
-}
+    value: socketInfo,
+  };
+};

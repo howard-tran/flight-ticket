@@ -1,12 +1,21 @@
 import { EmojiData, Picker } from "emoji-mart";
 import React, { ReactEventHandler, useCallback, useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { switchToConversation } from "../actions/chatBoxAction";
-import { ChatAccountInfo, ChatViewControl } from "../reducers/chatBoxReducer";
+import { getMessageThunk, switchToConversation } from "../actions/chatBoxAction";
+import {
+  ChatAccountInfo,
+  ChatViewControl,
+  CHAT_HANDLER,
+  Message,
+  MessageControl,
+} from "../reducers/chatBoxReducer";
 import "emoji-mart/css/emoji-mart.css";
 import style from "../styles/ChatBox.module.scss";
 import { ChatApiUtils } from "./ChatApiUtils";
 import { fromPxToOffset, getTextWidth, toDomNode } from "./Utils";
+import { JsxElement } from "typescript";
+import SocketManager from "./SocketManager";
+import { CHAT_KEY } from "./ChatBox";
 
 const TEXT_EDITOR_MAX_ROW = 5;
 const INPUT_TEXT_HANDLER_DELAY = 5;
@@ -15,26 +24,15 @@ const ChatMessage = React.memo(() => {
   const accountState = useSelector(
     (state: { chatAccountInfo: ChatAccountInfo }) => state.chatAccountInfo
   );
+  const messageControlState = useSelector(
+    (state: { messageControl: MessageControl }) => state.messageControl
+  );
   const view = useSelector((state: { viewControl: ChatViewControl }) => state.viewControl);
 
   const [chosenEmoji, setChosenEmoji] = useState<any>(null);
-  const [userInfo, setUserInfo] = useState<ChatAccountInfo>(null);
+  const [receiverInfo, setSenderInfo] = useState<ChatAccountInfo>(null);
 
   const dispatch = useDispatch();
-
-  const onInputChange = (e: Event) => {
-    let node_t = inputArea.current as HTMLTextAreaElement;
-    let content = node_t.value;
-
-    content = content.replace(/\n/g, "<br>");
-    hiddenDiv.current.innerHTML = content;
-
-    hiddenDiv.current.style.visibility = "hidden";
-    hiddenDiv.current.style.display = "block";
-
-    node_t.style.height = hiddenDiv.current.offsetHeight + 'px';
-    hiddenDiv.current.style.display = "none";
-  };
 
   const inputArea = useRef<HTMLElement>();
   const setInputArea = useCallback((node) => {
@@ -66,9 +64,9 @@ const ChatMessage = React.memo(() => {
     hiddenDiv.current.style.fontFamily = "inherit";
     hiddenDiv.current.style.fontSize = "inherit";
     hiddenDiv.current.style.lineHeight = "inherit";
-    hiddenDiv.current.style.width="290px";
-    hiddenDiv.current.style.maxHeight="130px";
-    hiddenDiv.current.style.padding="2px";
+    hiddenDiv.current.style.width = "290px";
+    hiddenDiv.current.style.maxHeight = "130px";
+    hiddenDiv.current.style.padding = "2px";
     hiddenDiv.current.style.minHeight = "25px";
     hiddenDiv.current.style.whiteSpace = "pre-wrap";
     hiddenDiv.current.style.wordWrap = "break-word";
@@ -96,6 +94,22 @@ const ChatMessage = React.memo(() => {
     } else emojiPicker.current.style.display = "block";
   };
 
+  const onInputChange = (e: Event) => {
+    let node_t = inputArea.current as HTMLTextAreaElement;
+    let content = node_t.value;
+
+    content = content.replace(/\n/g, "<br>");
+    hiddenDiv.current.innerHTML = content;
+
+    hiddenDiv.current.style.visibility = "hidden";
+    hiddenDiv.current.style.display = "block";
+
+    node_t.style.height = hiddenDiv.current.offsetHeight + "px";
+    hiddenDiv.current.style.display = "none";
+
+    node_t.scrollTop += 10;
+  };
+
   const handleClickOutside = (e: MouseEvent) => {
     if (emojiBtn.current && (emojiBtn.current as HTMLElement).contains(e.target as HTMLElement))
       return;
@@ -106,6 +120,29 @@ const ChatMessage = React.memo(() => {
       (emojiPicker.current as HTMLDivElement).style.display = "none";
     }
   };
+
+  const pushlishMessage = (e: Message) => {
+    SocketManager.publish(CHAT_KEY, {destination: CHAT_HANDLER, headers: {}, 
+      content: JSON.stringify(e)});
+  }
+
+  const messageListHandle = () => {
+    let result: JSX.Element[] = [];
+    for (let i = messageControlState.messageList.length - 1; i >= 0; i--) {
+      let x = messageControlState.messageList[i];
+      result.push((
+        <ChatMessageBox
+          id={x.id}
+          senderId={x.senderId}
+          receiverId={x.receiverId}
+          textContent={x.textContent}
+          fileContent={x.fileContent}
+          fileContentType={x.fileContentType}
+        ></ChatMessageBox>
+      ));
+    }
+    return result;
+  }
 
   useEffect(() => {
     if (chosenEmoji) {
@@ -123,12 +160,23 @@ const ChatMessage = React.memo(() => {
 
   useEffect(() => {
     // get info from an api
-    setUserInfo(ChatApiUtils.requestUser(view.currentReceiver));
+    setSenderInfo(ChatApiUtils.requestUser(view.currentReceiver));
 
     document.addEventListener("mousedown", handleClickOutside);
   }, [view]);
 
-  if (userInfo == null) {
+  useEffect(() => {
+    if (receiverInfo == null) return;
+
+    getMessageThunk(dispatch, () => null, {
+      senderId: accountState.id,
+      receiverId: receiverInfo.id,
+      index: 0,
+      loadPrev: false,
+    });
+  }, [receiverInfo]);
+
+  if (receiverInfo == null) {
     return <div></div>;
   }
   return (
@@ -142,9 +190,9 @@ const ChatMessage = React.memo(() => {
               dispatch(switchToConversation());
             }}
           ></i>
-          <img src={userInfo.avatar}></img>
+          <img src={receiverInfo.avatar}></img>
           <div>
-            <h3>{userInfo.user}</h3>
+            <h3>{receiverInfo.user}</h3>
             <br></br>
             <p>Đang hoạt động</p>
           </div>
@@ -152,7 +200,9 @@ const ChatMessage = React.memo(() => {
       </div>
 
       <div className={style.messageMainPanel}>
-        <div className={style.messageBody}></div>
+        <div className={style.messageBody}>
+          {messageListHandle()}
+        </div>
 
         <div className={style.messageToolBar}>
           <div className={style.toolBar} ref={setToolBar}>
@@ -175,8 +225,6 @@ const ChatMessage = React.memo(() => {
             <i
               className="fa fa-plus-circle fa-2x"
               onClick={() => {
-                if (toolBar.current == null) return;
-
                 if (toolBar.current.style.display == "none") {
                   toolBar.current.style.display = "flex";
                 } else {
@@ -193,7 +241,7 @@ const ChatMessage = React.memo(() => {
               <div className={style.emojiPicker} ref={setEmojiPicker}>
                 <Picker
                   title="Pick your emoji…"
-                  emoji="ok_hand"
+                  emoji="point_up_2"
                   onSelect={(e: EmojiData) => {
                     setChosenEmoji(e);
                   }}
@@ -209,5 +257,33 @@ const ChatMessage = React.memo(() => {
     </div>
   );
 });
+
+const ChatMessageBox: React.FC<Message> = (message) => {
+  const accountState = useSelector(
+    (state: { chatAccountInfo: ChatAccountInfo }) => state.chatAccountInfo
+  );
+
+  const textHandle = (txt: string) => {
+    return txt.replace(/\n/g, "<br>");
+  }
+
+  if (message.senderId == accountState.id) {
+    return (
+      <div className={style.messageFromMe}>
+        <div className={style.messageTxtContent}>
+          {textHandle(message.textContent)}
+        </div>
+      </div>
+    );
+  } else {
+    return (
+      <div className={style.messageFromOther}>
+        <div className={style.messageTxtContent}>
+          {textHandle(message.textContent)}
+        </div>
+      </div>
+    );
+  }
+};
 
 export default ChatMessage;

@@ -1,13 +1,6 @@
 import Axios from "axios";
 import { ChatAccountInfo } from "../reducers/chatBoxReducer";
 
-export interface IUser {
-  _id: String;
-  username: String;
-  tel: String;
-  avatar: String;
-}
-
 export class ChatApiUtils {
   static randomImg = () => {
     let imglist: string[] = [];

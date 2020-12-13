@@ -186,7 +186,7 @@ $white-smoke: #E8E8E8;
   div {
     height: 100%;
     display: flex;
-    justify-content: flex-start;
+    justify-items: flex-start;
     align-items: center;
 
     i {
@@ -218,13 +218,48 @@ $white-smoke: #E8E8E8;
 }
 
 .messageMainPanel {
-  display: flex;
+  display: flexbox;
   flex-flow: column;
   height: 85%;
 
   .messageBody {
+    padding: 5px;
     height: 90%;
     background-color: white;
+
+    .messageFromMe {
+      margin-bottom: 5px;
+      display: flex;
+      flex-flow: column;
+      align-self: flex-end;
+      align-items: flex-end;
+      text-align: right;
+      word-wrap: break-word;
+
+      .messageTxtContent {
+        background-color: #9ADAFF;
+        border-radius: 10px;
+        padding: 10px;
+        max-width: 80%;
+      }
+    }
+
+    .messageFromOther {
+      margin-bottom: 5px;
+      display: flex;
+      flex-flow: column;
+      align-self: flex-start;      
+      align-items: flex-start;
+      text-align: left;
+      word-wrap: break-word;
+
+      .messageTxtContent {
+        background-color: #E3E3E3;
+        border-radius: 10px;
+        padding: 10px;
+        max-width: 80%;
+      }
+    }
   }
 
   .messageToolBar {   

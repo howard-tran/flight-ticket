@@ -8,6 +8,9 @@ import {
   CLOSE_CHAT_BOX,
   REPLACE_CURRENT_RECEIVER,
   SET_SOCKET_INFO,
+  LOAD_PREV_CONVERSATION,
+  LOAD_MESSAGE,
+  RECEIVE_MESSAGE,
 } from "../actions/chatBoxAction";
 import { ISocket } from "../components/SocketManager";
 
@@ -40,8 +43,22 @@ export interface Conversation {
   receiverId: string;
 }
 
+export interface Message {
+  id: string;
+  senderId: string;
+  receiverId: string;
+  textContent: string;
+  fileContent: string;
+  fileContentType: string;
+}
+
 export interface ConversationControl {
   conversationList: Conversation[];
+  requestIndex: number;
+}
+
+export interface MessageControl {
+  messageList: Message[];
   requestIndex: number;
 }
 
@@ -49,6 +66,10 @@ const initConversationControl: ConversationControl = {
   conversationList: [],
   requestIndex: 0,
 };
+const initMessageControl : MessageControl = {
+  messageList: [],
+  requestIndex: 0,
+}
 const initAccountInfo: ChatAccountInfo = {
   id: "",
   user: "",
@@ -77,12 +98,53 @@ export const conversationControlReducer: React.Reducer<ConversationControl, Chat
   switch (action.type) {
     case LOAD_CONVERSATION: {
       let list = action.value as Conversation[];
-
+      return {
+        conversationList: list,
+        requestIndex: list.length,
+      };
+    }
+    case LOAD_PREV_CONVERSATION: {
+      let list = action.value as Conversation[];
       state.conversationList.push(...list);
+
       return {
         conversationList: state.conversationList,
         requestIndex: state.requestIndex + list.length,
+      }
+    }
+    default:
+      return state;
+  }
+};
+
+export const messageControlReducer: React.Reducer<MessageControl, ChatActionType<any>> = (
+  state = initMessageControl,
+  action
+) => {
+  switch (action.type) {
+    case LOAD_MESSAGE: {
+      let list = action.value as Message[];
+      return {
+        messageList: list,
+        requestIndex: list.length,
       };
+    }
+    case LOAD_PREV_CONVERSATION: {
+      let list = action.value as Message[];
+      state.messageList.push(...list);
+
+      return {
+        messageList: state.messageList,
+        requestIndex: state.requestIndex + list.length,
+      }
+    }
+    case RECEIVE_MESSAGE: {
+      state.messageList.push(action.value as Message);
+
+      return {
+        messageList: state.messageList,
+        requestIndex: state.requestIndex + 1,
+      }
     }
     default:
       return state;

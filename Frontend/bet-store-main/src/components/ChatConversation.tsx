@@ -24,7 +24,9 @@ import SocketManager from "./SocketManager";
 
 const ChatConversation = React.memo(() => {
   // state + dispatch
-  const accountState = useSelector((state: { chatAccountInfo: ChatAccountInfo }) => state.chatAccountInfo);
+  const accountState = useSelector(
+    (state: { chatAccountInfo: ChatAccountInfo }) => state.chatAccountInfo
+  );
   const conversationState = useSelector(
     (state: { conversationControl: ConversationControl }) => state.conversationControl
   );
@@ -34,8 +36,26 @@ const ChatConversation = React.memo(() => {
 
   useEffect(() => {
     if (accountState.id == "") return;
-    getConversationThunk(dispatch, () => null, { senderId: accountState.id, index: 0 });
+    getConversationThunk(dispatch, () => null, {
+      senderId: accountState.id,
+      index: 0,
+      loadPrev: false,
+    });
   }, [accountState]);
+
+  const onscrollDown = (e: React.UIEvent<HTMLDivElement, UIEvent>) => {
+    let targetDiv = e.target as HTMLDivElement;
+
+    if (targetDiv.scrollHeight - targetDiv.scrollTop === targetDiv.clientHeight) {
+      targetDiv.scrollTop -= 10;
+
+      getConversationThunk(dispatch, () => null, {
+        senderId: accountState.id,
+        index: conversationState.requestIndex,
+        loadPrev: true,
+      });
+    }
+  };
 
   return (
     <div style={{ width: "100%", height: "100%" }}>
@@ -46,7 +66,7 @@ const ChatConversation = React.memo(() => {
           <input type="text" placeholder="Search" spellCheck="false"></input>
         </div>
       </div>
-      <div className={style.conversationBody}>
+      <div className={style.conversationBody} onScroll={onscrollDown}>
         {conversationState.conversationList.map((x) => (
           <ChatConversationBox
             id={x.id}
@@ -85,10 +105,13 @@ export const ChatConversationBox: React.FC<Conversation> = (conversation) => {
     return <div></div>;
   }
   return (
-    <div className={style.conversationBox} onClick={() => {
-      dispatch(repalceCurrentReceiver(conversation.receiverId));
-      dispatch(switchToMessage());
-    }}>
+    <div
+      className={style.conversationBox}
+      onClick={() => {
+        dispatch(repalceCurrentReceiver(conversation.receiverId));
+        dispatch(switchToMessage());
+      }}
+    >
       <img src={userInfo.avatar}></img>
       <div>
         <h4>{userInfo.user}</h4>

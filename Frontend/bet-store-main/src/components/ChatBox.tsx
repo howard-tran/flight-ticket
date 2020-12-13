@@ -8,6 +8,9 @@ import ChatConversation from "./ChatConversation";
 import ChatMessage from "./ChatMessage";
 import { ISocket } from "./SocketManager";
 
+export const CHAT_KEY = "CHAT_BOX";
+export const CHAT_HANDLER = "/chat/handle";
+
 const ChatBox: React.FC = () => {
   const accountState = useSelector((state: { chatAccountInfo: ChatAccountInfo }) => state.chatAccountInfo);
   const view = useSelector((state: { viewControl: ChatViewControl }) => state.viewControl);
@@ -30,7 +33,7 @@ const ChatBox: React.FC = () => {
 
   const initSocketConnectionString = (): ISocket => {
     return {
-      key: "chat-box",
+      key: CHAT_KEY,
       socketUrl: `/java/chat-socket`,
       brockers: [
         {
