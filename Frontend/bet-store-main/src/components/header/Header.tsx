@@ -1,44 +1,68 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { DefaultRootState, useDispatch, useSelector } from 'react-redux';
 import '../../styles/Header.scss'
 import HeaderLeft from './HeaderLeft';
-import $ from 'jquery'
+import { AppState } from '../../store';
+import { GetProfile } from '../../actions/profileAction';
+import { initProfile } from '../../reducers/profileReducer';
+import { Link } from 'react-router-dom';
+import { Logout, LogoutAccount } from '../../actions/accountAction';
+
+
 
 const Header: React.FC = () => {
 
+    const dispatch = useDispatch();
+    //const account = useSelector((state:AppState)=> state.account)
+    
+    var [IsLogin,SetIsLogin] = React.useState<boolean>(false);
+
+    const profile = useSelector((state: AppState) => state.profile);
+    useEffect(() => {
+      dispatch(GetProfile());
+    }, [dispatch])
+
+    useEffect(() => {
+        console.log(profile);
+        if(profile.Error===null){
+            SetIsLogin(true);
+        } else {
+            SetIsLogin(false);
+
+        }
+      }, [dispatch, profile.IsFetching])
+  
+    
     var [isLeftNavBar, setLeftNavBar] = React.useState<boolean>(false);
 
-    const handleOffNav=()=>{
+    //const accountStatus = useSelector((state: AppState) => state.account);
+
+    const handleOffNav = () => {
         setLeftNavBar(false);
     }
-    const handleOnNavLeft=()=>{
+    const handleOnNavLeft = () => {
         setLeftNavBar(true);
-        // var ele = $('left-header-nav');
-        // console.log(ele);
-        // if(ele.hasClass('active-left-nav')){
-        //     ele.addClass('active-left-nav');
-        // }
     }
 
     return (
         <div>
-            {isLeftNavBar && <div className = "left-header-nav" id = "left-header-nav">
-                <HeaderLeft HandleOffNav = {handleOffNav}/>
+            {isLeftNavBar && <div className="left-header-nav" id="left-header-nav">
+                <HeaderLeft HandleOffNav={handleOffNav} />
             </div>}
             <nav className="white-nav-container">
 
                 <div className="btn-nav-left" >
-                    <a href="#" onClick = {handleOnNavLeft} >
+                    <a href="#" onClick={handleOnNavLeft} >
                         <i className="fas fa-caret-square-right"></i>
                     </a>
                 </div>
 
-                <a href="/">
+                <Link to="/">
                     <div className="logo-container">
                         <img src="/static/media/logo.png" alt="logo-betstore" />
                         <h2>BetStore</h2>
                     </div>
-                </a>
+                </Link>
                 <div className="search-container">
                     <i className="fas fa-search"></i>
                     <input type="text" placeholder="Bạn muốn tìm gì?" spellCheck="false"></input>
@@ -63,7 +87,8 @@ const Header: React.FC = () => {
                         </button>
                     </div>
 
-                    <div className="button dropdown-hover">
+
+                    { !IsLogin  && <div className="button dropdown-hover">
                         <div className=" noti-btn drop-btn">
                             <i className="fas fa-user"></i>
                             <h4>
@@ -71,15 +96,34 @@ const Header: React.FC = () => {
                             </h4>
                         </div>
                         <div className="dropdown-list">
-                            <div>
-                                <a href="/login">Đăng nhập</a>
-                            </div>
-                            <div>
-                                <a href="/signup">Đăng kí</a>
-                            </div>
+                            <a href="/login">
+                                <p>Đăng nhập</p>
+                            </a>
+                            <a href="/signup">
+                                <p>Đăng ký</p>
+                            </a>
                         </div>
 
-                    </div>
+                    </div>}
+                    { IsLogin && <div className="button dropdown-hover">
+                        <div className="noti-btn drop-btn">
+                            {/* <i className="fas fa-user"></i> */}
+                            <img src = {`/cdn/cdn/${profile.Payload.avatar}`} alt = "avatar"></img>
+                            <h4>
+                                {`${profile.Payload.surname} ${profile.Payload.name}`}
+                            </h4>
+                        </div>
+                        <div className="dropdown-list">
+                            <Link to="/profile">
+                                <p>Tài khoản</p> 
+                            </Link>
+                            <span onClick = {LogoutAccount}>
+                                <p>Đăng xuất</p>
+                            </span>
+                        </div>
+
+                    </div>}
+                
                 </div>
             </nav>
         </div>

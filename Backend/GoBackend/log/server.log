@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 --------- GoServer Start at 2020/11/25 16:38:19 ---------
 [GIN-debug] POST   /api/account/login        --> GoBackend/controller.LoginHandle (4 handlers)
@@ -1779,3 +1780,5 @@
 2020/12/14 - 04:43:25 |200| 1.071793886s |   10.1.0.1 |POST   "/api/account/signup"
 2020/12/14 - 04:43:32 |200| 1.03599057s |   10.1.0.1 |POST   "/api/account/signup"
 2020/12/14 - 04:43:37 |200| 1.083657899s |   10.1.0.1 |POST   "/api/account/signup"
+=======
+>>>>>>> demo
