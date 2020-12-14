@@ -2,6 +2,8 @@
 
 // create message collection
 
+DBQuery.shellBatchSize = 1000;
+
 print("###################### Create Messagge Collection ######################");
 
 db = db.getSiblingDB("bet_store");
@@ -37,7 +39,7 @@ db.Message.find({
 db.Message.find({ _id: ObjectId("5fb9362e1279553053ca4ed9") });
 
 db.Account.find({_id: ObjectId("5fbd3a3970cb4d0161112b1d")});
-db.Conversation.deleteMany({$where: "this.senderId.length <= 7"})
+db.Message.deleteMany({$where: "this.textContent.length <= 2"})
 db.Conversation.find();
 
 db.Account.find();

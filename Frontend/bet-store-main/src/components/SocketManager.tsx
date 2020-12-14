@@ -2,6 +2,7 @@ import { CompatClient, IFrame, IMessage, Stomp } from "@stomp/stompjs";
 import SockJS from "sockjs-client";
 
 export interface ISocket {
+  key: string;
   socketUrl: string;
   brockers: IBrocker[];
 }
@@ -13,10 +14,13 @@ export interface IBrocker {
 
 class SocketManager {
   private static stompClient: Map<string, CompatClient> = new Map();
-  private static clientInfo : Map<String, ISocket> = new Map();
+  private static clientInfo: Map<String, ISocket> = new Map();
 
   public static addSocket(key: string, socketInfo: ISocket) {
-    if (this.clientInfo.get(key).socketUrl === socketInfo.socketUrl) {
+    if (
+      this.clientInfo.get(key) != null &&
+      this.clientInfo.get(key).socketUrl === socketInfo.socketUrl
+    ) {
       return false;
     }
 

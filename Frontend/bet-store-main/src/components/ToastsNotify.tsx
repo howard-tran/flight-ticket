@@ -22,14 +22,14 @@ const ToastNotify: React.FC<{ notify: NotifyType, handleErase:any }> = (notify, 
             // console.log("hahaha");
             // toastDispose($("#"+toastname));
             setIsErase(true);
-            console.log(handleErase);
+            //console.log(handleErase);
             //handleErase();
             clearInterval(interval);
             //setInterval(null);
         }, 3000);
     useEffect(() => {
 
-        console.log("ref");
+        //console.log("ref");
     }, [IsErase])
 
 

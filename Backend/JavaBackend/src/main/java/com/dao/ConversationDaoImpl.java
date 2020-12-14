@@ -61,9 +61,7 @@ public class ConversationDaoImpl implements IConversationDao {
         collection -> {
           var con1 = new Document("senderId", senderId);
           var con2 = new Document("receiverId", receiverId);
-          var filter = Document.parse(
-            String.format("{$and: [%s, %s]}", con1.toJson(), con2.toJson())
-          );
+          var filter = Document.parse(String.format("{$and: [%s, %s]}", con1.toJson(), con2.toJson()));
 
           var res = new ArrayList<Conversation>();
           for (var doc : collection.find(filter).sort(new Document("_id", -1))) {

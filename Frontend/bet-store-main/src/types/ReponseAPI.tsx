@@ -1,5 +1,9 @@
 export interface ReponseAPI<T>{
     status: number,
-    error: string,
+    message: string,
     data: T
+}
+
+export interface Messenger{
+    message:string
 }

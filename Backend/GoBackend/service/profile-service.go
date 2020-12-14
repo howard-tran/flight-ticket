@@ -3,7 +3,10 @@ package service
 import (
 	"GoBackend/entity"
 	mongodbservice "GoBackend/service/repository-service"
+	"encoding/json"
 	"fmt"
+	"io/ioutil"
+	"net/http"
 	"os"
 
 	"gopkg.in/mgo.v2"
@@ -11,6 +14,11 @@ import (
 )
 
 const ProfileCollection = "Profile"
+const BASE_CDN_SERVER = "http://10.1.0.3:8888"
+
+type JsonAvatarStruct struct {
+	Avatar string `json:"avatar"`
+}
 
 type ProfileService interface {
 	AddProfile(enti entity.ProfileEntity) (bson.ObjectId, error)
@@ -56,12 +64,18 @@ func (c *ProfileDataService) GetProfile(ID string) (entity.ProfileEntity, error)
 func (c *ProfileDataService) AddProfile(enti entity.ProfileEntity) (bson.ObjectId, error) {
 	_id := bson.NewObjectId()
 	enti.ID = _id
-	err := c.collection.Insert(&enti)
 
 	//handle more...
 
-	//
+	//Add avatar random
+	avatarRandom, err := GetAvatarRandomFromCDNServer("men")
 
+	if err != nil {
+		fmt.Println(err.Error())
+	}
+	enti.Avatar = avatarRandom
+
+	err = c.collection.Insert(&enti)
 	if err != nil {
 		return "", err
 	}
@@ -81,4 +95,40 @@ func (c *ProfileDataService) EditProfile(ID string, profile entity.ProfileEntity
 
 func (c *ProfileDataService) DelProfile() (bson.ObjectId, error) {
 	return "", nil
+}
+
+func GetAvatarRandomFromCDNServer(sex string) (string, error) {
+	url := BASE_CDN_SERVER + "/avatar/" + sex
+	method := "GET"
+
+	client := &http.Client{}
+	req, err := http.NewRequest(method, url, nil)
+
+	if err != nil {
+		fmt.Println(err)
+		return "", err
+	}
+	res, err := client.Do(req)
+	if err != nil {
+		fmt.Println(err)
+		return "", err
+	}
+	defer res.Body.Close()
+	body, err := ioutil.ReadAll(res.Body)
+
+	if err != nil {
+		fmt.Println(err)
+		return "", err
+	}
+
+	var avatarJsonUnpack JsonAvatarStruct
+	json.Unmarshal([]byte(string(body)), &avatarJsonUnpack)
+	//json.NewDecoder(res.Body).Decode(avatarJsonUnpack)
+
+	fmt.Println("----------------------")
+	fmt.Println(string(body))
+
+	fmt.Println(avatarJsonUnpack.Avatar)
+	fmt.Println("----------------------")
+	return string(avatarJsonUnpack.Avatar), nil
 }

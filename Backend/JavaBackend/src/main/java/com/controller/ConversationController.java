@@ -7,7 +7,6 @@ import com.model.Conversation;
 import com.service.ConversationService;
 import java.util.Optional;
 import org.bson.types.ObjectId;
-import org.jboss.logging.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
@@ -27,7 +26,7 @@ public class ConversationController {
 
   @Autowired
   private SimpMessagingTemplate sender;
-
+  
   private void podcastNewConversation(Conversation conversation, Tuple2<String, String> data) {
     this.sender.convertAndSend(
         String.format("%s/%s", SocketService.ChatSupplier.roomBrocker, conversation.getSenderId()),
