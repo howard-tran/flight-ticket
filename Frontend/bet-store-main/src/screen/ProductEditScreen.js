@@ -5,9 +5,12 @@ import { useDispatch, useSelector } from "react-redux";
 import FormContainer from "../components/FormContainer";
 import { listProductDetails, updateProduct } from "../actions/productActions";
 import { listCategories } from "../actions/categoryActions";
+import ImageUploader from "react-images-upload";
+import style from "../styles/ProductEditForm.module.scss";
+import { uploadImage } from "../actions/imageActions";
 
-const ProductEditScreen = ({ match, history }) => {
-  const productId = match.params.id;
+const ProductEditScreen = (props) => {
+  const productId = props.match.params.id;
 
   //const [selectedFile, setFile] = useState(null);
   const [properties, setProperties] = useState([]);
@@ -17,6 +20,8 @@ const ProductEditScreen = ({ match, history }) => {
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState(0);
   const [countInStock, setCountInStock] = useState(0);
+  const [defaultImages, setDefaultImage] = useState([]);
+  const [pictures, setPictures] = useState([]);
 
   const dispatch = useDispatch();
 
@@ -33,15 +38,43 @@ const ProductEditScreen = ({ match, history }) => {
       setName(product.name);
       setPrice(product.price);
       setDescription(product.description);
-      setCountInStock(product.setCountInStock);
+      setCountInStock(product.countInStock);
       setProperties(product.properties);
+      handleDefaultImage(product.image);
     }
-  }, [dispatch, history, productId, product]);
+  }, [dispatch, props.history, productId, product]);
 
   const submitHandler = (event) => {
     event.preventDefault();
-    window.confirm("Bạn có chắc chắn?");
-    //dispatch(updateProduct())
+
+    const files = new FormData();
+    for (var x = 0; x < pictures.length; x++) {
+      files.append("files", pictures[x]);
+    }
+    if (window.confirm("Bạn có chắc chắn muốn lưu sản phẩm?")) {
+      const temp_product = {
+        name: name,
+        description: description,
+        price: price,
+        countInStock: countInStock,
+        image: product.image,
+        category: category._id,
+        user: "5fa7fb0a62083e11ace57490",
+        properties: properties,
+      };
+      console.log(files);
+      //dispatch(uploadImage(files));
+
+      dispatch(updateProduct(productId, temp_product, files));
+    }
+  };
+  const handleDefaultImage = (images) => {
+    images.map((image) => {
+      setDefaultImage([...defaultImages, `/cdn/cdn/${image.link}`]);
+    });
+  };
+  const onDrop = (picture) => {
+    setPictures([...pictures, picture]);
   };
 
   const onPropertyChange = (event) => {
@@ -161,7 +194,16 @@ const ProductEditScreen = ({ match, history }) => {
                 ></Form.Control>
               </Form.Group>
             ))}
-
+            <ImageUploader
+              {...props}
+              className={style.imgUpload}
+              withIcon={true}
+              onChange={onDrop}
+              defaultImages={defaultImages}
+              imgExtension={[".jpg", ".gif", ".png", ".gif"]}
+              maxFileSize={5242880}
+              withPreview={true}
+            />
             <Button type="submit" variant="primary">
               Cập nhật
             </Button>

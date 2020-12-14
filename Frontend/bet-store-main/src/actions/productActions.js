@@ -149,7 +149,7 @@ export const createProduct = (product, imagesToUpload) => async (
   }
 };
 
-export const updateProduct = (product, imagesToUpload) => async (
+export const updateProduct = (id, product, imagesToUpload) => async (
   dispatch,
   getState
 ) => {
@@ -179,11 +179,11 @@ export const updateProduct = (product, imagesToUpload) => async (
       },
     };*/
     //
-    const { data } = await axios.put(`/node/api/products/`, product);
+    //const { data } = await axios.put(`/node/api/products/${id}`, product);
 
     dispatch({
       type: PRODUCT_UPDATE_SUCCESS,
-      payload: data,
+      //payload: data,
     });
   } catch (error) {
     dispatch({
