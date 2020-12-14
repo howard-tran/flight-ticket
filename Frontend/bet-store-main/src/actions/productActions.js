@@ -13,6 +13,9 @@ import {
   PRODUCT_CREATE_REQUEST,
   PRODUCT_CREATE_SUCCESS,
   PRODUCT_CREATE_FAIL,
+  PRODUCT_UPDATE_REQUEST,
+  PRODUCT_UPDATE_SUCCESS,
+  PRODUCT_UPDATE_FAIL,
 } from "../constants/productConstants";
 
 import {
@@ -138,6 +141,53 @@ export const createProduct = (product, imagesToUpload) => async (
   } catch (error) {
     dispatch({
       type: PRODUCT_CREATE_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const updateProduct = (product, imagesToUpload) => async (
+  dispatch,
+  getState
+) => {
+  try {
+    dispatch({
+      type: PRODUCT_UPDATE_REQUEST,
+    });
+
+    await dispatch(uploadImage(imagesToUpload));
+
+    const {
+      imageUpload: { images },
+    } = getState();
+
+    Object.entries(images).map((filename) => {
+      product.image.push({
+        link: filename[1],
+        alt: filename[0],
+      });
+    });
+
+    //get user info
+    //const {userLogin: {userInfo}} = getState()
+    /*const config = {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };*/
+    //
+    const { data } = await axios.put(`/node/api/products/`, product);
+
+    dispatch({
+      type: PRODUCT_UPDATE_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: PRODUCT_UPDATE_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message

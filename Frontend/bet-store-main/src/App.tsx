@@ -16,6 +16,7 @@ import ProductScreen from "./screen/ProductScreen";
 import AddProductScreen from "./screen/AddProductScreen";
 import { ChatBox } from "./components/ChatBox";
 import ProductListScreen from "./screen/ProductListScreen";
+import ProductEditScreen from "./screen/ProductEditScreen";
 
 function App() {
   return (
@@ -37,7 +38,6 @@ function App() {
             <Login islogin={false} />
           </Route>
           <Route path="/product/:id" component={ProductScreen} exact></Route>
-          <Route path="/addProduct" component={AddProductScreen} exact></Route>
           <Route
             path="/profile/product"
             component={ProductListScreen}
@@ -46,7 +46,10 @@ function App() {
           <Route
             path="/profile/product/new"
             component={AddProductScreen}
-            exact
+          ></Route>
+          <Route
+            path="/profile/product/:id/edit"
+            component={ProductEditScreen}
           ></Route>
         </Switch>
         <ChatBox></ChatBox>
