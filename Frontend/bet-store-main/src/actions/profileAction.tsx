@@ -11,7 +11,7 @@ import fs from 'fs'
 
 export const GetProfile = () =>async (dispatch: React.Dispatch<ActionType<Profile>>) => {
     dispatch(setStateGetProfile())
-    Axios.defaults.headers.common['Authentication'] = 'Bearer ' + localStorage.getItem("token")// for all requests
+    Axios.defaults.headers.common['Authentication'] = 'Bearer ' + sessionStorage.getItem("token")// for all requests
     let response = await Axios.get<ReponseAPI<Profile>>(
         `/go/profile/`
     );
