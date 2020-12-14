@@ -69,7 +69,6 @@ export const getConversationThunk: ThunkAction<
   if (!param.loadPrev) {
     dispatch(loadConversation(result));
   } else {
-    alert("this is not good");
     dispatch(loadPrevConversation(result));
   }
 };

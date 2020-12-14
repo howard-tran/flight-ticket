@@ -46,3 +46,17 @@ db.Account.find();
 db.Account.updateMany({}, {
   $set: { password: "$2a$14$UcUJzKQuSUwxCm6j3cc4cOi7Q//Iw41YNHeMJM.CEHV4gdax0Ole2" },
 });
+
+db.Account.find().forEach(x => {
+  if (x.username.startsWith('admin')) {
+    db.Conversation.insertOne({
+      senderId: "5fbd3a3970cb4d0161112b1d",
+      receiverId: x._id.toString()
+    })
+  }
+});
+for (let i = 0; i < listAccount.length; i++) {
+  if (listAccount[i].username.startsWith('admin')) {
+    print("ok")
+  }
+}

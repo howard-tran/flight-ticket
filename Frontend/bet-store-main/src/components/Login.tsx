@@ -134,7 +134,7 @@ const Login: React.FC<{islogin:boolean}> = ({islogin}) => {
                     if (res.data["status"] === 200) {
                         dispatch(setLoginSuccess(res.data["data"]["token"]))
                         //console.log(res.data["data"]["token"]);
-                        window.localStorage.setItem("token", res.data["data"]["token"]);
+                        window.sessionStorage.setItem("token", res.data["data"]["token"]);
                         setisInfoWrong(false);
                     
                         dispatch(GetProfile());
