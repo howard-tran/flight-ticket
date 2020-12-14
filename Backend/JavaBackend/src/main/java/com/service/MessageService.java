@@ -88,7 +88,8 @@ public class MessageService implements LogService {
           if (index < list.size()) {
             if (index + 15 <= list.size()) {
               return list.subList(index, index + 15);
-            } else return list.subList(index, list.size());
+            } 
+            else return list.subList(index, list.size());
           }
           return new ArrayList<Message>();
         }

@@ -119,6 +119,45 @@ func CheckPasswordHash(password, hash string) bool {
 	return err == nil
 }
 
+func ChangePasswordHandle(ctx *gin.Context) {
+	var passwordChangeEntity entity.PasswordChangeEntity
+	err := ctx.BindJSON(&passwordChangeEntity)
+
+	// passHashed, err := HashPassword(passwordChangeEntity.NewPassword)
+	// fmt.Println(passHashed)
+	if err != nil {
+		ctx.JSON(200, service.CreateMsgErrorJsonResponse(http.StatusBadRequest, "format body wrong"))
+		return
+	}
+
+	ClaimJwt, _ := ctx.Get("ClaimJwt")
+
+	var data, _ = ClaimJwt.(entity.JwtClaimEntity)
+
+	passoldDB, err := AccountService.GetPassword(data.ID)
+	if err != nil {
+		ctx.JSON(http.StatusOK, service.CreateMsgErrorJsonResponse(http.StatusFound, err.Error()))
+		return
+	}
+	fmt.Println(passoldDB + ", " + passwordChangeEntity.OldPassword)
+
+	if CheckPasswordHash(passwordChangeEntity.OldPassword, passoldDB) {
+		passHashed, err := HashPassword(passwordChangeEntity.NewPassword)
+
+		err = AccountService.ChangePassword(data.ID, passHashed)
+		if err != nil {
+			ctx.JSON(http.StatusOK, service.CreateMsgErrorJsonResponse(http.StatusFound, err.Error()))
+			return
+		}
+		ctx.JSON(http.StatusOK, service.CreateMsgSuccessJsonResponse(gin.H{"message": "Password change success"}))
+
+	} else {
+		ctx.JSON(http.StatusOK, service.CreateMsgErrorJsonResponse(http.StatusFound, "Password wrong"))
+		return
+	}
+
+}
+
 /*
 func ConfirmTelbySMS(ctx *gin.Context) {
 	var account entity.AccountEntity

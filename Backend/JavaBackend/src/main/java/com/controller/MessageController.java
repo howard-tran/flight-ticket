@@ -31,14 +31,14 @@ public class MessageController {
   private void sendToUser(String userId, Object message) {
     this.simpMessagingTemplate.convertAndSend(
         String.format("%s/%s", SocketService.ChatSupplier.messageBrocker, userId),
-        message
+        ResponseHandler.ok(message)
       );
   }
 
   @MessageMapping(SocketService.ChatSupplier.chatHanlder)
   public void messageHandle(@Payload Message message) {
     Optional<Optional<String>> res = this.messageService.addMessage(message);
-
+    
     if (res.isEmpty()) {
       sendToUser(
         message.getSenderId(),

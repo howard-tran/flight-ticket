@@ -2,6 +2,12 @@ import {
   CHANGE_AVATAR,
   CHANGE_AVATAR_FAIL,
   CHANGE_AVATAR_SUCCESS,
+  CHANGE_PASSWORD,
+  CHANGE_PASSWORD_FAIL,
+  CHANGE_PASSWORD_SUCCESS,
+  EDIT_PROFILE,
+  EDIT_PROFILE_FAIL,
+  EDIT_PROFILE_SUCCESS,
   GET_PROFILE,
   GET_PROFILE_FAIL,
   GET_PROFILE_SUCCESS,
@@ -41,10 +47,23 @@ export const profileReducer: React.Reducer<StateType<Profile>, ActionType<any>> 
         ...state.Payload,
         avatar: action.payload
       }
-
       return { ...state, IsFetching: false, Payload: payloadnew };
     case CHANGE_AVATAR_FAIL:
       return { ...state, IsFetching: false };
+    case EDIT_PROFILE:
+
+      return { ...state, IsFetching: true };
+    case EDIT_PROFILE_SUCCESS:
+      return { ...state, IsFetching: false, Payload: action.payload };
+    case EDIT_PROFILE_FAIL:
+      return { ...state, IsFetching: false };
+    case CHANGE_PASSWORD:
+      return { ...state,IsFetching: true};
+    case CHANGE_PASSWORD_SUCCESS:
+      return { ...state,IsFetching: false, Error:""};
+    case CHANGE_PASSWORD_FAIL:
+      return { ...state,IsFetching: false, Error:action.payload};
+
 
     default:
       return state;

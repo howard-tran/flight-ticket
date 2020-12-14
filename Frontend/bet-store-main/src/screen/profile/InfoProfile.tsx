@@ -1,12 +1,14 @@
 import React, { createRef } from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { ChangeAvatar } from "../../actions/profileAction";
+import { ChangeAvatar, ChangePassword, EditProfile, GetProfile } from "../../actions/profileAction";
 import { AppState } from "../../store";
 import styles from "../../styles/Profile.module.scss";
 import { Profile } from "../../types/profile";
 import $ from 'jquery'
 import { AddNotify } from "../../actions/notifyAction";
+import { string } from "prop-types";
+import { PasswordChangeType } from "../../types/passwordchangeType";
 
 interface SetProfileAction {
     type: string,
@@ -17,6 +19,8 @@ const SURNAME = "SURNAME";
 const NAME = "NAME";
 const AVATAR = "AVATAR";
 const FULL = "FULL";
+const TEL = "TEL";
+const SEX = "SEX";
 
 const profilereducer: React.Reducer<Profile, SetProfileAction> = (s, a) => {
     switch (a.type) {
@@ -41,6 +45,16 @@ const profilereducer: React.Reducer<Profile, SetProfileAction> = (s, a) => {
                 ...s,
                 surname: a.payload
             }
+        case TEL:
+            return {
+                ...s,
+                tel: a.payload
+            }
+        case SEX:
+            return {
+                ...s,
+                sex: a.payload
+            }
         case FULL:
             return a.payload
     }
@@ -53,21 +67,33 @@ const SetName = (name: string): SetProfileAction => {
         payload: name
     }
 }
-
-
 const SetSurName = (name: string): SetProfileAction => {
     return {
         type: SURNAME,
         payload: name
     }
 }
+const SetTel = (tel: string): SetProfileAction => {
+    return {
+        type: TEL,
+        payload: tel
+    }
+}
+const SetSex = (sex: string): SetProfileAction => {
+    return {
+        type: SEX,
+        payload: sex
+    }
+}
 
 const CHANGE_PASSWORD = "CHANGE_PASSWORD",
     NOT_CHANGE_PASSWORD = "NOT_CHANGE_PASSWORD"
 
-const   WOMAN = "woman",
-        MAN = "man",
-        OTHER = "other"
+const initChangePass: PasswordChangeType = {
+    oldpassword: "",
+    newpassword: ""
+}
+
 
 export default function InfoProfile() {
     const profile = useSelector((state: AppState) => state.profile)
@@ -75,17 +101,28 @@ export default function InfoProfile() {
         profilereducer,
         profile.Payload
     );
+
+    const [passwordchange, setpasswordchange] = React.useState<PasswordChangeType>(initChangePass);
+    const [repassword, setrepassword] = React.useState<string>();
+
+
     useEffect(() => {
-        if (profile.IsFetching === true ) return;
+        if (profile.IsFetching === true) return;
         setProfileState({
             type: FULL,
             payload: profile.Payload
         })
         setSexuser(profile.Payload.sex);
-        if(profile.Payload.sex!=="")
-            $(`input[name=SelectSexForm][value=${profile.Payload.sex}]`).attr("checked","true");
+        if (profile.Payload.sex !== "")
+            $(`input[name=SelectSexForm][value=${profile.Payload.sex}]`).attr("checked", "true");
 
     }, [profile])
+
+    const [LoadingAsync, setLoadingAsync] = React.useState<boolean>(false);
+
+    useEffect(() => {
+        setLoadingAsync (profile.IsFetching);    
+    }, [profile.IsFetching, profile])
 
     const [IsChangePassword, setIsChangePassword] = React.useState<string>(NOT_CHANGE_PASSWORD);
     const [sexuser, setSexuser] = React.useState<string>();
@@ -120,12 +157,28 @@ export default function InfoProfile() {
     var SelectSexForm: React.RefObject<HTMLInputElement> = createRef();
 
     const HandleSubmit = () => {
-        dispatch(AddNotify({path:"",destination:"Push thông báo thành công!!!",title:"BetStore"}));        
+        dispatch(EditProfile(profileState));
+        dispatch(AddNotify({ path: "#", destination: "Cập nhật thông tin thành công!!!", title: "BetStore" }));
+        //dispatch(EditProfile(profileState));
+        if (IsChangePassword === CHANGE_PASSWORD) {
+
+            if (passwordchange !== initChangePass) {
+                if (repassword === passwordchange.newpassword) {
+                    dispatch(ChangePassword(passwordchange));
+                    //dispatch(AddNotify({ title: "betstore", destination: "Password đã được thay đổi", path: "#" }))
+                }
+            }
+
+        }
     }
 
     const ChangeSelectSexForm = (evt: React.ChangeEvent<any>) => {
+<<<<<<< HEAD
         //alert(evt.target.value);
         //console.log($(`input[name=SelectSexForm][value=woman]`).attr("checked","true"));
+=======
+        setProfileState(SetSex(String(evt.target.value)));
+>>>>>>> demo
     }
 
     return (
@@ -155,7 +208,8 @@ export default function InfoProfile() {
                         <input
                             placeholder="Nhập số số điện thoại của bạn"
                             type="text"
-                            value={profileState.tel} />
+                            value={profileState.tel}
+                            onChange={(evt) => { setProfileState(SetTel(evt.target.value)) }} />
                     </div>
                     <div className={styles.FormControl} >
                         <label>Giới Tính</label>
@@ -175,30 +229,43 @@ export default function InfoProfile() {
                             <label htmlFor="inputTrack">Đổi mật khẩu</label>
                         </div>
                     </div>
-                    {IsChangePassword == CHANGE_PASSWORD && <div className={styles.ChangePassArea}>
+                    {IsChangePassword === CHANGE_PASSWORD && <div className={styles.ChangePassArea}>
                         <div className={styles.FormControl} >
                             <label>Mật khẩu cũ</label>
                             <input
                                 placeholder="Nhập mật khẩu cũ"
-                                type="text" />
+                                type="text"
+                                value={passwordchange.oldpassword}
+                                onChange={(evt) => { setpasswordchange({ ...passwordchange, oldpassword: evt.target.value }) }} />
                         </div>
                         <div className={styles.FormControl} >
                             <label>Mật khẩu mới</label>
                             <input
                                 placeholder="Nhập mật khẩu từ 8 đến 32 kí tự"
-                                type="text" />
+                                type="text"
+                                value={passwordchange.newpassword}
+                                onChange={(evt) => { setpasswordchange({ ...passwordchange, newpassword: evt.target.value }) }} />
                         </div>
                         <div className={styles.FormControl} >
                             <label>Nhập lại</label>
                             <input
                                 placeholder="Xác nhận lại mật khẩu"
-                                type="text" />
+                                type="text"
+                                value={repassword}
+                                onChange={(evt) => { setrepassword(evt.target.value) }} />
                         </div>
                     </div>}
                     <div className={styles.FormControl}>
-                        <button className={styles.BtnSubmit} onClick={HandleSubmit}>
-                            Cập nhật
-                    </button>
+
+
+                        { LoadingAsync === true ? 
+                            <button className={styles.BtnSubmit} onClick={HandleSubmit} disabled>
+                                Cập nhật
+                            </button>: 
+                            <button className={styles.BtnSubmit} onClick={HandleSubmit}>
+                                Cập nhật
+                            </button>
+                        }
                     </div>
                 </div>
 

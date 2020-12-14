@@ -19,10 +19,10 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
     );
 
     registry.enableSimpleBroker(
-      "/chat",
       SocketService.ChatSupplier.messageBrocker,
       SocketService.ChatSupplier.roomBrocker,
-      SocketService.NotificationSupplier.notificationBrocker
+      SocketService.NotificationSupplier.notificationBrocker,
+      "/testChannel"
     );
   }
 

@@ -1,17 +1,20 @@
 import Axios, { AxiosRequestConfig } from "axios";
 import { useDispatch } from "react-redux";
-import { CHANGE_AVATAR, CHANGE_AVATAR_FAIL, CHANGE_AVATAR_SUCCESS, GET_PROFILE, GET_PROFILE_FAIL, GET_PROFILE_SUCCESS, REMOVE_PROFILE, SAVE_CHANGE_AVATAR } from "../constants/profileConstants";
+import { CHANGE_AVATAR, CHANGE_AVATAR_FAIL, CHANGE_AVATAR_SUCCESS, CHANGE_PASSWORD, CHANGE_PASSWORD_FAIL, CHANGE_PASSWORD_SUCCESS, EDIT_PROFILE, EDIT_PROFILE_FAIL, EDIT_PROFILE_SUCCESS, GET_PROFILE, GET_PROFILE_FAIL, GET_PROFILE_SUCCESS, REMOVE_PROFILE, SAVE_CHANGE_AVATAR } from "../constants/profileConstants";
 import { ActionType } from "../types/actionType";
 import { Profile } from "../types/profile";
-import { ReponseAPI } from "../types/ReponseAPI";
+import { Messenger, ReponseAPI } from "../types/ReponseAPI";
 import FormData from 'form-data'
 import fs from 'fs'
+import { PasswordChangeType } from "../types/passwordchangeType";
+import { AddNotify } from "./notifyAction";
+import { NotifyType } from "../types/notifyType";
 
 
 
 export const GetProfile = () =>async (dispatch: React.Dispatch<ActionType<Profile>>) => {
     dispatch(setStateGetProfile())
-    Axios.defaults.headers.common['Authentication'] = 'Bearer ' + localStorage.getItem("token")// for all requests
+    Axios.defaults.headers.common['Authentication'] = 'Bearer ' + sessionStorage.getItem("token")// for all requests
     let response = await Axios.get<ReponseAPI<Profile>>(
         `/go/profile/`
     );
@@ -21,13 +24,56 @@ export const GetProfile = () =>async (dispatch: React.Dispatch<ActionType<Profil
             dispatch(setProfile(response.data.data));
         }
         else {
-            dispatch(setStateErrorProfile(response.data.error))
+            dispatch(setStateErrorProfile(response.data.message))
         }
     } else {
         dispatch(setStateErrorProfile(response.statusText))
     }
 }
 
+
+export const EditProfile = (profile:Profile) =>async (dispatch: React.Dispatch<ActionType<Profile>>) => {
+    //console.log(profile);
+    dispatch(EditProfileAction())
+    //Object.entries(profile).reduce((a,[k,v]) => (v ? (a[k]=v, a) : a), {})
+
+    let response = await Axios.post<ReponseAPI<Profile>>(
+        `/go/profile/`,
+        profile
+    );
+    console.log(response);
+    if (response.status === 200) {
+        if (response.data.status === 200) {
+            dispatch(EditProfileAction_SUCCESS(profile));
+        }
+        else {
+            dispatch(EditProfileAction_FAIL())
+        }
+    } else {
+        dispatch(EditProfileAction_FAIL())
+    }
+}
+
+const EditProfileAction = (): ActionType<Profile> => {
+    return {
+        type: EDIT_PROFILE,
+        payload: null
+    }
+}
+
+const EditProfileAction_SUCCESS = (profile: Profile): ActionType<Profile> => {
+    return {
+        type: EDIT_PROFILE_SUCCESS,
+        payload: profile
+    }
+}
+
+const EditProfileAction_FAIL = (): ActionType<Profile> => {
+    return {
+        type: EDIT_PROFILE_FAIL,
+        payload: null
+    }
+}
 const setProfile = (profile: Profile): ActionType<Profile> => {
     return {
         type: GET_PROFILE_SUCCESS,
@@ -49,7 +95,6 @@ const setStateErrorProfile = (profile: any): ActionType<any> => {
     }
 }
 
-
 export const ProfileRemove = () => {
     const dispatch = useDispatch();
     dispatch({
@@ -57,8 +102,6 @@ export const ProfileRemove = () => {
         payload: {},
     });
 }
-
-
 
 export const ChangeAvatar = (file: File) => async (dispatch: React.Dispatch<ActionType<Profile>>) => {
     dispatch(ChangeAvatar_Request());
@@ -128,7 +171,6 @@ const ChangeAvatar_Success = (link: string): ActionType<any> => {
     }
 }
 
-
 const ChangeAvatar_Fail = (err: string): ActionType<any> => {
     return {
         type: CHANGE_AVATAR_FAIL,
@@ -174,9 +216,64 @@ const SaveChangeAvatarSuccess = (): ActionType<any> => {
         payload: null
     }
 }
+
 const SaveChangeAvatarFail = (): ActionType<any> => {
     return {
         type: SAVE_CHANGE_AVATAR,
         payload: null
     }
 }
+
+
+export const ChangePassword = (pass:PasswordChangeType) => async (dispatch: React.Dispatch<ActionType<Profile>>,
+    dispatchnoti: React.Dispatch<ActionType<NotifyType>>) => {
+    dispatch(ChangePasswordAction());
+
+    let res = await Axios.post<ReponseAPI<Messenger>>(
+        `/go/api/account/password`,
+        pass
+    )
+
+
+    if (res.status === 200) {
+        if (res.data.status === 200) {
+            dispatch(ChangePasswordAction_SUCCESS());
+            alert("Password đã được thay đổi");
+            //dispatchnoti(AddNotify({ title: "betstore", destination: "Password đã được thay đổi", path: "#" }))
+        }
+        else {
+            dispatch(ChangePasswordAction_FAIL(res.data.message));
+            alert(res.data.message);
+            //dispatchnoti(AddNotify({ title: "betstore", destination: res.data.message, path: "#" }))
+        }
+    } else {
+        dispatch(ChangePasswordAction_FAIL(res.data.message));
+        alert(res.data.message);
+        //dispatchnoti(AddNotify({ title: "betstore", destination: res.data.message, path: "#" }))
+    }
+
+
+}
+
+
+const ChangePasswordAction = (): ActionType<any> => {
+    return {
+        type: CHANGE_PASSWORD,
+        payload: null
+    }
+}
+
+const ChangePasswordAction_SUCCESS = (): ActionType<any> => {
+    return {
+        type: CHANGE_PASSWORD_SUCCESS,
+        payload: null
+    }
+}
+
+const ChangePasswordAction_FAIL = (msg:string): ActionType<any> => {
+    return {
+        type: CHANGE_PASSWORD_FAIL,
+        payload: msg
+    }
+}
+
