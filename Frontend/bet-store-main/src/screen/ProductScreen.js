@@ -5,7 +5,6 @@ import AwesomeSlider from "react-awesome-slider";
 import "react-awesome-slider/dist/styles.css";
 import { useDispatch, useSelector } from "react-redux";
 import { listProductDetails } from "../actions/productActions";
-import { listCategoryDetails } from "../actions/categoryActions";
 
 const ProductScreen = ({ match }) => {
   const dispatch = useDispatch();
@@ -13,28 +12,25 @@ const ProductScreen = ({ match }) => {
   const [properties, setProperties] = useState([]);
   const [images, setImages] = useState([]);
 
+  const [propertyLabel, setPropertyLabel] = useState([]);
+
   const productDetails = useSelector((state) => state.productDetails);
   const { product } = productDetails;
 
-  const categoryDetails = useSelector((state) => state.categoryDetails);
-  const { category } = categoryDetails;
-
-  useEffect(async () => {
-    const getProductDetails = () => {
-      return dispatch(listProductDetails(match.params.id)).then(() =>
-        console.log(product.category)
+  useEffect(() => {
+    const getProductDetails = async () => {
+      return await dispatch(listProductDetails(match.params.id)).then(() =>
+        console.log(product)
       );
     };
     getProductDetails();
   }, [dispatch, match]);
 
   useEffect(() => {
-    if (product) {
+    if (productDetails.loading == false) {
       setImages(product.image);
       setProperties(product.properties);
-      if (product.category) {
-        dispatch(listCategoryDetails(product.category));
-      }
+      setPropertyLabel(product.category.properties);
     }
   }, [dispatch, productDetails.loading]);
 
@@ -43,12 +39,12 @@ const ProductScreen = ({ match }) => {
       {/*<Link className="btn btn-light my-3" to="/">
         Go Back
   </Link>*/}
-      {productDetails.loading || categoryDetails.loading ? (
+      {productDetails.loading ? (
         <h2>Loading...</h2>
       ) : productDetails.error ? (
         <h3>{productDetails.error}</h3>
       ) : (
-        <Row>
+        <Row onLoad>
           <Col md={6}>
             <AwesomeSlider>
               {images.map((img) => (
@@ -92,12 +88,12 @@ const ProductScreen = ({ match }) => {
                     type="button"
                     disabled={product.countInStock === 0}
                   >
-                    Add To Cart
+                    Liên lạc với người bán
                   </Button>
                 </ListGroup.Item>
               </ListGroup>
               <ListGroup variant="flush">
-                {category.properties.map((prop) => (
+                {propertyLabel.map((prop) => (
                   <ListGroup.Item>
                     <Row>
                       <Col>{prop.name}</Col>

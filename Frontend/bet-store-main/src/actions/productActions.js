@@ -15,6 +15,14 @@ import {
   PRODUCT_CREATE_FAIL,
 } from "../constants/productConstants";
 
+import {
+  IMAGE_UPLOAD_REQUEST,
+  IMAGE_UPLOAD_SUCCESS,
+  IMAGE_UPLOAD_FAIL,
+} from "../constants/imageConstants";
+
+import { uploadImage } from "../actions/imageActions";
+
 export const listProducts = () => async (dispatch) => {
   try {
     dispatch({
@@ -91,10 +99,26 @@ export const deleteProduct = (id) => async (dispatch, getState) => {
   }
 };
 
-export const createProduct = (id) => async (dispatch, getState) => {
+export const createProduct = (product, imagesToUpload) => async (
+  dispatch,
+  getState
+) => {
   try {
     dispatch({
       type: PRODUCT_CREATE_REQUEST,
+    });
+
+    await dispatch(uploadImage(imagesToUpload));
+
+    const {
+      imageUpload: { images },
+    } = getState();
+
+    Object.entries(images).map((filename) => {
+      product.image.push({
+        link: filename[1],
+        alt: filename[0],
+      });
     });
 
     //get user info
@@ -105,7 +129,7 @@ export const createProduct = (id) => async (dispatch, getState) => {
       },
     };*/
     //
-    const { data } = await axios.delete(`/node/api/products/`, {});
+    const { data } = await axios.post(`/node/api/products/`, product);
 
     dispatch({
       type: PRODUCT_CREATE_SUCCESS,

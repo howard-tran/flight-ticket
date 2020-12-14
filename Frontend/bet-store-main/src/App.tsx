@@ -39,8 +39,13 @@ function App() {
           <Route path="/product/:id" component={ProductScreen} exact></Route>
           <Route path="/addProduct" component={AddProductScreen} exact></Route>
           <Route
-            path="/productList"
+            path="/profile/product"
             component={ProductListScreen}
+            exact
+          ></Route>
+          <Route
+            path="/profile/product/new"
+            component={AddProductScreen}
             exact
           ></Route>
         </Switch>

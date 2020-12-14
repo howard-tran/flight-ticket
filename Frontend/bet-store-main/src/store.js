@@ -11,6 +11,7 @@ import {
   categoryListReducer,
   categoryDetailsReducer,
 } from "./reducers/categoryReducer";
+import { imagesUploadReducer } from "./reducers/imageReducer";
 
 const reducer = combineReducers({
   productList: productListReducer,
@@ -19,6 +20,7 @@ const reducer = combineReducers({
   productCreate: productCreateReducer,
   categoryList: categoryListReducer,
   categoryDetails: categoryDetailsReducer,
+  imageUpload: imagesUploadReducer,
 });
 
 const initialState = {};
