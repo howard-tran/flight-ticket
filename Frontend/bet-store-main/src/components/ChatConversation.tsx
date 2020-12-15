@@ -1,3 +1,4 @@
+import Axios from "axios";
 import React, {
   useCallback,
   useEffect,
@@ -34,15 +35,6 @@ const ChatConversation = React.memo(() => {
 
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    if (accountState.id == "") return;
-    getConversationThunk(dispatch, () => null, {
-      senderId: accountState.id,
-      index: 0,
-      loadPrev: false,
-    });
-  }, [accountState]);
-
   const onscrollDown = (e: React.UIEvent<HTMLDivElement, UIEvent>) => {
     let targetDiv = e.target as HTMLDivElement;
 
@@ -57,6 +49,30 @@ const ChatConversation = React.memo(() => {
     }
   };
 
+  const listConversationHandle = () => {
+    let res: JSX.Element[] = [];
+    for (let i = 0; i < conversationState.conversationList.length; i++) {
+      let x = conversationState.conversationList[i];
+      res.push(
+        <ChatConversationBox
+          id={x.id}
+          receiverId={x.receiverId}
+          senderId={x.senderId}
+        ></ChatConversationBox>
+      );
+    }
+    return res;
+  }
+
+  useEffect(() => {
+    if (accountState.id == "") return;
+    getConversationThunk(dispatch, () => null, {
+      senderId: accountState.id,
+      index: 0,
+      loadPrev: false,
+    });
+  }, [accountState]);
+
   return (
     <div style={{ width: "100%", height: "100%" }}>
       <div className={style.conversationHeader}>
@@ -67,13 +83,7 @@ const ChatConversation = React.memo(() => {
         </div>
       </div>
       <div className={style.conversationBody} onScroll={onscrollDown}>
-        {conversationState.conversationList.map((x) => (
-          <ChatConversationBox
-            id={x.id}
-            receiverId={x.receiverId}
-            senderId={x.senderId}
-          ></ChatConversationBox>
-        ))}
+        {listConversationHandle()}
         {() => {
           if (conversationState.conversationList.length <= 0) {
             return <h5>Bạn chưa có cuộc hội thoại nào</h5>;
@@ -88,9 +98,19 @@ export const ChatConversationBox: React.FC<Conversation> = (conversation) => {
   const [userInfo, setUserInfo] = useState<ChatAccountInfo>(null);
   const dispatch = useDispatch();
 
+  const getReceiverInfo = async () : Promise<ChatAccountInfo> => {
+    let response = await Axios.get(`/java/api/profile/get?accountid=${conversation.receiverId}`);
+    return {
+      id: conversation.receiverId,
+      avatar: response.data.data.avatar,
+      user: response.data.data.username
+    } 
+  }
+
   useEffect(() => {
-    // get info from an api
-    setUserInfo(ChatApiUtils.requestUser(conversation.receiverId));
+    getReceiverInfo().then(x => {
+      setUserInfo(x);
+    });
   }, []);
 
   const textHandle = (text: string) => {
@@ -112,7 +132,7 @@ export const ChatConversationBox: React.FC<Conversation> = (conversation) => {
         dispatch(switchToMessage());
       }}
     >
-      <img src={userInfo.avatar}></img>
+      <img src={`/cdn/cdn/${userInfo.avatar}`}></img>
       <div>
         <h4>{userInfo.user}</h4>
         <p> {textHandle("Bạn: Ohaiyo Itadakimashu ouohueiuheiufh")}</p>

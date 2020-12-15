@@ -42,14 +42,18 @@ export const getAccountInfoThunk: ThunkAction<
   ChatActionType<ChatAccountInfo>
 > = async (dispatch, getState, token) => {
   //
-  let response = await Axios.get(`/java/api/account/jwt?token=${token}`);
+  let response = await Axios.get(`/go/profile/`);
   dispatch(setAccountInfo(response.data.data));
 };
 
-export const setAccountInfo = (account: ChatAccountInfo): ChatActionType<ChatAccountInfo> => {
+export const setAccountInfo = (account: any): ChatActionType<ChatAccountInfo> => {
   return {
     type: SET_ACCOUNT_INFO,
-    value: account,
+    value: {
+      id: account.accountID,
+      avatar: account.avatar,
+      user: account.username,
+    }
   };
 };
 

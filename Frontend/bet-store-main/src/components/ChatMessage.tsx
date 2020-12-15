@@ -16,6 +16,7 @@ import { fromPxToOffset, getTextWidth, toDomNode } from "./Utils";
 import { JsxElement } from "typescript";
 import SocketManager from "./SocketManager";
 import { CHAT_KEY } from "./ChatBox";
+import Axios from "axios";
 
 const TEXT_EDITOR_MAX_ROW = 5;
 const INPUT_TEXT_HANDLER_DELAY = 5;
@@ -54,7 +55,7 @@ const ChatMessage = React.memo(() => {
 
   const hiddenDiv = useRef<HTMLDivElement>();
   const setHiddenDiv = useCallback((node) => {
-    let node_t = inputArea.current as HTMLTextAreaElement;
+    if (node == null) return;
     hiddenDiv.current = node;
 
     hiddenDiv.current.style.overflowY = "scroll";
@@ -89,7 +90,7 @@ const ChatMessage = React.memo(() => {
   const setSendBtn = useCallback((node) => {
     sendBtn.current = node;
   }, []);
-
+  
   const pickEmoji = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     if (emojiPicker.current.style.display == "block") {
       emojiPicker.current.style.display = "none";
@@ -130,7 +131,7 @@ const ChatMessage = React.memo(() => {
   const textAreaKeydown = (e : React.KeyboardEvent<HTMLTextAreaElement>) => {
     let node_t = e.target as HTMLTextAreaElement;
 
-    if (e.key == "Enter") {
+    if (e.key == "Enter" && !e.shiftKey) {
       (sendBtn.current as HTMLButtonElement).click();
       e.preventDefault();
     }
@@ -152,24 +153,31 @@ const ChatMessage = React.memo(() => {
   };
 
   const sendMessageTxt = (e : string) => {
-    if (e.length == 0) return;
+    // check message first
+    let lines = e.split('\n'), res = '';
 
-    let payload: Message = {
-      id: "",
-      senderId: accountState.id,
-      receiverId: receiverInfo.id,
-      textContent: e,
-      fileContent: "",
-      fileContentType: CONTENT_NONE,
+    for (let i = 0; i < lines.length; i++) {
+      if (lines[i].length == 0) continue;
+      res += lines[i] + '\n';
     }
-    publishMessage(payload);
+    if (res.length > 0) {
+      let payload: Message = {
+        id: "",
+        senderId: accountState.id,
+        receiverId: receiverInfo.id,
+        textContent: res,
+        fileContent: "",
+        fileContentType: CONTENT_NONE,
+      }
+      publishMessage(payload);
+    }
+    (inputArea.current as HTMLTextAreaElement).value = "";
+    onInputChange(null);
   }
 
   const publishMessage = (e: Message) => {
     SocketManager.publish(CHAT_KEY, {destination: CHAT_HANDLER, headers: {}, 
       content: JSON.stringify(e)});
-    (inputArea.current as HTMLTextAreaElement).value = "";
-    onInputChange(null);
   }
 
   const messageListHandle = () => {
@@ -190,6 +198,15 @@ const ChatMessage = React.memo(() => {
     return result;
   }
 
+  const getReceiverInfo = async () : Promise<ChatAccountInfo> => {
+    let response = await Axios.get(`/java/api/profile/get?accountid=${view.currentReceiver}`);
+    return {
+      id: view.currentReceiver,
+      avatar: response.data.data.avatar,
+      user: response.data.data.username
+    } 
+  }
+
   useEffect(() => {
     if (chosenEmoji) {
       let cursorPos = (inputArea.current as HTMLTextAreaElement).selectionStart;
@@ -205,9 +222,13 @@ const ChatMessage = React.memo(() => {
   }, [chosenEmoji]);
 
   useEffect(() => {
-    // get info from an api
-    setSenderInfo(ChatApiUtils.requestUser(view.currentReceiver));
+    if (view.currentReceiver == "")
+      return;
 
+    getReceiverInfo().then(x => {
+      setSenderInfo(x);
+    });
+    
     document.addEventListener("mousedown", handleClickOutside);      
   }, [view]);
 
@@ -244,7 +265,7 @@ const ChatMessage = React.memo(() => {
               dispatch(switchToConversation());
             }}
           ></i>
-          <img src={receiverInfo.avatar}></img>
+          <img src={`/cdn/cdn/${receiverInfo.avatar}`}></img>
           <div>
             <h3>{receiverInfo.user}</h3>
             <br></br>
@@ -254,8 +275,7 @@ const ChatMessage = React.memo(() => {
       </div>
 
       <div className={style.messageMainPanel}>
-        <div 
-          className={style.messageBody} ref={setMessageBody} 
+        <div className={style.messageBody} ref={setMessageBody} 
           onScroll={(e) => {
             messageBodyScrollup(e);
           }}>
@@ -264,9 +284,13 @@ const ChatMessage = React.memo(() => {
 
         <div className={style.messageToolBar}>
           <div className={style.toolBar} ref={setToolBar}>
-            <div className={style.tool}>
+            
+            {/* image tool */}
+            <div className={style.tool}> 
               <i className="fa fa-image fa-2x"></i>
             </div>
+
+            {/* gif tool */}
             <div className={style.tool}>
               <div
                 style={{ borderRadius: "5px", border: "2px solid black", padding: "0 5px 0 5px" }}
@@ -277,6 +301,10 @@ const ChatMessage = React.memo(() => {
                   GIF
                 </p>
               </div>
+            </div>
+
+            <div className={style.tool}>
+            <i className="fa fa-file fa-2x"></i>
             </div>
           </div>
           <div className={style.textEditor}>
@@ -292,6 +320,7 @@ const ChatMessage = React.memo(() => {
             ></i>
             <div className={style.inputArea}>
               <div style={{ width: "100%" }}>
+                <div ref={setHiddenDiv}></div>
                 <textarea 
                   rows={1} ref={setInputArea} 
                   onKeyDown={(e) => {
@@ -303,7 +332,6 @@ const ChatMessage = React.memo(() => {
                   }}>
                   
                 </textarea>
-                <div ref={setHiddenDiv}></div>
               </div>
 
               <div className={style.emojiPicker} ref={setEmojiPicker}>

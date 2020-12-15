@@ -61,7 +61,7 @@ $white-smoke: #E8E8E8;
 .emojiPicker {
   position: absolute;
   display: none;
-  top: 28%;
+  bottom: 9%;
   left: 20%;
 }
 
@@ -291,9 +291,11 @@ $white-smoke: #E8E8E8;
       animation: slideInFromBottom;  
       animation-duration: 0.5s;
       display: none;
+      height: 65px;
       margin-bottom: 10px;
 
       .tool {
+        height: 50px;
         cursor: pointer;
         display: flex;
         flex-flow: row;

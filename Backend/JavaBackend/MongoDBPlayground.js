@@ -40,7 +40,6 @@ db.Message.find({ _id: ObjectId("5fb9362e1279553053ca4ed9") });
 
 db.Account.find({_id: ObjectId("5fbd3a3970cb4d0161112b1d")});
 db.Message.deleteMany({$where: "this.textContent.length <= 2"})
-db.Conversation.find();
 
 db.Account.find();
 db.Account.updateMany({}, {
@@ -50,13 +49,8 @@ db.Account.updateMany({}, {
 db.Account.find().forEach(x => {
   if (x.username.startsWith('admin')) {
     db.Conversation.insertOne({
-      senderId: "5fbd3a3970cb4d0161112b1d",
+      senderId: "5fd7a1411afadc0167ec231b",
       receiverId: x._id.toString()
     })
   }
 });
-for (let i = 0; i < listAccount.length; i++) {
-  if (listAccount[i].username.startsWith('admin')) {
-    print("ok")
-  }
-}

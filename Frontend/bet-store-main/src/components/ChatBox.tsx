@@ -68,7 +68,7 @@ const ChatBox: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    if (intervalId == null) {
+    if (intervalId == null && sessionStorage.getItem("token")) {
       getAccountInfoThunk(dispatch, () => null, sessionStorage.getItem("token"));
     }
   }, [intervalId])
