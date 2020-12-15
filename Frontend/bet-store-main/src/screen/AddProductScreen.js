@@ -69,6 +69,7 @@ const AddProductScreen = ({ history }) => {
 
   const onFileChange = (event) => {
     setFile(event.target.files);
+    console.log(selectedFile);
   };
 
   const onPropertyChange = (event) => {
@@ -95,6 +96,8 @@ const AddProductScreen = ({ history }) => {
       user: "5fa7fb0a62083e11ace57490",
       properties: properties,
     };
+    //console.log(uploadFiledata.get("files"));
+    //console.log(uploadFiledata);
     //dispatch(uploadImage(uploadFiledata));
     dispatch(createProduct(product, uploadFiledata));
 
@@ -107,7 +110,7 @@ const AddProductScreen = ({ history }) => {
       });
     });*/
 
-    console.log(product);
+    //console.log(product);
     /* axios
       .post(`${nodeServer}/api/products`, product, {
         headers: {

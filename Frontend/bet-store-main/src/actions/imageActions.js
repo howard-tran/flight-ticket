@@ -19,7 +19,7 @@ export const uploadImage = (images) => async (dispatch, getState) => {
       },
     };*/
     //
-    const { data } = await axios.post(`/cdn/upload`, images, {});
+    const { data } = await axios.post(`/cdn/upload`, images);
 
     dispatch({
       type: IMAGE_UPLOAD_SUCCESS,

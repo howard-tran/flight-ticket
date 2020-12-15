@@ -62,10 +62,10 @@ const ProductEditScreen = (props) => {
         user: "5fa7fb0a62083e11ace57490",
         properties: properties,
       };
-      console.log(files);
-      //dispatch(uploadImage(files));
+      console.log(files.get("files"));
+      dispatch(uploadImage(files));
 
-      dispatch(updateProduct(productId, temp_product, files));
+      //dispatch(updateProduct(productId, temp_product, files));
     }
   };
   const handleDefaultImage = (images) => {
@@ -73,7 +73,8 @@ const ProductEditScreen = (props) => {
       setDefaultImage([...defaultImages, `/cdn/cdn/${image.link}`]);
     });
   };
-  const onDrop = (picture) => {
+  const onDrop = (picture, e, a) => {
+    console.log(picture, e, a);
     setPictures([...pictures, picture]);
   };
 

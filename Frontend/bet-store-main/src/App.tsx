@@ -7,6 +7,8 @@ import "../node_modules/popper.js/dist/popper";
 import "../node_modules/bootstrap/dist/js/bootstrap";
 import "../node_modules/jquery/dist/jquery";
 import "./App.css";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 import Login from "./components/Login";
 import { BrowserRouter } from "react-router-dom";
 import Header from "./components/header/Header";
