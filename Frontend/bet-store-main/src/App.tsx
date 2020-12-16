@@ -16,18 +16,23 @@ import ProductScreen from "./screen/ProductScreen";
 import AddProductScreen from "./screen/AddProductScreen";
 import { Provider } from "react-redux";
 import { combineReducers, createStore } from "redux";
-import { accountInfoReducer, conversationControlReducer, messageControlReducer, socketInfoReducer, viewControlReducer } from "./reducers/chatBoxReducer";
+import {
+  accountInfoReducer,
+  conversationControlReducer,
+  messageControlReducer,
+  socketInfoReducer,
+  viewControlReducer,
+} from "./reducers/chatBoxReducer";
 import ProductListScreen from "./screen/ProductListScreen";
 import ProductEditScreen from "./screen/ProductEditScreen";
 
-import ChatBox from './components/ChatBox';
+import ChatBox from "./components/ChatBox";
 import Profile from "./screen/profile/profile";
 import NotifyContainer from "./components/NotifyContainer";
 import { useDispatch } from "react-redux";
 import { AddNotify } from "./actions/notifyAction";
 
 function App() {
-
   const dispatch = useDispatch();
   return (
     <div>
@@ -36,7 +41,7 @@ function App() {
           test
         </button> */}
 
-        <NotifyContainer/>
+        <NotifyContainer />
         <div className="headermain">
           <Header></Header>
         </div>
@@ -56,8 +61,9 @@ function App() {
           <Route
             path="/profile/product"
             component={ProductListScreen}
-          ></Route>
             exact
+          ></Route>
+
           <Route
             path="/profile/product/new"
             component={AddProductScreen}
@@ -66,23 +72,22 @@ function App() {
             path="/profile/product/:id/edit"
             component={ProductEditScreen}
           ></Route>
-            <Route path="/profile" component={Profile} exact></Route>
+          <Route path="/profile" component={Profile} exact></Route>
         </Switch>
-          <Provider
-            store={createStore(
-              combineReducers({
-                conversationControl: conversationControlReducer,
-                messageControl: messageControlReducer,
-                chatAccountInfo: accountInfoReducer,
-                viewControl: viewControlReducer,
-                socketInfo: socketInfoReducer
-              })
-            )}
-          >
-            <ChatBox></ChatBox>
-          </Provider>
-          <FooterView></FooterView>
-        </div>
+        <Provider
+          store={createStore(
+            combineReducers({
+              conversationControl: conversationControlReducer,
+              messageControl: messageControlReducer,
+              chatAccountInfo: accountInfoReducer,
+              viewControl: viewControlReducer,
+              socketInfo: socketInfoReducer,
+            })
+          )}
+        >
+          <ChatBox></ChatBox>
+        </Provider>
+        <FooterView></FooterView>
       </BrowserRouter>
     </div>
   );

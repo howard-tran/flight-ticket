@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Form, Button } from "react-bootstrap";
+import { Form, Button, Container } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import FormContainer from "../components/FormContainer";
 import { listProductDetails, updateProduct } from "../actions/productActions";
@@ -8,7 +8,7 @@ import { listCategories } from "../actions/categoryActions";
 import ImageUploader from "react-images-upload";
 import style from "../styles/ProductEditForm.module.scss";
 import { uploadImage } from "../actions/imageActions";
-
+import ImageUpload from "../components/ImageUpload";
 const ProductEditScreen = (props) => {
   const productId = props.match.params.id;
 
@@ -22,7 +22,7 @@ const ProductEditScreen = (props) => {
   const [countInStock, setCountInStock] = useState(0);
   const [defaultImages, setDefaultImage] = useState([]);
   const [pictures, setPictures] = useState([]);
-
+  const [files, setFiles] = useState([]);
   const dispatch = useDispatch();
 
   const productDetails = useSelector((state) => state.productDetails);
@@ -40,7 +40,7 @@ const ProductEditScreen = (props) => {
       setDescription(product.description);
       setCountInStock(product.countInStock);
       setProperties(product.properties);
-      handleDefaultImage(product.image);
+      setDefaultImage(product.image);
     }
   }, [dispatch, props.history, productId, product]);
 
@@ -49,7 +49,7 @@ const ProductEditScreen = (props) => {
 
     const files = new FormData();
     for (var x = 0; x < pictures.length; x++) {
-      files.append("files", pictures[x]);
+      files.append("files", pictures[x], pictures[x].name);
     }
     if (window.confirm("Bạn có chắc chắn muốn lưu sản phẩm?")) {
       const temp_product = {
@@ -57,25 +57,16 @@ const ProductEditScreen = (props) => {
         description: description,
         price: price,
         countInStock: countInStock,
-        image: product.image,
+        image: defaultImages,
         category: category._id,
         user: "5fa7fb0a62083e11ace57490",
         properties: properties,
       };
-      console.log(files.get("files"));
-      dispatch(uploadImage(files));
+      //console.log(files.get("files"));
+      //dispatch(uploadImage(files));
 
-      //dispatch(updateProduct(productId, temp_product, files));
+      dispatch(updateProduct(productId, temp_product, files));
     }
-  };
-  const handleDefaultImage = (images) => {
-    images.map((image) => {
-      setDefaultImage([...defaultImages, `/cdn/cdn/${image.link}`]);
-    });
-  };
-  const onDrop = (picture, e, a) => {
-    console.log(picture, e, a);
-    setPictures([...pictures, picture]);
   };
 
   const onPropertyChange = (event) => {
@@ -112,12 +103,45 @@ const ProductEditScreen = (props) => {
     return "";
   };
 
+  const onFileChange = (event) => {
+    setPictures([...pictures, ...event.target.files]);
+  };
+
+  const deletePic = (index) => {
+    const arr = [...pictures];
+    arr.splice(index, 1);
+    setPictures(arr);
+  };
+
+  const deleteDefaultPic = (index) => {
+    const arr = [...defaultImages];
+    URL.revokeObjectURL(arr.splice(index, 1).preview);
+    setDefaultImage(arr);
+  };
+  useEffect(() => {
+    setFiles(
+      Object.values(pictures).map((file) =>
+        Object.assign(file, {
+          preview: URL.createObjectURL(file),
+        })
+      )
+    );
+  }, [pictures]);
+
+  /* useEffect(
+    () => () => {
+      // Make sure to revoke the data uris to avoid memory leaks
+      files.forEach((picture) => URL.revokeObjectURL(picture.preview));
+    },
+    [files]
+  );*/
+
   return (
-    <>
+    <div className={style.body}>
       <Link to="/profile/product" className="btn btn-light my-3">
         Quay lại
       </Link>
-      <FormContainer>
+      <Container className={style.form_section}>
         <h1>Chỉnh sửa sản phẩm</h1>
         {loading || loadingCategories ? (
           <h3>Loading</h3>
@@ -195,7 +219,7 @@ const ProductEditScreen = (props) => {
                 ></Form.Control>
               </Form.Group>
             ))}
-            <ImageUploader
+            {/*<ImageUploader
               {...props}
               className={style.imgUpload}
               withIcon={true}
@@ -204,14 +228,41 @@ const ProductEditScreen = (props) => {
               imgExtension={[".jpg", ".gif", ".png", ".gif"]}
               maxFileSize={5242880}
               withPreview={true}
-            />
-            <Button type="submit" variant="primary">
-              Cập nhật
-            </Button>
+            />*/}
+
+            <br />
           </Form>
         )}
-      </FormContainer>
-    </>
+      </Container>
+      <Container className={style.form_section}>
+        <h1>Hình ảnh</h1>
+        <Form.File
+          className={style.img_select}
+          onChange={onFileChange}
+          multiple
+        ></Form.File>
+        <ImageUpload
+          defaultImages={defaultImages}
+          images={files}
+          onChange={onFileChange}
+          onDel={deletePic}
+          onDelDefault={deleteDefaultPic}
+        ></ImageUpload>
+        <br />
+      </Container>
+      <Container className={style.btn_container}>
+        <button className={`btn btn-outline-dark ${style.button}`}>
+          Reset
+        </button>
+        <button className={`btn btn-outline-dark ${style.button}`}>Hủy</button>
+        <button
+          className={`btn btn-primary ${style.button}`}
+          onClick={submitHandler}
+        >
+          Lưu
+        </button>
+      </Container>
+    </div>
   );
 };
 

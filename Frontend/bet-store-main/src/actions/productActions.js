@@ -157,19 +157,20 @@ export const updateProduct = (id, product, imagesToUpload) => async (
     dispatch({
       type: PRODUCT_UPDATE_REQUEST,
     });
+    if (imagesToUpload.get("files")) {
+      await dispatch(uploadImage(imagesToUpload));
 
-    await dispatch(uploadImage(imagesToUpload));
-
-    const {
-      imageUpload: { images },
-    } = getState();
-
-    Object.entries(images).map((filename) => {
-      product.image.push({
-        link: filename[1],
-        alt: filename[0],
+      const {
+        imageUpload: { images },
+      } = getState();
+      console.log(images);
+      Object.entries(images).map((filename) => {
+        product.image.push({
+          link: filename[1],
+          alt: filename[0],
+        });
       });
-    });
+    }
 
     //get user info
     //const {userLogin: {userInfo}} = getState()
@@ -179,11 +180,11 @@ export const updateProduct = (id, product, imagesToUpload) => async (
       },
     };*/
     //
-    //const { data } = await axios.put(`/node/api/products/${id}`, product);
+    const { data } = await axios.put(`/node/api/products/${id}`, product);
 
     dispatch({
       type: PRODUCT_UPDATE_SUCCESS,
-      //payload: data,
+      payload: data,
     });
   } catch (error) {
     dispatch({
