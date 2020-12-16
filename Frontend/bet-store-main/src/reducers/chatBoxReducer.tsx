@@ -109,6 +109,9 @@ export const conversationControlReducer: React.Reducer<ConversationControl, Chat
     }
     case LOAD_PREV_CONVERSATION: {
       let list = action.value as Conversation[];
+      if (list.length == 0) {
+        return state;
+      }
       state.conversationList.push(...list);
 
       return {
@@ -144,6 +147,10 @@ export const messageControlReducer: React.Reducer<MessageControl, ChatActionType
     }
     case LOAD_PREV_MESSAGE: {
       let list = action.value as Message[];
+
+      if (list.length == 0) {
+        return state;
+      }
       state.messageList.push(...list);
 
       return {

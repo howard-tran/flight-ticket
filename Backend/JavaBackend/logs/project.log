@@ -144,3 +144,24 @@ Caused by: java.lang.IllegalArgumentException: invalid hexadecimal representatio
 [2020-12-15 15:24:39] [main] INFO  com.helper.LogUtils  - 
 ========== Service Restarted ==========
 
+[2020-12-16 00:04:56] [main] INFO  com.helper.LogUtils  - 
+========== Service Restarted ==========
+
+[2020-12-16 00:08:29] [main] INFO  com.helper.LogUtils  - 
+========== Service Restarted ==========
+
+[2020-12-16 00:12:41] [main] INFO  com.helper.LogUtils  - 
+========== Service Restarted ==========
+
+[2020-12-16 00:15:43] [main] INFO  com.helper.LogUtils  - 
+========== Service Restarted ==========
+
+[2020-12-16 00:18:54] [main] INFO  com.helper.LogUtils  - 
+========== Service Restarted ==========
+
+[2020-12-16 02:05:24] [main] INFO  com.helper.LogUtils  - 
+========== Service Restarted ==========
+
+[2020-12-16 08:26:17] [main] INFO  com.helper.LogUtils  - 
+========== Service Restarted ==========
+

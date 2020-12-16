@@ -48,9 +48,13 @@ db.Account.updateMany({}, {
 
 db.Account.find().forEach(x => {
   if (x.username.startsWith('admin')) {
+    // db.Conversation.insertOne({
+    //   senderId: "5fd7a1411afadc0167ec231b",
+    //   receiverId: x._id.toString()
+    // });
     db.Conversation.insertOne({
-      senderId: "5fd7a1411afadc0167ec231b",
-      receiverId: x._id.toString()
-    })
+      senderId: x._id.toString(),
+      receiverId: "5fd7a1411afadc0167ec231b",
+    });
   }
 });

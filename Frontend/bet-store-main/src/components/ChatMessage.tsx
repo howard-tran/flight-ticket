@@ -15,19 +15,20 @@ import { ChatApiUtils } from "./ChatApiUtils";
 import { fromPxToOffset, getTextWidth, toDomNode } from "./Utils";
 import { JsxElement } from "typescript";
 import SocketManager from "./SocketManager";
-import { CHAT_KEY } from "./ChatBox";
-import Axios from "axios";
+import { CDN_SERVER_PREFIX, CHAT_KEY } from "./ChatBox";
+import Axios, { AxiosRequestConfig } from "axios";
 
 const TEXT_EDITOR_MAX_ROW = 5;
 const INPUT_TEXT_HANDLER_DELAY = 5;
 
+const imageThumbnailMessageWidth = 320;
+const imageThumbnailMessageHeight = 266;
+
 export const CONTENT_NONE = "CONTENT_NONE";
 export const CONTENT_PRODUCT_INFO = "CONTENT_PRODUCT_INFO";
-export const CONTENT_SOUND = "CONTENT_SOUND";
+export const CONTENT_FILE = "CONTENT_FILE";
 export const CONTENT_IMAGE = "CONTENT_IMAGE";
-export const CONTENT_PLAINTEXT = "CONTENT_PLAINTEXT";
-export const CONTENT_ZIP = "CONTENT_ZIP";
-export const CONTENT_RAR = "CONTENT_RAR";
+
 
 const ChatMessage = React.memo(() => {
   const accountState = useSelector(
@@ -175,6 +176,30 @@ const ChatMessage = React.memo(() => {
     onInputChange(null);
   }
 
+  const sendMessageImage = (fileId: string) => {
+    let payload: Message = {
+      id: "",
+      senderId: accountState.id,
+      receiverId: receiverInfo.id,
+      textContent: "",
+      fileContent: fileId,
+      fileContentType: CONTENT_IMAGE,
+    }
+    publishMessage(payload);
+  }
+
+  const sendMessageFile = (fileId: string, filename: string) => {
+    let payload: Message = {
+      id: "",
+      senderId: accountState.id,
+      receiverId: receiverInfo.id,
+      textContent: filename,
+      fileContent: fileId,
+      fileContentType: CONTENT_FILE,
+    }
+    publishMessage(payload); 
+  }
+
   const publishMessage = (e: Message) => {
     SocketManager.publish(CHAT_KEY, {destination: CHAT_HANDLER, headers: {}, 
       content: JSON.stringify(e)});
@@ -205,6 +230,40 @@ const ChatMessage = React.memo(() => {
       avatar: response.data.data.avatar,
       user: response.data.data.username
     } 
+  }
+
+  const onChooseImage = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let file = e.target.files[0];
+
+    let formData = new FormData();
+    formData.append('files', file);
+
+    let axiosConf: AxiosRequestConfig = {
+      method: "post",
+      url:"/cdn/upload",
+      data: formData
+    }
+    Axios(axiosConf).then(res => {
+      let fileId = res.data[file.name];
+      sendMessageImage(fileId);
+    })
+  }
+
+  const onChooseFile = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let file = e.target.files[0];
+
+    let formData = new FormData();
+    formData.append('files', file);
+
+    let axiosConf: AxiosRequestConfig = {
+      method: "post",
+      url:"/cdn/upload",
+      data: formData
+    }
+    Axios(axiosConf).then(res => {
+      let fileId = res.data[file.name];
+      sendMessageFile(fileId, file.name);
+    });
   }
 
   useEffect(() => {
@@ -284,12 +343,6 @@ const ChatMessage = React.memo(() => {
 
         <div className={style.messageToolBar}>
           <div className={style.toolBar} ref={setToolBar}>
-            
-            {/* image tool */}
-            <div className={style.tool}> 
-              <i className="fa fa-image fa-2x"></i>
-            </div>
-
             {/* gif tool */}
             <div className={style.tool}>
               <div
@@ -303,8 +356,22 @@ const ChatMessage = React.memo(() => {
               </div>
             </div>
 
+            {/* image tool */}
             <div className={style.tool}>
-            <i className="fa fa-file fa-2x"></i>
+              <input id="chooseImgInput" name="send images" type="file" accept="image/png,image/jpg,image/jpeg" style={{display:"none"}} 
+                onChange={onChooseImage}></input>
+              <i className="fa fa-image fa-2x" onClick={() => {
+                document.getElementById('chooseImgInput').click();
+              }}></i>
+            </div>
+            
+            {/* file tool */}
+            <div className={style.tool}>
+              <input id="chooseFileInput" name="send file" type="file" style={{display:"none"}} 
+                  onChange={onChooseFile}></input>
+              <i className="fa fa-file fa-2x" onClick={() => {
+                document.getElementById('chooseFileInput').click();
+              }}></i>
             </div>
           </div>
           <div className={style.textEditor}>
@@ -357,31 +424,77 @@ const ChatMessage = React.memo(() => {
   );
 });
 
+const ImageThumpnailToolbox: React.FC<{index: number}> = (param) => {
+  return (
+    <div></div>
+  ) 
+}
+
 const ChatMessageBox: React.FC<Message> = (message) => {
   const accountState = useSelector(
     (state: { chatAccountInfo: ChatAccountInfo }) => state.chatAccountInfo
   );
 
+  const longTextHandle = (text: string) => {
+    const maxCharacter = 30;
+    if (text.length >= maxCharacter) {
+      return text.substring(0, maxCharacter - 1) + "...";
+    }
+    return text;
+  };
+
   const textHandle = (txt: string) => {
     return txt.replace(/\n/g, "<br>");
+  }
+
+  const renderOnContent = () => {
+    if (message.fileContentType == CONTENT_NONE) {
+      return (
+        <div 
+          className={style.messageTxtContent} 
+          dangerouslySetInnerHTML={{__html: textHandle(message.textContent)}}>
+        </div>
+      );
+    } else if (message.fileContentType == CONTENT_IMAGE) {
+      return (
+        <div className={style.messageImgContent} onClick={() => {
+          let win = window.open(`${CDN_SERVER_PREFIX}${message.fileContent}`, '_blank');
+          win.focus();
+        }}>
+          <img src={`${CDN_SERVER_PREFIX}${message.fileContent}?width=${imageThumbnailMessageWidth}&height=${imageThumbnailMessageHeight}`} 
+            width={imageThumbnailMessageWidth.toString()}
+            height={imageThumbnailMessageHeight.toString()}
+            alt={CONTENT_IMAGE}>
+            
+          </img>
+        </div>
+      );
+    } else if (message.fileContentType == CONTENT_FILE) {
+      return (
+        <div className={style.messageFileContent} onClick={() => {
+          let win = window.open(`${CDN_SERVER_PREFIX}${message.fileContent}`, '_blank');
+          win.focus();
+        }}>
+          <div style={{display: "flex"}}>
+            <i className="fa fa-file-archive-o fa-2x"></i>
+            <strong>&nbsp;&nbsp; <u>{longTextHandle(message.textContent)}</u></strong>
+          </div>
+        </div>
+      )
+    } 
+    else return (<div></div>)
   }
 
   if (message.senderId == accountState.id) {
     return (
       <div className={style.messageFromMe}>
-        <div 
-          className={style.messageTxtContent} 
-          dangerouslySetInnerHTML={{__html: textHandle(message.textContent)}}>
-        </div>
+        {renderOnContent()}
       </div>
     );
   } else {
     return (
       <div className={style.messageFromOther}>
-        <div 
-          className={style.messageTxtContent} 
-          dangerouslySetInnerHTML={{__html: textHandle(message.textContent)}}>
-        </div>
+        {renderOnContent()}
       </div>
     );
   }

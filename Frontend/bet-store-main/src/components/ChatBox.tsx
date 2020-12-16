@@ -9,6 +9,7 @@ import ChatMessage from "./ChatMessage";
 import { ISocket } from "./SocketManager";
 
 export const CHAT_KEY = "CHAT_BOX";
+export const CDN_SERVER_PREFIX = "http://localhost:8082/cdn/";
 export const CHAT_HANDLER = "/chat/handle";
 
 const ChatBox: React.FC = () => {
