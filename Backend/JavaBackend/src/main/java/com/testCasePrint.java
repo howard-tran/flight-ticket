@@ -10,12 +10,12 @@ public class testCasePrint {
     System.out.print(
       String.format(
         "\n[%sTESTCASE%s] %s-------------------- %d --------------------%s",
-        ConsoleColors.YELLOW_BOLD_BRIGHT,
+        ConsoleColors.PURPLE_BACKGROUND_BRIGHT,
         ConsoleColors.RESET,
         ConsoleColors.WHITE_BOLD_BRIGHT,
         ++testCasePrint.testCount,
         ConsoleColors.RESET
-      )
+      ) 
     );
 
     for (int i = 0; i < descriptions.length; i++) {

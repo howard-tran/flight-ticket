@@ -9,7 +9,7 @@ import vi from "javascript-time-ago/locale/vi";
 TimeAgo.addLocale(vi);
 TimeAgo.setDefaultLocale("vi");
 ReactDOM.render(
-  <Provider store={store}>
+  <Provider store={store} >
     <App />
   </Provider>,
   document.getElementById("root")

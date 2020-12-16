@@ -1,21 +1,32 @@
+import Axios from 'axios';
 import axios from 'axios';
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { setLoginSuccess, setStateErrorLogin, setStateLogin } from '../actions/accountAction';
+import { AddNotify } from '../actions/notifyAction';
+import { GetProfile } from '../actions/profileAction';
 import "../styles/Login.css"
 
 let regexpTel: RegExp = /(09|01[2|6|8|9])+([0-9]{8})\b/;
 
-interface AccountEntity {
+interface ProfileEntity {
     name: string,
     surname: string,
+}
+
+interface AccountEntity {
     username: string,
     password: string,
     tel: string
+    profile :ProfileEntity
 }
 
 const initAccount: AccountEntity = {
-    name: '',
-    surname: '',
+    profile:{
+        name: "",
+        surname: ""
+    },
     username: '',
     password: '',
     tel: ''
@@ -26,13 +37,20 @@ interface AccountAction {
     value: string
 }
 
-
 const Accountreducer: React.Reducer<AccountEntity, AccountAction> = (state, action) => {
     switch (action.type) {
         case "name":
-            return { ...state, name: action.value }
+            var temp:ProfileEntity  = {
+                name: action.value,
+                surname: state.profile.surname
+            }
+            return { ...state, profile:temp }
         case "surname":
-            return { ...state, surname: action.value }
+            var temp:ProfileEntity  = {
+                name: state.profile.name,
+                surname: action.value
+            }
+            return { ...state, profile:temp }
         case "username":
             return { ...state, username: action.value }
         case "tel":
@@ -43,14 +61,14 @@ const Accountreducer: React.Reducer<AccountEntity, AccountAction> = (state, acti
     return { ...state }
 }
 
-
-
 const Login: React.FC<{islogin:boolean}> = ({islogin}) => {
 
     var [isLogin, changeisLogin] = React.useState<boolean>(true);
     var [isInfoWrong, setisInfoWrong] = React.useState<boolean>(false);
     var [NotiSignup, setNotiSignup] = React.useState<string[]>([]);
     
+    const dispatch = useDispatch();
+
     React.useEffect(
         ()=>{
             changeisLogin(islogin);
@@ -90,7 +108,8 @@ const Login: React.FC<{islogin:boolean}> = ({islogin}) => {
             .then(
                 res => {
                     if (res.data["status"] == 200) {
-                        alert("Tài khoản được tạo thành công!!!");
+                        //alert("Tài khoản được tạo thành công!!!");
+                        dispatch(AddNotify({path:"",destination:"Tài khoản được tạo thành công!!!",title:"BetStore"}));
                         changeisLogin(true);
                     }
                     else {
@@ -108,20 +127,27 @@ const Login: React.FC<{islogin:boolean}> = ({islogin}) => {
 
     const HandleLoginSubmit = (evt: { preventDefault: () => void }) => {
         evt.preventDefault();
+        dispatch(setStateLogin())
         axios.post(`/go/api/account/login`, account)
             .then(
                 res => {
-                    if (res.data["status"] == 200) {
-                        console.log(res.data["data"]["token"]);
-                        window.sessionStorage.setItem("token", res.data["data"]["token"]);
+                    if (res.data["status"] === 200) {
+                        dispatch(setLoginSuccess(res.data["data"]["token"]))
+                        //console.log(res.data["data"]["token"]);
+                        sessionStorage.setItem("token", res.data["data"]["token"]);
                         setisInfoWrong(false);
+                    
+                        dispatch(GetProfile());
                         window.location.href = "/";
+                        dispatch(AddNotify({path:"",destination:"Đăng nhập thành công!!!",title:"BetStore"}));
                     } else {
+                        dispatch(setStateErrorLogin())
                         setisInfoWrong(true);
                     }
                 }
             ).catch(
                 err => {
+                    dispatch(setStateErrorLogin())
                     console.log(err);
                     setisInfoWrong(true);
                 }
@@ -178,11 +204,11 @@ const Login: React.FC<{islogin:boolean}> = ({islogin}) => {
                                 <div className="row form-group ">
                                     <div className="col input-group ">
                                         <span className="input-group-addon"><i className="fa fa-user" /></span>
-                                        <input type="text" className="form-control" name="surname" placeholder="Họ" value={account.surname} onChange={(evt) => (setaccount({ type: "surname", value: evt.target.value.toString() }))} required />
+                                        <input type="text" className="form-control" name="surname" placeholder="Họ" value={account.profile.surname} onChange={(evt) => (setaccount({ type: "surname", value: evt.target.value.toString() }))} required />
                                     </div>
                                     <div className="col input-group">
                                         <span className="input-group-addon"><i className="fa fa-user" /></span>
-                                        <input type="text" className="form-control" name="name" placeholder="Tên" value={account.name} onChange={(evt) => (setaccount({ type: "name", value: evt.target.value.toString() }))} required />
+                                        <input type="text" className="form-control" name="name" placeholder="Tên" value={account.profile.name} onChange={(evt) => (setaccount({ type: "name", value: evt.target.value.toString() }))} required />
                                     </div>
                                 </div>
 

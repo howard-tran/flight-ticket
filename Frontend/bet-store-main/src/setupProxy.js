@@ -1,7 +1,6 @@
 const { createProxyMiddleware } = require('http-proxy-middleware');
 
 module.exports = function (app) {
-
     //golang backend
     app.use(
         '/go/*',
@@ -10,7 +9,7 @@ module.exports = function (app) {
             changeOrigin: true,
             pathRewrite: {
                 '^/go/': '/'
-            },
+             },
         })
     );
 
@@ -18,6 +17,7 @@ module.exports = function (app) {
     app.use(
         '/java/*',
         createProxyMiddleware({
+            ws: true,
             target: 'http://localhost:8085',
             changeOrigin: true,
             pathRewrite: {

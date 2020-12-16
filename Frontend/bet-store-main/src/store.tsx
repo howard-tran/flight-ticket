@@ -11,6 +11,9 @@ import {
   categoryListReducer,
   categoryDetailsReducer,
 } from "./reducers/categoryReducer";
+import { profileReducer } from "./reducers/profileReducer";
+import {accountReducer} from "./reducers/accountReducer"
+import { notifyReducer } from "./reducers/notifyReducer";
 import { imagesUploadReducer } from "./reducers/imageReducer";
 
 const reducer = combineReducers({
@@ -22,7 +25,11 @@ const reducer = combineReducers({
   categoryList: categoryListReducer,
   categoryDetails: categoryDetailsReducer,
   imageUpload: imagesUploadReducer,
+  profile:profileReducer,
+  account:accountReducer,
+  notify:notifyReducer
 });
+export type AppState = ReturnType<typeof reducer>;
 
 const initialState = {};
 

@@ -1,13 +1,13 @@
 package com.model;
 
 public enum MessageContentType {
-  CONTENT_NONE("none"),
-  CONTENT_PRODUCT_INFO("productInfo"),
-  CONTENT_SOUND("sound"),
-  CONTENT_IMAGE("image"),
-  CONTENT_PLAINTEXT("txt"),
-  CONTENT_ZIP("zip"),
-  CONTENT_RAR("rar");
+  CONTENT_NONE("CONTENT_NONE"),
+  CONTENT_PRODUCT_INFO("CONTENT_PRODUCT_INFO"),
+  CONTENT_SOUND("CONTENT_SOUND"),
+  CONTENT_IMAGE("CONTENT_IMAGE"),
+  CONTENT_PLAINTEXT("CONTENT_PLAINTEXT"),
+  CONTENT_ZIP("CONTENT_ZIP"),
+  CONTENT_RAR("CONTENT_RAR");
 
   private String contentType;
 
