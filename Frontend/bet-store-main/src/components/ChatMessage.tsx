@@ -343,6 +343,7 @@ const ChatMessage = React.memo(() => {
 
         <div className={style.messageToolBar}>
           <div className={style.toolBar} ref={setToolBar}>
+
             {/* gif tool */}
             <div className={style.tool}>
               <div
