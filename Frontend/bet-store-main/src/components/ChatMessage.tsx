@@ -17,6 +17,7 @@ import { JsxElement } from "typescript";
 import SocketManager from "./SocketManager";
 import { CDN_SERVER_PREFIX, CHAT_KEY } from "./ChatBox";
 import Axios, { AxiosRequestConfig } from "axios";
+import { GifPicker } from "./GifPicker";
 
 const TEXT_EDITOR_MAX_ROW = 5;
 const INPUT_TEXT_HANDLER_DELAY = 5;
@@ -82,6 +83,11 @@ const ChatMessage = React.memo(() => {
     emojiPicker.current = node;
   }, []);
 
+  const gifPicker = useRef<HTMLElement>();
+  const setGifPicker = useCallback((node : HTMLDivElement) => {
+    gifPicker.current = node;
+  }, []);
+
   const emojiBtn = useRef<HTMLElement>();
   const setEmojiBtn = useCallback((node) => {
     emojiBtn.current = node;
@@ -92,11 +98,17 @@ const ChatMessage = React.memo(() => {
     sendBtn.current = node;
   }, []);
   
-  const pickEmoji = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+  const pickEmojiBtn = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     if (emojiPicker.current.style.display == "block") {
       emojiPicker.current.style.display = "none";
     } else emojiPicker.current.style.display = "block";
   };
+
+  const pickGifBtn = (e : any) => {
+    if (gifPicker.current.style.display == "block") {
+      gifPicker.current.style.display = "none";
+    } else gifPicker.current.style.display = "block";
+  }
 
   const onInputChange = (e: React.FormEvent<HTMLTextAreaElement>) => {
     let node_t = inputArea.current as HTMLTextAreaElement;
@@ -344,8 +356,14 @@ const ChatMessage = React.memo(() => {
         <div className={style.messageToolBar}>
           <div className={style.toolBar} ref={setToolBar}>
 
+            <div className={style.gifPicker} ref={setGifPicker} >
+              <GifPicker onGifChoosen={(gif: any, e: any) => {
+                
+              }}></GifPicker>
+            </div>
+
             {/* gif tool */}
-            <div className={style.tool}>
+            <div className={style.tool} onClick={pickGifBtn}>
               <div
                 style={{ borderRadius: "5px", border: "2px solid black", padding: "0 5px 0 5px" }}
               >
@@ -383,6 +401,7 @@ const ChatMessage = React.memo(() => {
                   toolBar.current.style.display = "flex";
                 } else {
                   toolBar.current.style.display = "none";
+                  gifPicker.current.style.display = "none";
                 }
               }}
             ></i>
@@ -412,7 +431,7 @@ const ChatMessage = React.memo(() => {
                 />
               </div>
 
-              <i className="fa fa-smile-o fa-2x" ref={setEmojiBtn} onClickCapture={pickEmoji}></i>
+              <i className="fa fa-smile-o fa-2x" ref={setEmojiBtn} onClickCapture={pickEmojiBtn}></i>
             </div>
             <i ref={setSendBtn} className="fa fa-send fa-2x" onClick={() => {
                 sendMessageTxt((inputArea.current as HTMLTextAreaElement).value);

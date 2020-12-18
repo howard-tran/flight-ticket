@@ -117,7 +117,6 @@ export const getMessageThunk: ThunkAction<
   result = response.data.data;
 
   if (!param.loadPrev) {
-    console.log(result);
     dispatch(loadMessage(result));
   } else {
     dispatch(loadPrevMessage(result));
