@@ -25,6 +25,7 @@ export const LOAD_PREV_MESSAGE = "LOAD_PREV_MESSAGE";
 export const RECEIVE_MESSAGE = "RECEIVE_MESSAGE";
 export const GET_MESSAGE = "GET_MESSAGE";
 export const ADD_MESSAGE = "ADD_MESSAGE";
+export const CLEAR_GIF = "CLEAR_GIF";
 export const SWITCH_TO_CONVERSATION = "SWITCH_TO_CONVERSATION";
 export const SWITCH_TO_MESSAGE = "SWITCH_TO_MESSAGE";
 export const REPLACE_CURRENT_RECEIVER = "REPLACE_CURRENT_RECEIVER";
@@ -145,6 +146,13 @@ export const messageReceive = (message: Message): ChatActionType<Message> => {
   return {
     type: RECEIVE_MESSAGE,
     value: message
+  }
+}
+
+export const clearGif = (): ChatActionType<any> => {
+  return {
+    type: CLEAR_GIF,
+    value: null
   }
 }
 

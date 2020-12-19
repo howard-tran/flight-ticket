@@ -13,6 +13,7 @@ import {
   RECEIVE_MESSAGE,
   RECEIVE_CONVERSATION,
   LOAD_PREV_MESSAGE,
+  CLEAR_GIF,
 } from "../actions/chatBoxAction";
 import { ISocket } from "../components/SocketManager";
 
@@ -36,7 +37,7 @@ export interface ChatAccountInfo {
 export interface ChatViewControl {
   viewId: number;
   isOpen: boolean;
-  currentReceiver: string,
+  currentReceiver: string;
 }
 
 export interface Conversation {
@@ -192,6 +193,25 @@ export const viewControlReducer: React.Reducer<ChatViewControl, ChatActionType<a
       return state;
   }
 };
+
+export const gifControlReducer: React.Reducer<{isClearGif: boolean}, ChatActionType<any>> = (
+  state = {isClearGif: false}, action) => {
+  switch (action.type) {
+    case CLEAR_GIF: {
+      if (state.isClearGif) {
+        return {
+          ...state, isClearGif: false
+        }
+      } else {
+        return {
+          ...state, isClearGif: true
+        }
+      }
+    }
+    default: 
+      return state;
+  }
+}
 
 export const socketInfoReducer: React.Reducer<ISocket, ChatActionType<any>> = (
   state = {key:"", socketUrl:"", brockers: null}, action

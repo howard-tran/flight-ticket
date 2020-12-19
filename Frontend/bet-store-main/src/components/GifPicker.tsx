@@ -1,15 +1,25 @@
 
-import React, { useState } from "react";
+import React, {useCallback, useEffect, useRef, useState } from "react";
 import {GiphyFetch} from "@giphy/js-fetch-api";
+import { renderGrid } from '@giphy/js-components';
+import {removeAllChild} from './Utils';
 import { IGif } from "@giphy/js-types";
 import { Gif, Grid, Carousel } from "@giphy/react-components";
+import { fromPxToOffset, toDomNode } from "./Utils";
+import ReactDOM from "react-dom";
+import { useSelector } from "react-redux";
+import { ChatViewControl } from "../reducers/chatBoxReducer";
 
 export const gifWidthDisplay = 400;
 
-const giphyFetch = new GiphyFetch("0L5XCnJwI21DzramGOLEE5sZiUDihjVe");
+const giphyApiKey = "0L5XCnJwI21DzramGOLEE5sZiUDihjVe";
+const giphyFetch = new GiphyFetch(giphyApiKey);
 
 const _GifPicker: React.FC<{onGifChoosen: (gif: any, e : any) => void}> = (param) => {
   const [searchString, setSearchString] = useState<string>("");
+  const gifControlState = useSelector((state: {gifControl: {isClearGif: boolean}}) => state.gifControl);
+
+  const gridRef = useRef<HTMLDivElement>();
 
   const fetchGifTrending = (_offset: number) => {
     return giphyFetch.trending({offset: _offset, limit: 9});
@@ -19,48 +29,49 @@ const _GifPicker: React.FC<{onGifChoosen: (gif: any, e : any) => void}> = (param
     return giphyFetch.search(searchString, {offset: _offset, limit: 9});
   }
 
-  const renderHandle = () => {
-    if (searchString.length == 0) {
-      return (
-        <div style={{overflowY:"scroll", height:"90%"}}>
-          <Grid
-            onGifClick={param.onGifChoosen}
-            fetchGifs={fetchGifTrending}
-            width={gifWidthDisplay}
-            columns={2}
-            gutter={6}>
+  const refreshGrid = () => {
+    removeAllChild(gridRef.current);
 
-          </Grid>
-        </div>
-      )
+    let node = document.createElement("div");
+    
+    if (searchString.length <= 0) {
+      renderGrid(
+        {width: gifWidthDisplay, gutter: 3, columns: 2, fetchGifs: fetchGifTrending, 
+          onGifClick: param.onGifChoosen},
+        node);
+    } else {
+      renderGrid(
+        {width: gifWidthDisplay, gutter: 3, columns: 2, fetchGifs: fetchGifOnSearch, 
+          onGifClick: param.onGifChoosen},
+        node);
     }
-    return (
-      <div style={{overflowY:"scroll", height:"90%"}}>
-        <Grid
-          onGifClick={param.onGifChoosen}
-          fetchGifs={fetchGifOnSearch}
-          width={gifWidthDisplay}
-          columns={2}
-          gutter={6}>
-            
-        </Grid>
-      </div>
-    )
+    gridRef.current.appendChild(node);
   }
 
+  useEffect(() => {
+    refreshGrid();
+  }, [searchString]);
+
+  useEffect(() => {
+    refreshGrid();
+  }, [gifControlState])
+
   return ( 
-    <div style={{backgroundColor:"whitesmoke", height:"450px", maxHeight:"450px", padding:"10px"}}>
-      <div style={{height:"10%", display:"flex", flexFlow:"row", alignItems:"center"}}>
-        <i className="fa fa-search fa-1x" style={{paddingRight:"5px"}}></i>
-        <input style={{resize:"none"}} onChange={
-          (e : React.ChangeEvent<HTMLInputElement>) => {
-            setSearchString((e.target as HTMLInputElement).value);
-          }
-        }></input>
+    <div style={{backgroundColor:"whitesmoke", height:"450px", maxHeight:"450px", padding:"10px", width:"435px"}}>
+      <div style={{height:"10%", alignItems:"center", paddingBottom:"10px"}}>
+        <textarea style={{resize:"none", outline:"none", border:"0.5px solid black", width:"90%", wordWrap:"break-word",}} 
+          placeholder="Search Gif" rows={1} maxLength={35}
+          onInput={
+            (e : React.FormEvent<HTMLTextAreaElement>) => {
+              setSearchString((e.target as HTMLTextAreaElement).value);
+            }
+        }></textarea>
       </div>
-      {renderHandle()}
+      <div style={{overflowY:"scroll", height:"90%"}} ref={gridRef}>
+        
+      </div>
     </div>
   )
 };
 
-export const GifPicker = React.memo(_GifPicker);
+export const GifPicker = _GifPicker;

@@ -28,3 +28,14 @@ export const getTextWidth = (text: string, font: string) => {
   let metrics = context.measureText(text);
   return metrics.width;
 };
+
+export const removeAllChild = (parent: HTMLElement) => {
+  let size = parent.children.length;
+  let childNode = [];
+  for (let i = 0; i < size; i++) {
+    childNode.push(parent.children[i]);
+  }
+  for (let i = 0; i < size; i++) {
+    parent.removeChild(childNode[i]);
+  }
+}

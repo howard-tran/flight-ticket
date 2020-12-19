@@ -17,7 +17,7 @@ import ProductScreen from './screen/ProductScreen';
 import AddProductScreen from './screen/AddProductScreen';
 import { Provider } from "react-redux";
 import { combineReducers, createStore } from "redux";
-import { accountInfoReducer, conversationControlReducer, messageControlReducer, socketInfoReducer, viewControlReducer } from "./reducers/chatBoxReducer";
+import { accountInfoReducer, conversationControlReducer, gifControlReducer, messageControlReducer, socketInfoReducer, viewControlReducer } from "./reducers/chatBoxReducer";
 import ProductListScreen from "./screen/ProductListScreen";
 
 import ChatBox from './components/ChatBox';
@@ -56,6 +56,7 @@ function App() {
                 messageControl: messageControlReducer,
                 chatAccountInfo: accountInfoReducer,
                 viewControl: viewControlReducer,
+                gifControl: gifControlReducer,
                 socketInfo: socketInfoReducer
               })
             )}

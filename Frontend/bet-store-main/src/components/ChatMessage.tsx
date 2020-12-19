@@ -1,7 +1,7 @@
 import { EmojiData, Picker } from "emoji-mart";
 import React, { ReactEventHandler, useCallback, useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getMessageThunk, switchToConversation } from "../actions/chatBoxAction";
+import { clearGif, getMessageThunk, switchToConversation } from "../actions/chatBoxAction";
 import {
   ChatAccountInfo,
   ChatViewControl,
@@ -12,12 +12,13 @@ import {
 import "emoji-mart/css/emoji-mart.css";
 import style from "../styles/ChatBox.module.scss";
 import { ChatApiUtils } from "./ChatApiUtils";
-import { fromPxToOffset, getTextWidth, toDomNode } from "./Utils";
+import { fromPxToOffset, getTextWidth, removeAllChild, toDomNode } from "./Utils";
 import { JsxElement } from "typescript";
 import SocketManager from "./SocketManager";
 import { CDN_SERVER_PREFIX, CHAT_KEY } from "./ChatBox";
 import Axios, { AxiosRequestConfig } from "axios";
 import { GifPicker } from "./GifPicker";
+import ReactDOM from "react-dom";
 
 const TEXT_EDITOR_MAX_ROW = 5;
 const INPUT_TEXT_HANDLER_DELAY = 5;
@@ -39,11 +40,14 @@ const ChatMessage = React.memo(() => {
     (state: { messageControl: MessageControl }) => state.messageControl
   );
   const view = useSelector((state: { viewControl: ChatViewControl }) => state.viewControl);
+  const gifControlState = useSelector((state: {gifControl: {isClearGif: boolean}}) => state.gifControl);
 
   const [chosenEmoji, setChosenEmoji] = useState<any>(null);
   const [receiverInfo, setSenderInfo] = useState<ChatAccountInfo>(null);
 
   const dispatch = useDispatch();
+
+  //#region set ref
 
   const inputArea = useRef<HTMLElement>();
   const setInputArea = useCallback((node) => {
@@ -93,10 +97,17 @@ const ChatMessage = React.memo(() => {
     emojiBtn.current = node;
   }, []);
 
+  const gifBtn = useRef<HTMLElement>();
+  const setGifBtn = useCallback((node) => {
+    gifBtn.current = node;
+  }, []);
+
   const sendBtn = useRef<HTMLElement>();
   const setSendBtn = useCallback((node) => {
     sendBtn.current = node;
   }, []);
+
+  //#endregion
   
   const pickEmojiBtn = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     if (emojiPicker.current.style.display == "block") {
@@ -107,7 +118,10 @@ const ChatMessage = React.memo(() => {
   const pickGifBtn = (e : any) => {
     if (gifPicker.current.style.display == "block") {
       gifPicker.current.style.display = "none";
-    } else gifPicker.current.style.display = "block";
+      dispatch(clearGif());
+    } else {
+      gifPicker.current.style.display = "block";
+    }
   }
 
   const onInputChange = (e: React.FormEvent<HTMLTextAreaElement>) => {
@@ -154,7 +168,7 @@ const ChatMessage = React.memo(() => {
     }
   }
 
-  const handleClickOutside = (e: MouseEvent) => {
+  const checkOutSideEmojiClick = (e: MouseEvent) => {
     if (emojiBtn.current && (emojiBtn.current as HTMLElement).contains(e.target as HTMLElement))
       return;
     if (
@@ -163,6 +177,23 @@ const ChatMessage = React.memo(() => {
     ) {
       (emojiPicker.current as HTMLDivElement).style.display = "none";
     }
+  }
+
+  const checkOutSideGifClick = (e: MouseEvent) => {
+    if (gifBtn.current 
+      && (gifBtn.current as HTMLElement).contains(e.target as HTMLElement))
+      return;
+
+    if (!(gifPicker.current as HTMLDivElement).contains(e.target as HTMLDivElement)
+    ) {
+      (gifPicker.current as HTMLDivElement).style.display = "none";
+      dispatch(clearGif());
+    }
+  }
+
+  const handleClickOutside = (e: MouseEvent) => {
+    checkOutSideEmojiClick(e);  
+    checkOutSideGifClick(e);
   };
 
   const sendMessageTxt = (e : string) => {
@@ -212,6 +243,18 @@ const ChatMessage = React.memo(() => {
     publishMessage(payload); 
   }
 
+  const sendMessageGif = (gif: any) => {
+    let payload: Message = {
+      id: "",
+      senderId: accountState.id,
+      receiverId: receiverInfo.id,
+      textContent: "",
+      fileContent: gif,
+      fileContentType: CONTENT_FILE,
+    }
+    publishMessage(payload);
+  }
+
   const publishMessage = (e: Message) => {
     SocketManager.publish(CHAT_KEY, {destination: CHAT_HANDLER, headers: {}, 
       content: JSON.stringify(e)});
@@ -233,6 +276,17 @@ const ChatMessage = React.memo(() => {
       ));
     }
     return result;
+  }
+
+  const onToolBarClick = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
+    if (toolBar.current.style.display == "none") {
+      toolBar.current.style.display = "flex";
+    } else {
+      toolBar.current.style.display = "none";
+      gifPicker.current.style.display = "none";
+
+      dispatch(clearGif());
+    }
   }
 
   const getReceiverInfo = async () : Promise<ChatAccountInfo> => {
@@ -358,12 +412,14 @@ const ChatMessage = React.memo(() => {
 
             <div className={style.gifPicker} ref={setGifPicker} >
               <GifPicker onGifChoosen={(gif: any, e: any) => {
-                
-              }}></GifPicker>
+                e.preventDefault();
+                sendMessageGif(gif);
+              }}>
+              </GifPicker>
             </div>
 
             {/* gif tool */}
-            <div className={style.tool} onClick={pickGifBtn}>
+            <div className={style.tool} ref={setGifBtn} onClick={pickGifBtn}>
               <div
                 style={{ borderRadius: "5px", border: "2px solid black", padding: "0 5px 0 5px" }}
               >
@@ -394,16 +450,7 @@ const ChatMessage = React.memo(() => {
             </div>
           </div>
           <div className={style.textEditor}>
-            <i
-              className="fa fa-plus-circle fa-2x"
-              onClick={() => {
-                if (toolBar.current.style.display == "none") {
-                  toolBar.current.style.display = "flex";
-                } else {
-                  toolBar.current.style.display = "none";
-                  gifPicker.current.style.display = "none";
-                }
-              }}
+            <i className="fa fa-plus-circle fa-2x" onClick={onToolBarClick}
             ></i>
             <div className={style.inputArea}>
               <div style={{ width: "100%" }}>
