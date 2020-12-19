@@ -45,6 +45,7 @@ db.Account.find();
 db.Account.updateMany({}, {
   $set: { password: "$2a$14$UcUJzKQuSUwxCm6j3cc4cOi7Q//Iw41YNHeMJM.CEHV4gdax0Ole2" },
 });
+db.Message.deleteMany({_id: ObjectId("5fde6dacc419812a6e0a1394")})
 
 db.Account.find().forEach(x => {
   if (x.username.startsWith('admin')) {

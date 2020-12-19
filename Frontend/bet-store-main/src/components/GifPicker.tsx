@@ -13,7 +13,7 @@ import { ChatViewControl } from "../reducers/chatBoxReducer";
 export const gifWidthDisplay = 400;
 
 const giphyApiKey = "0L5XCnJwI21DzramGOLEE5sZiUDihjVe";
-const giphyFetch = new GiphyFetch(giphyApiKey);
+export const giphyFetch = new GiphyFetch(giphyApiKey);
 
 const _GifPicker: React.FC<{onGifChoosen: (gif: any, e : any) => void}> = (param) => {
   const [searchString, setSearchString] = useState<string>("");

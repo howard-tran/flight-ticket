@@ -17,8 +17,12 @@ import { JsxElement } from "typescript";
 import SocketManager from "./SocketManager";
 import { CDN_SERVER_PREFIX, CHAT_KEY } from "./ChatBox";
 import Axios, { AxiosRequestConfig } from "axios";
-import { GifPicker } from "./GifPicker";
+import { GifPicker, gifWidthDisplay, giphyFetch } from "./GifPicker";
 import ReactDOM from "react-dom";
+import { Gif, renderGif } from "@giphy/js-components";
+import { IGif } from "@giphy/js-types";
+import { GiphyFetch } from "@giphy/js-fetch-api";
+import { useAsync } from "react-async-hook";
 
 const TEXT_EDITOR_MAX_ROW = 5;
 const INPUT_TEXT_HANDLER_DELAY = 5;
@@ -29,6 +33,7 @@ const imageThumbnailMessageHeight = 266;
 export const CONTENT_NONE = "CONTENT_NONE";
 export const CONTENT_PRODUCT_INFO = "CONTENT_PRODUCT_INFO";
 export const CONTENT_FILE = "CONTENT_FILE";
+export const CONTENT_GIF = "CONTENT_GIF";
 export const CONTENT_IMAGE = "CONTENT_IMAGE";
 
 
@@ -44,6 +49,7 @@ const ChatMessage = React.memo(() => {
 
   const [chosenEmoji, setChosenEmoji] = useState<any>(null);
   const [receiverInfo, setSenderInfo] = useState<ChatAccountInfo>(null);
+  let prevMessageSize = 0;
 
   const dispatch = useDispatch();
 
@@ -112,7 +118,10 @@ const ChatMessage = React.memo(() => {
   const pickEmojiBtn = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     if (emojiPicker.current.style.display == "block") {
       emojiPicker.current.style.display = "none";
-    } else emojiPicker.current.style.display = "block";
+    } else {
+      emojiPicker.current.style.display = "block";
+      (emojiPicker.current.children[0] as HTMLElement).focus();
+    } 
   };
 
   const pickGifBtn = (e : any) => {
@@ -144,7 +153,6 @@ const ChatMessage = React.memo(() => {
     let node_t = e.target as HTMLDivElement;
 
     if (node_t.scrollTop <= 1) {
-      node_t.scrollTop += 2;
 
       getMessageThunk(dispatch, () => null, {
         senderId: accountState.id,
@@ -249,8 +257,8 @@ const ChatMessage = React.memo(() => {
       senderId: accountState.id,
       receiverId: receiverInfo.id,
       textContent: "",
-      fileContent: gif,
-      fileContentType: CONTENT_FILE,
+      fileContent: gif.id,
+      fileContentType: CONTENT_GIF,
     }
     publishMessage(payload);
   }
@@ -261,6 +269,26 @@ const ChatMessage = React.memo(() => {
   }
 
   const messageListHandle = () => {
+
+    //#region scroll top handle when load message
+    if (messageControlState.messageList.length - prevMessageSize >= 10) {
+      let node_t = messageBody.current as HTMLDivElement;
+
+      for (let i = messageControlState.messageList.length - 1; i >= messageControlState.messageList.length - 15; i--) {
+        switch(messageControlState.messageList[i].fileContentType) {
+          case CONTENT_NONE: {
+            node_t.scrollTop += 44;
+            break;
+          }
+          case CONTENT_IMAGE: case CONTENT_GIF: {
+            node_t.scrollTop += 286;
+            break;
+          }
+        }
+      }
+    }
+    //#endregion
+
     let result: JSX.Element[] = [];
     for (let i = messageControlState.messageList.length - 1; i >= 0; i--) {
       let x = messageControlState.messageList[i];
@@ -275,6 +303,8 @@ const ChatMessage = React.memo(() => {
         ></ChatMessageBox>
       ));
     }
+    prevMessageSize = messageControlState.messageList.length;
+    
     return result;
   }
 
@@ -355,6 +385,7 @@ const ChatMessage = React.memo(() => {
     });
     
     document.addEventListener("mousedown", handleClickOutside);      
+    prevMessageSize = 0;
   }, [view]);
 
   useEffect(() => {
@@ -413,6 +444,7 @@ const ChatMessage = React.memo(() => {
             <div className={style.gifPicker} ref={setGifPicker} >
               <GifPicker onGifChoosen={(gif: any, e: any) => {
                 e.preventDefault();
+                gifBtn.current.click();
                 sendMessageGif(gif);
               }}>
               </GifPicker>
@@ -433,7 +465,8 @@ const ChatMessage = React.memo(() => {
 
             {/* image tool */}
             <div className={style.tool}>
-              <input id="chooseImgInput" name="send images" type="file" accept="image/png,image/jpg,image/jpeg" style={{display:"none"}} 
+              <input id="chooseImgInput" name="send images" type="file" accept="image/png,image/jpg,image/jpeg" 
+                style={{display:"none"}} 
                 onChange={onChooseImage}></input>
               <i className="fa fa-image fa-2x" onClick={() => {
                 document.getElementById('chooseImgInput').click();
@@ -548,7 +581,20 @@ const ChatMessageBox: React.FC<Message> = (message) => {
           </div>
         </div>
       )
-    } 
+    } else if (message.fileContentType == CONTENT_GIF) {
+      return (
+        <div className={style.messageFileContent} onClick={() => {
+          let win = window.open(`https://media.giphy.com/media/${message.fileContent}/giphy.gif`);
+          win.focus();
+        }}>
+          <img src={`https://media.giphy.com/media/${message.fileContent}/giphy.gif`}
+            width={imageThumbnailMessageWidth.toString()}
+            height={imageThumbnailMessageHeight.toString()}
+            alt={CONTENT_GIF}>
+          </img>
+        </div>
+      )
+    }
     else return (<div></div>)
   }
 
