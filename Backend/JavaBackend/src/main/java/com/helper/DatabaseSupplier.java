@@ -4,11 +4,11 @@ public class DatabaseSupplier {
 
   public static class MongoDB {
 
-    public static class BetStore {
-      private static final String prefix = "MongoDB.BetStore.";
+    public static class FlightTicket {
+      private static final String prefix = "MongoDB.FlightTicket.";
 
-      public static final String Message = prefix + "Message";
-      public static final String Conversation = prefix + "Conversation";
+      public static final String Account = prefix + "Account";
+      public static final String Ticket = prefix + "Ticket";
     }
   }
 }

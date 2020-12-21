@@ -39,7 +39,7 @@ public class PropertyHelper {
    *         </div>
    * @throws Exception
    */
-  public static HashMap<String, String> getMongoDBChat() throws Exception {
+  public static HashMap<String, String> getMongoDB() throws Exception {
     HashMap<String, String> res = new HashMap<String, String>();
     res.put("connection", getProperty("mongodb-connection").get());
     res.put("database", getProperty("mongodb-database").get());

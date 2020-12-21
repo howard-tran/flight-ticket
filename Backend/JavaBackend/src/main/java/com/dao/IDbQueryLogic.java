@@ -31,6 +31,11 @@ public interface IDbQueryLogic {
     return (T) func.run(collection);
   }
 
+  public default <T> T parse(Document doc, Class classOf) {
+    Object obj = new Gson().fromJson(doc.toJson(), classOf);
+    return (T) obj;
+  }
+
   public default <T> T parseWithId(Document doc, Class classOf) {
     Object obj = new Gson().fromJson(doc.toJson(), classOf);
     ((MongoIdModel) obj).set_id(doc.getObjectId("_id"));

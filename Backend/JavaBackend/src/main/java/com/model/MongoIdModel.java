@@ -26,9 +26,18 @@ public class MongoIdModel {
     return this._id;
   }
 
-  public MongoIdModel set_id(ObjectId _id) {
+  public void set_id(ObjectId _id) {
     this._id = _id;
     this.setId(_id.toString());
+  }
+
+  public MongoIdModel id(String id) {
+    this.id = id;
+    return this;
+  }
+
+  public MongoIdModel _id(ObjectId _id) {
+    this._id = _id;
     return this;
   }
 }

@@ -1,4 +1,4 @@
-FROM mingkhoi/betstore-javabackend:latest
+FROM mingkhoi/flightticket-javabackend:latest
 
 EXPOSE 8081
 

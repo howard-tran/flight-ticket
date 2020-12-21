@@ -12,7 +12,7 @@ public class MongoClientIns {
   private static MongoClient _mongoClientIns;
 
   public static MongoClient GetMongoClient() throws Exception {
-    HashMap<String, String> dtb = PropertyHelper.getMongoDBChat();
+    HashMap<String, String> dtb = PropertyHelper.getMongoDB();
 
     if (MongoClientIns._mongoClientIns == null) {
       MongoClientSettings settings = MongoClientSettings
