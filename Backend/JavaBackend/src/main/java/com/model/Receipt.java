@@ -9,6 +9,7 @@ public class Receipt extends MongoIdModel {
   private String userid;
   private String username;
   private String status;
+  private String agencyId;
   private BigDecimal total;
 
   public Receipt() {
@@ -28,6 +29,14 @@ public class Receipt extends MongoIdModel {
 
   public void setTickets(List<Ticket> tickets) {
     this.tickets = tickets;
+  }
+
+  public String getAgencyId() {
+    return this.agencyId;
+  }
+
+  public void setAgencyId(String agencyId) {
+    this.agencyId = agencyId;
   }
 
   public String getStatus() {
@@ -64,6 +73,11 @@ public class Receipt extends MongoIdModel {
 
   public Receipt tickets(List<Ticket> tickets) {
     this.tickets = tickets;
+    return this;
+  }
+
+  public Receipt agencyId(String agencyId) {
+    this.agencyId = agencyId;
     return this;
   }
 

@@ -7,10 +7,10 @@ import com.helper.Tuple2;
 import com.model.Ticket;
 import com.model.TicketStatus;
 
-public class BamBooAirlineTicketService extends TicketService {
+public class BamBooAirlineTicketService extends TicketRandUtils {
   public static Ticket random(String agentId) {
-    Tuple2<String, String> flightRand = TicketService.randomFlight();
-    String seatClass = TicketService.randomSeatType();
+    Tuple2<String, String> flightRand = TicketRandUtils.randomFlight();
+    String seatClass = TicketRandUtils.randomSeatType();
 
     Ticket ticket = new Ticket(
       UUID.randomUUID().toString(),seatClass,
@@ -18,22 +18,22 @@ public class BamBooAirlineTicketService extends TicketService {
       agentId,
       TicketStatus.NEW_TICKET.toString(),
       "BambooAirline",
-      TicketService.randomFlightDate().getMillis(),
-      TicketService.randomPrice(seatClass)
+      TicketRandUtils.randomFlightDate().getMillis(),
+      TicketRandUtils.randomPrice(seatClass)
     );
     return ticket;
   }
 
   public static List<Ticket> requestForTickets(String agentId) {
-    int size = TicketService.randomSize();
+    int size = TicketRandUtils.randomSize();
 
     List<Ticket> res = new ArrayList<>();
     for (int i = 0; i < size; i++) {
       var ticket = BamBooAirlineTicketService.random(agentId);
       res.add(ticket);
 
-      if (TicketService.randomReverse()) {
-        res.add(TicketService.reverseTicketAirline(ticket));
+      if (TicketRandUtils.randomReverse()) {
+        res.add(TicketRandUtils.reverseTicketAirline(ticket));
       }
     } 
     return res;

@@ -9,25 +9,19 @@ public class Account extends MongoIdModel {
   private String phoneNumber;
   private String agencyId;
   private String type;
+  private String status;
 
   public Account() {
   }
 
-  public Account(String username, String password, String email, String phoneNumber, String agencyId, String type) {
+  public Account(String username, String password, String email, String phoneNumber, String agencyId, String status, String type) {
     this.username = username;
     this.password = password;
     this.email = email;
     this.phoneNumber = phoneNumber;
     this.agencyId = agencyId;
     this.type = type;
-  }
-
-  public Account(String username, String password, String email, String phoneNumber, String type) {
-    this.username = username;
-    this.password = password;
-    this.email = email;
-    this.phoneNumber = phoneNumber;
-    this.type = type;
+    this.status = status;
   }
 
   public String getUsername() {
@@ -36,6 +30,14 @@ public class Account extends MongoIdModel {
 
   public void setUsername(String username) {
     this.username = username;
+  }
+
+  public String getStatus() {
+    return this.status;
+  }
+
+  public void setStatus(String status) {
+    this.status = status;
   }
 
   public String getAgencyId() {
@@ -80,6 +82,11 @@ public class Account extends MongoIdModel {
 
   public Account username(String username) {
     this.username = username;
+    return this;
+  }
+
+  public Account status(String status) {
+    this.status = status;
     return this;
   }
 

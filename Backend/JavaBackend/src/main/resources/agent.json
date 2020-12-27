@@ -1,8 +1,8 @@
 {
   "agents": [
-    {"id":"22b5a4cc-43bd-11eb-b378-0242ac130002", "name":"Q1, TPHCM", "countryCode":"VN"},
-    {"id":"71dae54e-43bd-11eb-b378-0242ac130002", "name":"Q Binh Thanh, TPHCM", "countryCode":"VN"},
-    {"id":"799c5e3e-43bd-11eb-b378-0242ac130002", "name":"Q Binh Tan, TPHCM", "countryCode":"VN"},
-    {"id":"85de2cc2-43bd-11eb-b378-0242ac130002", "name":"Q6, TPHCM", "countryCode":"VN"}
+    {"id":"22b5a4cc-43bd-11eb-b378-0242ac130002", "name":"VietTravel-Q1", "address":"Q1, TPHCM", "countryCode":"VN"},
+    {"id":"71dae54e-43bd-11eb-b378-0242ac130002", "name":"VietTravel-BinhThanh", "address":"Q Binh Thanh, TPHCM", "countryCode":"VN"},
+    {"id":"799c5e3e-43bd-11eb-b378-0242ac130002", "name":"VietTravel-BinhTan", "address":"Q Binh Tan, TPHCM", "countryCode":"VN"},
+    {"id":"85de2cc2-43bd-11eb-b378-0242ac130002", "name":"VietTravel-Q6", "address":"Q6, TPHCM", "countryCode":"VN"}
   ]
 }

@@ -5,26 +5,39 @@ import java.io.FileReader;
 import java.io.InputStream;
 
 import com.google.gson.Gson;
+import com.helper.PropertyHelper;
+import com.model.Agent;
+import com.model.AgentData;
+import com.model.Airline;
 import com.model.AirlineData;
 import com.model.Ticket;
-import com.service.VietNameAirlineTicketService;
+import com.model.TicketStatus;
+import com.service.TicketService;
+import com.service.VietNamAirlineTicketService;
 
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormatter;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-public class unitTest1 extends testCasePrint {
+public class unitTest1 extends testCaseHandler {
 
-@Test
+  @Autowired
+  private TicketService ticketService;
+
+  @Test
   public void testcase1() throws Exception {
-    this.run(
+    this.runTestCase(
       () -> {
-        var tickets = VietNameAirlineTicketService.requestForTickets("fuck");
-        for (int i = 0; i < tickets.size(); i++) {
-          System.out.println(tickets.get(i).toString()); 
-        }
-
+        
         return null;
       });
+  }
+
+  @Test
+  public void testCase2() throws Exception {
+    
   }
 }

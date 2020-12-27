@@ -18,13 +18,13 @@ public class AccountController {
   @Autowired
   private AccountService accountService;
 
-  @GetMapping("/get")
+  @GetMapping("/getallstaff")
   public Response<Object> getAccount(
     @RequestParam(name = "agentid", required = true) String agentId
   ) {
-    var res = this.accountService.getAllAccount(agentId);
+    var res = this.accountService.getAllStaff(agentId);
 
-    if (res.isEmpty()) {
+    if (res == null) {
       return ResponseHandler.error(null);
     } else {
       return ResponseHandler.ok(res.get());
@@ -40,9 +40,13 @@ public class AccountController {
     // =========
     var res = this.accountService.addAccount(account);
 
-    if (res.isEmpty()) {
+    if (res == null) {
       return ResponseHandler.error(null);
     } else {
+      if (res.get().equals("email")) 
+        return ResponseHandler.overlapedEmail(null);
+      else if (res.get().equals("username")) 
+        return ResponseHandler.overlapedUsername(null);
       return ResponseHandler.ok(res.get());
     }
   }
@@ -56,9 +60,13 @@ public class AccountController {
     // =========
     var res = this.accountService.addAccount(account);
 
-    if (res.isEmpty()) {
+    if (res == null) {
       return ResponseHandler.error(null);
     } else {
+      if (res.get().equals("email")) 
+        return ResponseHandler.overlapedEmail(null);
+      else if (res.get().equals("username")) 
+        return ResponseHandler.overlapedUsername(null);
       return ResponseHandler.ok(res.get());
     }
   }
@@ -69,9 +77,9 @@ public class AccountController {
   ) {
     var res = this.accountService.checkAccount(account);
 
-    if (res.isEmpty()) {
+    if (res == null) {
       return ResponseHandler.error(null);
-    } else {
+    } else { 
       if (res.get().length() > 0) {
         return ResponseHandler.ok(res.get());
       }

@@ -17,6 +17,8 @@ services:
       - cdnserver
       - database
     volumes:
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
       - ./Backend/GoBackend:/app/Backend/GoBackend
       - ./Backend/GoBackend/go.mod:/app/Backend/GoBackend/go.mod
     networks:
@@ -65,6 +67,8 @@ services:
       - cdnserver
       - database
     volumes:
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
       - ./Backend/JavaBackend:/app
       - ./Backend/JavaBackend/logs:/app/logs
     networks:
@@ -84,6 +88,8 @@ services:
       MONGO_URI: mongodb://root:root@10.1.1.4:27017/
       NAME_DATABASE: flight_ticket
     volumes:
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
       - ./Backend/NodeJSBackend/config:/app/config
       - ./Backend/NodeJSBackend/controller:/app/controller
       - ./Backend/NodeJSBackend/middleware:/app/middleware

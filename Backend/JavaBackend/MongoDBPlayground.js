@@ -2,6 +2,6 @@
 
 // create message collection
 
-DBQuery.shellBatchSize = 1000;
+DBQuery.shellBatchSize = 1000000;
 
-db.Account.find()
+db.Account.find();

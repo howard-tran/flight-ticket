@@ -1,19 +1,20 @@
 package com;
 
+import com.dao.IMongoDBQueryLogic;
 import com.helper.IFunction;
 import java.io.Console;
 
-public class testCasePrint {
+public class testCaseHandler implements IMongoDBQueryLogic {
   public static int testCount = 0;
 
-  public void run(IFunction<Object> func, String... descriptions) throws Exception {
+  public void runTestCase(IFunction<Object> func, String... descriptions) throws Exception {
     System.out.print(
       String.format(
         "\n[%sTESTCASE%s] %s-------------------- %d --------------------%s",
         ConsoleColors.PURPLE_BOLD_BRIGHT,
         ConsoleColors.RESET,
         ConsoleColors.WHITE_BOLD_BRIGHT,
-        ++testCasePrint.testCount,
+        ++testCaseHandler.testCount,
         ConsoleColors.RESET
       ) 
     );

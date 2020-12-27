@@ -3,6 +3,7 @@ package com.model;
 public enum TicketStatus {
   NEW_TICKET("NEW_TICKET"),
   SOLD_TICKET("SOLD_TICKET"),
+  EXPIRED_TICKET("EXPIRED_TICKET"),
   PENDING_TICKET("PENDING_TICKET");
   
   private String _data;

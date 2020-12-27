@@ -13,4 +13,12 @@ public class ResponseHandler {
   public static Response<Object> unAuthorized(Object data) {
     return new Response<Object>(404, "unauthorized-error", data);
   }
+
+  public static Response<Object> overlapedUsername(Object data) {
+    return new Response<Object>(1001, "overlaped-username", data);
+  }
+
+  public static Response<Object> overlapedEmail(Object data) {
+    return new Response<Object>(1001, "overlaped-email", data);
+  }
 }

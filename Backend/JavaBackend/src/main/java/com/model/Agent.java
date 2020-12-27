@@ -5,14 +5,16 @@ import java.util.Objects;
 public class Agent {
   private String id;
   private String name;
+  private String address;
   private String countryCode;
 
   public Agent() {
   }
 
-  public Agent(String id, String name, String countryCode) {
+  public Agent(String id, String name, String address, String countryCode) {
     this.id = id;
     this.name = name;
+    this.address = address;
     this.countryCode = countryCode;
   }
 
@@ -30,6 +32,14 @@ public class Agent {
 
   public void setName(String name) {
     this.name = name;
+  }
+
+  public String getAddress() {
+    return this.address;
+  }
+
+  public void setAddress(String address) {
+    this.address = address;
   }
 
   public String getCountryCode() {
@@ -50,6 +60,11 @@ public class Agent {
     return this;
   }
 
+  public Agent address(String address) {
+    this.address = address;
+    return this;
+  }
+
   public Agent countryCode(String countryCode) {
     this.countryCode = countryCode;
     return this;
@@ -63,12 +78,12 @@ public class Agent {
             return false;
         }
         Agent agent = (Agent) o;
-        return Objects.equals(id, agent.id) && Objects.equals(name, agent.name) && Objects.equals(countryCode, agent.countryCode);
+        return Objects.equals(id, agent.id) && Objects.equals(name, agent.name) && Objects.equals(address, agent.address) && Objects.equals(countryCode, agent.countryCode);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, name, countryCode);
+    return Objects.hash(id, name, address, countryCode);
   }
 
   @Override
@@ -76,8 +91,8 @@ public class Agent {
     return "{" +
       " id='" + getId() + "'" +
       ", name='" + getName() + "'" +
+      ", address='" + getAddress() + "'" +
       ", countryCode='" + getCountryCode() + "'" +
       "}";
   }
-
 }
