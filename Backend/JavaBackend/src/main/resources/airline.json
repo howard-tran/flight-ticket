@@ -1,0 +1,25 @@
+{
+  "airlines": [
+    {"id": "VN-CD", "name": "Côn Đảo", "countryCode": "VN"},
+    {"id": "VN-PC", "name": "Phù Cát", "countryCode": "VN"},
+    {"id": "VN-CM", "name": "Cà Mau", "countryCode": "VN"},
+    {"id": "VN-CT", "name": "Cần Thơ", "countryCode": "VN"},
+    {"id": "VN-BMT", "name": "Buôn Ma Thuột", "countryCode": "VN"},
+    {"id": "VN-DN", "name": "Đà Nẵng", "countryCode": "VN"},
+    {"id": "VN-DBP", "name": "Điện Biên Phủ", "countryCode": "VN"},
+    {"id": "VN-PLKU", "name": "Pleiku", "countryCode": "VN"},
+    {"id": "VN-NB", "name": "Nội Bài", "countryCode": "VN"},
+    {"id": "VN-TSN", "name": "Tân Sơn Nhất", "countryCode": "VN"},
+    {"id": "VN-CR", "name": "Cam Ranh", "countryCode": "VN"},
+    {"id": "VN-RG", "name": "Rạch Giá", "countryCode": "VN"},
+    {"id": "VN-PQ", "name": "Phú Quốc", "countryCode": "VN"},
+    {"id": "VN-LK", "name": "Liên Khương", "countryCode": "VN"},
+    {"id": "VN-VI", "name": "Vinh", "countryCode": "VN"},
+    {"id": "VN-TH", "name": "Tuy Hòa", "countryCode": "VN"},
+    {"id": "VN-DH", "name": "Đồng Hới", "countryCode": "VN"},
+    {"id": "VN-CL", "name": "Chu Lai", "countryCode": "VN"},
+    {"id": "VN-PB", "name": "Phú Bài", "countryCode": "VN"},
+    {"id": "VN-TX", "name": "Thọ Xuân", "countryCode": "VN"},
+    {"id": "VN-VD", "name": "Vân Đồn", "countryCode": "VN"}
+  ]
+}

@@ -1,0 +1,93 @@
+[2020-12-24 15:32:28] [main] INFO  com.helper.LogUtils  - 
+========== Service Restarted ==========
+
+[2020-12-24 15:32:51] [main] INFO  com.helper.LogUtils  - 
+========== Service Restarted ==========
+
+[2020-12-24 15:35:31] [main] INFO  com.helper.LogUtils  - 
+========== Service Restarted ==========
+
+[2020-12-24 22:42:39] [main] INFO  com.helper.LogUtils  - 
+========== Service Restarted ==========
+
+[2020-12-24 23:54:25] [main] INFO  com.helper.LogUtils  - 
+========== Service Restarted ==========
+
+[2020-12-25 03:24:21] [main] INFO  com.helper.LogUtils  - 
+========== Service Restarted ==========
+
+[2020-12-25 03:25:48] [main] INFO  com.helper.LogUtils  - 
+========== Service Restarted ==========
+
+[2020-12-26 04:50:47] [main] INFO  com.helper.LogUtils  - 
+========== Service Restarted ==========
+
+[2020-12-26 05:17:44] [main] INFO  com.helper.LogUtils  - 
+========== Service Restarted ==========
+
+[2020-12-26 05:20:43] [main] INFO  com.helper.LogUtils  - 
+========== Service Restarted ==========
+
+[2020-12-27 00:08:50] [main] INFO  com.helper.LogUtils  - 
+========== Service Restarted ==========
+
+[2020-12-27 00:54:52] [main] INFO  com.helper.LogUtils  - 
+========== Service Restarted ==========
+
+[2020-12-27 01:06:08] [main] INFO  com.helper.LogUtils  - 
+========== Service Restarted ==========
+
+[2020-12-27 02:56:00] [main] INFO  com.helper.LogUtils  - 
+========== Service Restarted ==========
+
+[2020-12-27 03:03:18] [main] INFO  com.helper.LogUtils  - 
+========== Service Restarted ==========
+
+[2020-12-27 03:05:10] [http-nio-8081-exec-2] INFO  com.helper.LogUtils  - VN-HG
+[2020-12-27 03:08:11] [main] INFO  com.helper.LogUtils  - 
+========== Service Restarted ==========
+
+[2020-12-27 03:08:27] [http-nio-8081-exec-2] INFO  com.helper.LogUtils  - 
+[2020-12-27 03:08:44] [http-nio-8081-exec-3] INFO  com.helper.LogUtils  - VN-HG
+[2020-12-27 03:10:11] [http-nio-8081-exec-6] INFO  com.helper.LogUtils  - VN-HG
+[2020-12-27 03:11:37] [main] INFO  com.helper.LogUtils  - 
+========== Service Restarted ==========
+
+[2020-12-27 03:11:37] [http-nio-8081-exec-2] INFO  com.helper.LogUtils  - VN-HG
+[2020-12-27 03:11:39] [http-nio-8081-exec-3] INFO  com.helper.LogUtils  - VN-HG
+[2020-12-27 03:11:39] [http-nio-8081-exec-4] INFO  com.helper.LogUtils  - VN-HG
+[2020-12-27 03:11:40] [http-nio-8081-exec-5] INFO  com.helper.LogUtils  - VN-HG
+[2020-12-27 03:12:17] [http-nio-8081-exec-6] INFO  com.helper.LogUtils  - VN-HG
+[2020-12-27 03:15:06] [http-nio-8081-exec-9] INFO  com.helper.LogUtils  - VN-TH
+[2020-12-27 03:16:44] [main] INFO  com.helper.LogUtils  - 
+========== Service Restarted ==========
+
+[2020-12-27 03:16:45] [http-nio-8081-exec-2] INFO  com.helper.LogUtils  - 0
+[2020-12-27 03:16:45] [http-nio-8081-exec-2] INFO  com.helper.LogUtils  - VN-TH
+[2020-12-27 03:17:39] [http-nio-8081-exec-3] INFO  com.helper.LogUtils  - 0
+[2020-12-27 03:17:39] [http-nio-8081-exec-3] INFO  com.helper.LogUtils  - VN-VI
+[2020-12-27 03:17:45] [http-nio-8081-exec-6] INFO  com.helper.LogUtils  - 0
+[2020-12-27 03:17:45] [http-nio-8081-exec-6] INFO  com.helper.LogUtils  - VN-VI
+[2020-12-27 03:18:58] [http-nio-8081-exec-9] INFO  com.helper.LogUtils  - 2
+[2020-12-27 03:18:58] [http-nio-8081-exec-9] INFO  com.helper.LogUtils  - VN-VI
+[2020-12-27 03:19:11] [http-nio-8081-exec-10] INFO  com.helper.LogUtils  - 0
+[2020-12-27 03:19:11] [http-nio-8081-exec-10] INFO  com.helper.LogUtils  - VN-VI
+[2020-12-27 03:19:20] [http-nio-8081-exec-1] INFO  com.helper.LogUtils  - 0
+[2020-12-27 03:19:20] [http-nio-8081-exec-1] INFO  com.helper.LogUtils  - VN-VI
+[2020-12-27 03:20:38] [http-nio-8081-exec-4] INFO  com.helper.LogUtils  - 2
+[2020-12-27 03:20:38] [http-nio-8081-exec-4] INFO  com.helper.LogUtils  - VN-VI
+[2020-12-27 03:23:26] [http-nio-8081-exec-7] INFO  com.helper.LogUtils  - VN-VI
+[2020-12-27 03:23:34] [http-nio-8081-exec-8] INFO  com.helper.LogUtils  - 2
+[2020-12-27 03:23:34] [http-nio-8081-exec-8] INFO  com.helper.LogUtils  - VN-VI
+[2020-12-27 03:23:43] [http-nio-8081-exec-9] INFO  com.helper.LogUtils  - 0
+[2020-12-27 03:23:43] [http-nio-8081-exec-9] INFO  com.helper.LogUtils  - 
+[2020-12-27 03:23:59] [http-nio-8081-exec-10] INFO  com.helper.LogUtils  - 2
+[2020-12-27 03:23:59] [http-nio-8081-exec-10] INFO  com.helper.LogUtils  - VN-VI
+[2020-12-27 03:25:35] [main] INFO  com.helper.LogUtils  - 
+========== Service Restarted ==========
+
+[2020-12-27 03:25:59] [http-nio-8081-exec-4] INFO  com.helper.LogUtils  - date time null
+[2020-12-27 03:26:14] [http-nio-8081-exec-5] INFO  com.helper.LogUtils  - date time null
+[2020-12-27 03:29:07] [main] INFO  com.helper.LogUtils  - 
+========== Service Restarted ==========
+
