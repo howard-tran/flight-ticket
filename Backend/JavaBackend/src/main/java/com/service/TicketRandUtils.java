@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 
+import com.dao.IMongoDBQueryLogic;
 import com.helper.Tuple2;
 import com.model.Airline;
 import com.model.Ticket;
@@ -14,7 +15,7 @@ import com.model.TicketStatus;
 
 import org.joda.time.DateTime;
 
-public class TicketRandUtils {
+public class TicketRandUtils implements IMongoDBQueryLogic {
   protected static String randomAirline() {
     List<Airline> arr = AirlineStatic.getInstance().getData();
     return arr.get(new Random().nextInt(arr.size())).getId();
@@ -89,5 +90,19 @@ public class TicketRandUtils {
     res.setId(UUID.randomUUID().toString());
 
     return res;
+  }
+
+  protected static Ticket random(String agentId, String supplier) {
+    Tuple2<String, String> flightRand = TicketRandUtils.randomFlight();
+    String seatClass = TicketRandUtils.randomSeatType();
+
+    Ticket ticket = new Ticket(
+      UUID.randomUUID().toString(),seatClass,
+      flightRand.get_1(),flightRand.get_2(),
+      agentId, TicketStatus.NEW_TICKET.toString(),supplier,
+      TicketRandUtils.randomFlightDate().getMillis(),
+      TicketRandUtils.randomPrice(seatClass)
+    );
+    return ticket;
   }
 }

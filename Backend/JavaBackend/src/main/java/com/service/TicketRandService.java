@@ -1,23 +1,22 @@
 package com.service;
 
-import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.Collection;
 
+import com.dao.IMongoDBQueryLogic;
 import com.dao.ITicketDao;
 import com.helper.DatabaseSupplier;
 import com.helper.IConsumer;
-import com.model.Agent;
+import com.helper.PropertyHelper;
 import com.model.TicketStatus;
+import com.model.TicketSupplier;
 
 import org.springframework.beans.factory.annotation.Qualifier;
 
 
-public class TicketRandService implements LogService {
+public class TicketRandService implements LogService, IMongoDBQueryLogic {
   private ITicketDao ticketDao;
-  private Timer ticketTimer;
-
-  private final Long limitNewTicket = 1000000l;
+  
+  private final Long limitNewTicket = 100000000l;
 
   public TicketRandService(
     @Qualifier(DatabaseSupplier.MongoDB.FlightTicket.Ticket) ITicketDao ticketDao
@@ -35,38 +34,41 @@ public class TicketRandService implements LogService {
     }
 
     if (newTicketCount < this.limitNewTicket) {
-      VietNamAirlineTicketService
-        .requestForTickets("")
-        .forEach(t -> {
-          try {ticketDao.insertTicket(t);}
-          catch (Exception e) {
-            e.printStackTrace();
-          }
-        });
-      
-      BamBooAirlineTicketService
-        .requestForTickets("")
-        .forEach(t -> {
-          try {ticketDao.insertTicket(t);}
-          catch (Exception e) {
-            e.printStackTrace();
-          }
-        });
-    }
-  };
+      this.run(PropertyHelper.getMongoDB(), "Supplier", 
+        collection -> {
+          for (var doc : collection.find()) {
+            TicketSupplier supplier = this.parse(doc, TicketSupplier.class);
 
-  private TimerTask ticketTask = new TimerTask() {
-    @Override
-    public void run() {
-      try {serviceTask.run();}
-      catch (Exception e) {
-        e.printStackTrace();
-      }
+            int size = TicketRandUtils.randomSize();
+            for (int i = 0; i < size; i++) {
+              var ticket = TicketRandUtils.random("", supplier.getName());
+              ticketDao.insertTicket(ticket);
+
+              if (TicketRandUtils.randomReverse()) {
+                ticketDao.insertTicket(TicketRandUtils.reverseTicketAirline(ticket));
+              }
+            }
+          }
+          return null;
+        });
     }
   };
 
   public void start() {
-    ticketTimer = new Timer("TicketTimer");
-    ticketTimer.schedule(ticketTask, 0, 1200000l);
+    Thread newThread = new Thread(() -> {
+
+      while (true) {
+        try {serviceTask.run();}
+        catch (Exception e) {
+          e.printStackTrace();
+        }
+
+        try {Thread.sleep(60l);}
+        catch (Exception e) {
+          e.printStackTrace();
+        }
+      }
+    });
+    newThread.run();
   }
 }

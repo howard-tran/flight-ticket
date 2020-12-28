@@ -9,10 +9,31 @@ import com.helper.PropertyHelper;
 import com.model.Ticket;
 
 import org.bson.Document;
+import org.bson.types.ObjectId;
 import org.springframework.stereotype.Repository;
 
 @Repository(DatabaseSupplier.MongoDB.FlightTicket.Ticket)
 public class TicketDao implements ITicketDao {
+
+  @Override
+  public Ticket getTicketById(String id) throws Exception {
+    return this.run(PropertyHelper.getMongoDB(), "Ticket",
+      collection -> {
+        var filter = new Document("_id", new ObjectId(id));
+        return this.parseWithId(collection.find(filter).first(), Ticket.class);
+      });
+  }
+
+  @Override
+  public Integer updateTicket(Ticket ticket) throws Exception {
+    return this.run(PropertyHelper.getMongoDB(), "Ticket",
+      collection -> {
+        var filter = new Document("_id", new ObjectId(ticket.getId()));
+        
+        return (int)collection.updateOne(filter, this.toBsonDocument(ticket))
+          .getMatchedCount();
+      });
+  }
 
   @Override
   public String insertTicket(Ticket ticket) throws Exception {

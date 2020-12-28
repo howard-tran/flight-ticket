@@ -6,7 +6,6 @@ import java.util.Optional;
 
 import com.dao.ITicketDao;
 import com.helper.DatabaseSupplier;
-import com.helper.LogUtils;
 import com.model.ListData;
 import com.model.Ticket;
 
