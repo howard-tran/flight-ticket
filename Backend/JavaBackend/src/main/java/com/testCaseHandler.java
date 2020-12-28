@@ -2,7 +2,6 @@ package com;
 
 import com.dao.IMongoDBQueryLogic;
 import com.helper.IFunction;
-import java.io.Console;
 
 public class testCaseHandler implements IMongoDBQueryLogic {
   public static int testCount = 0;

@@ -13,7 +13,6 @@ import com.model.AirlineData;
 import com.model.Ticket;
 import com.model.TicketStatus;
 import com.service.TicketService;
-import com.service.VietNamAirlineTicketService;
 
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormatter;
