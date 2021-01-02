@@ -51,52 +51,6 @@ public class TicketController implements LogService {
     return null;
   }
 
-  // option + index != nul, guaranteed
-  private Optional<ListData<List<Ticket>>> handleTicketParams(
-    int index, String airlineStart, String airlineEnd, Long datetime, String option
-  ) {
-    if (airlineStart != null && airlineEnd != null && datetime != null) {
-      return this.resultOnTicketStatus(option, status -> {
-        return this.ticketService.getTicketByRoute(airlineStart, airlineEnd, index, status, datetime);
-      });
-    }//
-    else if (airlineStart != null && airlineEnd != null) {
-      return this.resultOnTicketStatus(option, status -> {
-        return this.ticketService.getTicketByRoute(airlineStart, airlineEnd, index, status, null);
-      });
-    }
-    else if (airlineStart != null && datetime != null) {
-      return this.resultOnTicketStatus(option, status -> {
-        return this.ticketService.getTicketByAirlineStart(airlineStart, index, status, datetime);
-      });
-    }
-    else if (airlineEnd != null && datetime != null) {
-      return this.resultOnTicketStatus(option, status -> {
-        return this.ticketService.getTicketByAirlineEnd(airlineEnd, index, status, datetime);
-      });
-    }
-    else if (airlineStart != null) {
-      return this.resultOnTicketStatus(option, status -> {
-        return this.ticketService.getTicketByAirlineStart(airlineStart, index, status, null);
-      });
-    }
-    else if (airlineEnd != null) {
-      return this.resultOnTicketStatus(option, status -> {
-        return this.ticketService.getTicketByAirlineEnd(airlineEnd, index, status, null);
-      });
-    }
-    else if (datetime != null) {
-      return this.resultOnTicketStatus(option, status -> {
-        return this.ticketService.getTicket(index, status, datetime);
-      });
-    }
-    else {
-      return this.resultOnTicketStatus(option, status -> {
-        return this.ticketService.getTicket(index, status, null);
-      });
-    }
-  }
-
   private String parseStringFromParams(String value) {
     if (value == "") {
       return null;
@@ -112,14 +66,16 @@ public class TicketController implements LogService {
     @RequestParam(name = "airlineEnd") String airlineEnd,
     @RequestParam(name="dateTime") Long datetime
   ) {
-    var res = handleTicketParams(index, parseStringFromParams(airlineStart), 
-      parseStringFromParams(airlineEnd), datetime, option);
+    // var res = handleTicketParams(index, parseStringFromParams(airlineStart), 
+    //   parseStringFromParams(airlineEnd), datetime, option);
 
-    if (res == null) {
-      return ResponseHandler.error(null);
-    } else {
-      return ResponseHandler.ok(res.get());
-    }
+    // if (res == null) {
+    //   return ResponseHandler.error(null);
+    // } else {
+    //   return ResponseHandler.ok(res.get());
+    // }
+
+    return null;
   }
 
   @PostMapping("/addProfile")

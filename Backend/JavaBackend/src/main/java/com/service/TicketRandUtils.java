@@ -8,10 +8,12 @@ import java.util.UUID;
 
 import com.dao.IMongoDBQueryLogic;
 import com.helper.Tuple2;
+import com.helper.UnixHelper;
 import com.model.Airline;
 import com.model.Ticket;
 import com.model.TicketSeatType;
 import com.model.TicketStatus;
+import com.model.TicketType;
 
 import org.joda.time.DateTime;
 
@@ -40,6 +42,19 @@ public class TicketRandUtils implements IMongoDBQueryLogic {
     return arr.get(new Random().nextInt(arr.size()));
   }
 
+  protected static String randomTicketType() {
+    List<String> arr = Arrays.asList(
+      TicketType.ADULT.toString(),
+      TicketType.MINOR.toString(),
+      TicketType.BABY.toString()
+    );
+    return arr.get(new Random().nextInt(arr.size()));
+  }
+
+  protected static Tuple2<Float, Float> getWeight() {
+    return new Tuple2<Float,Float>(7.0f, 18.0f);
+  }
+
   protected static BigDecimal randomPrice(String seatClass) {
     double scale = 500000.0;
     double rand = new Random().nextDouble();
@@ -50,12 +65,21 @@ public class TicketRandUtils implements IMongoDBQueryLogic {
     } else if (seatClass.equals(TicketSeatType.PRENIUM.toString())) {
       price *= 1.2;
     }
-
     return new BigDecimal(price);
   }
 
-  protected static int randomSize() {
-    return new Random().nextInt(51) + 50;
+  protected static int randomFlightCount() {
+    return new Random().nextInt(20) + 2;
+  }
+
+  protected static int randomTicketCount(String seatClass) {
+    if (seatClass.equals(TicketSeatType.BUSINESS.toString())) {
+      return new Random().nextInt(11) + 1;
+    } else if (seatClass.equals(TicketSeatType.PRENIUM.toString())) {
+      return new Random().nextInt(21) + 1;
+    } else {
+      return new Random().nextInt(60) + 5;
+    }
   }
 
   protected static boolean randomReverse() {
@@ -65,44 +89,51 @@ public class TicketRandUtils implements IMongoDBQueryLogic {
   protected static int randomMinuteFlight() {
     List<Integer> arr = Arrays.asList(0,15,30,45);
     return arr.get(new Random().nextInt(arr.size()));
-  } 
+  }
 
-  protected static DateTime randomFlightDate() {
+  protected static Long randomFlightDate() {
     DateTime today = DateTime.now();
 
     double scale = 604800.0d;
     double rand = new Random().nextDouble();
     int randSeconds = (int)((rand * scale) + 172800.0d);
     
-    today = today.plusSeconds(randSeconds);
-    today = today.withMinuteOfHour(TicketRandUtils.randomMinuteFlight());
-    today = today.withSecondOfMinute(0);
-    today = today.withMillisOfSecond(0);
-
-    return today;
+    DateTime res = new DateTime(
+      UnixHelper.roundToMinute(today.plusSeconds(randSeconds), 
+        TicketRandUtils.randomMinuteFlight()));
+    return res.getMillis();
   }
 
-  protected static Ticket reverseTicketAirline(Ticket data) {
-    Ticket res = data;
-    String airlineStart = res.getAirlineStart();
-    res.setAirlineStart(res.getAirlineEnd());
-    res.setAirlineEnd(airlineStart);
-    res.setId(UUID.randomUUID().toString());
+  // protected static Ticket random(String agentId, String supplier) {
+  //   Tuple2<String, String> flightRand = TicketRandUtils.randomFlight();
+  //   String seatClass = TicketRandUtils.randomSeatType();
+  //   String ticketType = TicketRandUtils.randomTicketType();
+  //   Tuple2<Float, Float> flightWeight = TicketRandUtils.getWeight(seatClass);
 
-    return res;
-  }
+  //   Ticket ticket = new Ticket(
+  //     UUID.randomUUID().toString(),seatClass,
+  //     ticketType,flightWeight.get_1(),flightWeight.get_2(),
+  //     flightRand.get_1(),flightRand.get_2(),
+  //     agentId, TicketStatus.NEW_TICKET.toString(),supplier,
+  //     TicketRandUtils.randomFlightDate().getMillis(),
+  //     TicketRandUtils.randomPrice(seatClass, ticketType)
+  //   );
+  //   return null;
+  // }
 
-  protected static Ticket random(String agentId, String supplier) {
-    Tuple2<String, String> flightRand = TicketRandUtils.randomFlight();
-    String seatClass = TicketRandUtils.randomSeatType();
+  // protected static Ticket random(String agentId, String supplier, String ticketType) {
+  //   Tuple2<String, String> flightRand = TicketRandUtils.randomFlight();
+  //   String seatClass = TicketRandUtils.randomSeatType();
+  //   Tuple2<Float, Float> flightWeight = TicketRandUtils.getWeight(seatClass);
 
-    Ticket ticket = new Ticket(
-      UUID.randomUUID().toString(),seatClass,
-      flightRand.get_1(),flightRand.get_2(),
-      agentId, TicketStatus.NEW_TICKET.toString(),supplier,
-      TicketRandUtils.randomFlightDate().getMillis(),
-      TicketRandUtils.randomPrice(seatClass)
-    );
-    return ticket;
-  }
+  //   Ticket ticket = new Ticket(
+  //     UUID.randomUUID().toString(),seatClass,
+  //     ticketType,flightWeight.get_1(),flightWeight.get_2(),
+  //     flightRand.get_1(),flightRand.get_2(),
+  //     agentId, TicketStatus.NEW_TICKET.toString(),supplier,
+  //     TicketRandUtils.randomFlightDate().getMillis(),
+  //     TicketRandUtils.randomPrice(seatClass, ticketType)
+  //   );
+  //   return null;
+  // }
 }

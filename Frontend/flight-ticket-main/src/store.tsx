@@ -1,33 +1,9 @@
 import { createStore, combineReducers, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
-import {
-  productListReducer,
-  productDetailsReducer,
-  productDeleteReducer,
-  productCreateReducer,
-} from "./reducers/productReducer";
-import {
-  categoryListReducer,
-  categoryDetailsReducer,
-} from "./reducers/categoryReducer";
-import { profileReducer } from "./reducers/profileReducer";
-import {accountReducer} from "./reducers/accountReducer"
-import { notifyReducer } from "./reducers/notifyReducer";
-import { imagesUploadReducer } from "./reducers/imageReducer";
 
 const reducer = combineReducers({
-  productList: productListReducer,
-  productDetails: productDetailsReducer,
-  productDelete: productDeleteReducer,
-  productCreate: productCreateReducer,
-  productUpdate: productCreateReducer,
-  categoryList: categoryListReducer,
-  categoryDetails: categoryDetailsReducer,
-  imageUpload: imagesUploadReducer,
-  profile:profileReducer,
-  account:accountReducer,
-  notify:notifyReducer
+  
 });
 export type AppState = ReturnType<typeof reducer>;
 

@@ -2,12 +2,10 @@ package com.dao;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import com.google.gson.Gson;
 import com.helper.DatabaseSupplier;
 import com.helper.PropertyHelper;
 import com.model.Receipt;
-
 import org.bson.Document;
 import org.bson.types.ObjectId;
 import org.springframework.stereotype.Repository;

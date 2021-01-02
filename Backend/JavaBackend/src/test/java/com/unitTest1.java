@@ -12,6 +12,8 @@ import com.model.Airline;
 import com.model.AirlineData;
 import com.model.Ticket;
 import com.model.TicketStatus;
+import com.service.AirplaneStatic;
+import com.service.RouteStatic;
 import com.service.TicketService;
 
 import org.joda.time.DateTime;
@@ -30,7 +32,11 @@ public class unitTest1 extends testCaseHandler {
   public void testcase1() throws Exception {
     this.runTestCase(
       () -> {
-        
+        int a = AirplaneStatic.getInstance().getAirplaneData("VN-VA").size();
+        int b = RouteStatic.getInstance().getRouteData("VN-VA").size();
+
+        System.out.println(a);
+        System.out.println(b);
         return null;
       });
   }

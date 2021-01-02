@@ -1,5 +1,6 @@
 package com;
 
+import com.dao.FlightDao;
 import com.dao.TicketDao;
 import com.helper.LogUtils;
 import com.service.TicketRandService;
@@ -12,13 +13,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class App {
   public static final String service = "/api";
   
-  @Autowired
   private static TicketRandService ticketRandService;
 
   public static void main(String[] args) {
     SpringApplication.run(App.class, args);
 
-    App.ticketRandService = new TicketRandService(new TicketDao());
+    ticketRandService = new TicketRandService(new TicketDao(), new FlightDao());
     ticketRandService.start();
 
     LogUtils.LogInfo("\n========== Service Restarted ==========\n", null);

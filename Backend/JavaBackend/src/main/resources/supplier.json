@@ -1,6 +1,6 @@
 [
-  {"name":"Vietnam-AirLine", "countryCode": "VN"},
-  {"name":"Bamboo-Airline", "countryCode": "VN"},
-  {"name":"Vietjet-Air", "countryCode": "VN"},
-  {"name":"Jetstar-Pacific-Airlines", "countryCode":"VN"}
+  {"id":"VN-VA", "name":"Vietnam-AirLine", "countryCode": "VN"},
+  {"id":"VN-BB", "name":"Bamboo-Airline", "countryCode": "VN"},
+  {"id":"VN-VJ", "name":"Vietjet-Air", "countryCode": "VN"},
+  {"id":"VN-JP", "name":"Jetstar-Pacific-Airlines", "countryCode":"VN"}
 ]

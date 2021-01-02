@@ -4,15 +4,26 @@ import java.util.List;
 import java.util.Objects;
 
 public class TicketSupplier {
+  private String id;
   private String name;
   private String countryCode;
+
 
   public TicketSupplier() {
   }
 
-  public TicketSupplier(String name, String countryCode) {
+  public TicketSupplier(String id, String name, String countryCode) {
+    this.id = id;
     this.name = name;
     this.countryCode = countryCode;
+  }
+
+  public String getId() {
+    return this.id;
+  }
+
+  public void setId(String id) {
+    this.id = id;
   }
 
   public String getName() {
@@ -29,6 +40,11 @@ public class TicketSupplier {
 
   public void setCountryCode(String countryCode) {
     this.countryCode = countryCode;
+  }
+
+  public TicketSupplier id(String id) {
+    this.id = id;
+    return this;
   }
 
   public TicketSupplier name(String name) {
@@ -49,20 +65,21 @@ public class TicketSupplier {
             return false;
         }
         TicketSupplier ticketSupplier = (TicketSupplier) o;
-        return Objects.equals(name, ticketSupplier.name) && Objects.equals(countryCode, ticketSupplier.countryCode);
+        return Objects.equals(id, ticketSupplier.id) && Objects.equals(name, ticketSupplier.name) && Objects.equals(countryCode, ticketSupplier.countryCode);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(name, countryCode);
+    return Objects.hash(id, name, countryCode);
   }
 
   @Override
   public String toString() {
     return "{" +
-      " name='" + getName() + "'" +
+      " id='" + getId() + "'" +
+      ", name='" + getName() + "'" +
       ", countryCode='" + getCountryCode() + "'" +
       "}";
   }
-
+  
 }

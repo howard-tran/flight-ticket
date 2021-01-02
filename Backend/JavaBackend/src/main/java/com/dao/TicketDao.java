@@ -25,6 +25,20 @@ public class TicketDao implements ITicketDao {
   }
 
   @Override
+  public List<Ticket> getTicket(String flightId) throws Exception {
+    return this.run(PropertyHelper.getMongoDB(), "Ticket",
+      collection -> {
+        var filter = new Document("flightId", flightId);
+        
+        var res = new ArrayList<Ticket>();
+        for (var doc : collection.find(filter)) {
+          res.add(this.parseWithId(doc, Ticket.class));
+        }
+        return res;
+      });
+  }
+
+  @Override
   public Integer updateTicket(Ticket ticket) throws Exception {
     return this.run(PropertyHelper.getMongoDB(), "Ticket",
       collection -> {
@@ -54,78 +68,6 @@ public class TicketDao implements ITicketDao {
       PropertyHelper.getMongoDB(), "Ticket",
       collection -> {
         return collection.countDocuments(new Document("status", status));
-      });
-  }
-
-  @Override
-  public List<Ticket> getTicket(String status) throws Exception {
-    return this.run(
-      PropertyHelper.getMongoDB(), "Ticket", 
-      collection -> {
-        var res = new ArrayList<Ticket>();
-        for (var doc : collection.find(new Document("status", status))) {
-          res.add(this.parseWithId(doc, Ticket.class));
-        }
-        return res;
-      });
-  }
-
-  @Override
-  public List<Ticket> getTicket() throws Exception {
-    return this.run(
-      PropertyHelper.getMongoDB(), "Ticket", 
-      collection -> {
-        var res = new ArrayList<Ticket>();
-        for (var doc : collection.find()) {
-          res.add(this.parseWithId(doc, Ticket.class));
-        }
-        return res;
-      });
-  }
-
-  @Override
-  public List<Ticket> getTicketByRoute(String airlineStart, String airlineEnd, String status) throws Exception {
-    return this.run(
-      PropertyHelper.getMongoDB(), "Ticket", 
-      collection -> {
-        var filter = new Document("status", status).append("airlineStart", airlineStart)
-          .append("airlineEnd", airlineEnd);
-
-        var res = new ArrayList<Ticket>();
-        for (var doc : collection.find(filter)) {
-          res.add(this.parseWithId(doc, Ticket.class));
-        }
-        return res;
-      });
-  }
-
-  @Override
-  public List<Ticket> getTicketByAirlineStart(String airlineStart, String status) throws Exception {
-    return this.run(
-      PropertyHelper.getMongoDB(), "Ticket",
-      collection -> {
-        var filter  = new Document("status", status).append("airlineStart", airlineStart);
-        var res = new ArrayList<Ticket>();
-
-        for (var doc : collection.find(filter)) {
-          res.add(this.parseWithId(doc, Ticket.class));
-        }
-        return res;
-      });
-  }
-
-  @Override
-  public List<Ticket> getTicketByAirlineEnd(String airlineEnd, String status) throws Exception {
-    return this.run(
-      PropertyHelper.getMongoDB(), "Ticket",
-      collection -> {
-        var filter  = new Document("status", status).append("airlineEnd", airlineEnd);
-        var res = new ArrayList<Ticket>();
-
-        for (var doc : collection.find(filter)) {
-          res.add(this.parseWithId(doc, Ticket.class));
-        }
-        return res;
       });
   }
 }

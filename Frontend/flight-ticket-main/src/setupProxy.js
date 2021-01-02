@@ -5,7 +5,7 @@ module.exports = function (app) {
     app.use(
         '/go/*',
         createProxyMiddleware({
-            target: 'http://localhost:8081',
+            target: 'http://localhost:8181',
             changeOrigin: true,
             pathRewrite: {
                 '^/go/': '/'
@@ -18,7 +18,7 @@ module.exports = function (app) {
         '/java/*',
         createProxyMiddleware({
             ws: true,
-            target: 'http://localhost:8085',
+            target: 'http://localhost:8185',
             changeOrigin: true,
             pathRewrite: {
                 '^/java/': '/'
@@ -30,7 +30,7 @@ module.exports = function (app) {
     app.use(
         '/cdn/*',
         createProxyMiddleware({
-            target: 'http://localhost:8082',
+            target: 'http://localhost:8182',
             changeOrigin: true,
             pathRewrite: {
                 '^/cdn/': '/'
@@ -42,7 +42,7 @@ module.exports = function (app) {
     app.use(
         '/node/*',
         createProxyMiddleware({
-            target: 'http://localhost:8086',
+            target: 'http://localhost:8186',
             changeOrigin: true,
             pathRewrite: {
                 '^/node/': '/'
