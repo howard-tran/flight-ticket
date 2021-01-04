@@ -20,7 +20,11 @@ public class TicketDao implements ITicketDao {
     return this.run(PropertyHelper.getMongoDB(), "Ticket",
       collection -> {
         var filter = new Document("_id", new ObjectId(id));
-        return this.parseWithId(collection.find(filter).first(), Ticket.class);
+
+        Document res = collection.find(filter).first();
+        if (res == null) return null;
+
+        return this.parseWithId(res, Ticket.class);
       });
   }
 
@@ -29,6 +33,20 @@ public class TicketDao implements ITicketDao {
     return this.run(PropertyHelper.getMongoDB(), "Ticket",
       collection -> {
         var filter = new Document("flightId", flightId);
+        
+        var res = new ArrayList<Ticket>();
+        for (var doc : collection.find(filter)) {
+          res.add(this.parseWithId(doc, Ticket.class));
+        }
+        return res;
+      });
+  }
+
+  @Override
+  public List<Ticket> getTicket(String flightId, String seatType) throws Exception {
+    return this.run(PropertyHelper.getMongoDB(), "Ticket",
+      collection -> {
+        var filter = new Document("flightId", flightId).append("seatType", seatType);
         
         var res = new ArrayList<Ticket>();
         for (var doc : collection.find(filter)) {

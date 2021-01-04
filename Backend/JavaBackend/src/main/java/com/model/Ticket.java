@@ -5,18 +5,17 @@ import java.util.Objects;
 
 public class Ticket extends MongoIdModel {
   private String flightId;
-  private String position;
   private String seatType;
-  private BigDecimal price;
+  private Integer count;
+
 
   public Ticket() {
   }
 
-  public Ticket(String flightId, String position, String seatType, BigDecimal price) {
+  public Ticket(String flightId, String seatType, Integer count) {
     this.flightId = flightId;
-    this.position = position;
     this.seatType = seatType;
-    this.price = price;
+    this.count = count;
   }
 
   public String getFlightId() {
@@ -27,14 +26,6 @@ public class Ticket extends MongoIdModel {
     this.flightId = flightId;
   }
 
-  public String getPosition() {
-    return this.position;
-  }
-
-  public void setPosition(String position) {
-    this.position = position;
-  }
-
   public String getSeatType() {
     return this.seatType;
   }
@@ -43,21 +34,16 @@ public class Ticket extends MongoIdModel {
     this.seatType = seatType;
   }
 
-  public BigDecimal getPrice() {
-    return this.price;
+  public Integer getCount() {
+    return this.count;
   }
 
-  public void setPrice(BigDecimal price) {
-    this.price = price;
+  public void setCount(Integer count) {
+    this.count = count;
   }
 
   public Ticket flightId(String flightId) {
     this.flightId = flightId;
-    return this;
-  }
-
-  public Ticket position(String position) {
-    this.position = position;
     return this;
   }
 
@@ -66,8 +52,8 @@ public class Ticket extends MongoIdModel {
     return this;
   }
 
-  public Ticket price(BigDecimal price) {
-    this.price = price;
+  public Ticket count(Integer count) {
+    this.count = count;
     return this;
   }
 
@@ -79,23 +65,21 @@ public class Ticket extends MongoIdModel {
             return false;
         }
         Ticket ticket = (Ticket) o;
-        return Objects.equals(flightId, ticket.flightId) && Objects.equals(position, ticket.position) && Objects.equals(seatType, ticket.seatType) && Objects.equals(price, ticket.price);
+        return Objects.equals(flightId, ticket.flightId) && Objects.equals(seatType, ticket.seatType) && Objects.equals(count, ticket.count);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(flightId, position, seatType, price);
+    return Objects.hash(flightId, seatType, count);
   }
 
   @Override
   public String toString() {
     return "{" +
       " flightId='" + getFlightId() + "'" +
-      ", position='" + getPosition() + "'" +
       ", seatType='" + getSeatType() + "'" +
-      ", price='" + getPrice() + "'" +
+      ", count='" + getCount() + "'" +
       "}";
   }
   
-
 }

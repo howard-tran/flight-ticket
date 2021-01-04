@@ -10,4 +10,5 @@ public interface ITicketDao extends IMongoDBQueryLogic {
   public Integer updateTicket(Ticket ticket) throws Exception;
   public Ticket getTicketById(String id) throws Exception;
   public List<Ticket> getTicket(String flightId) throws Exception;
+  public List<Ticket> getTicket(String flightId, String seatType) throws Exception;
 }

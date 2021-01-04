@@ -72,10 +72,11 @@ public class AccountService implements LogService {
       () -> {
         var ac = this.accountDao.getAccountByUsername
           (account.getUsername(), account.getAgencyId());
+
         if (
           ac != null && 
           ac.getPassword().equals(account.getPassword())
-        ) return account.getId();
+        ) return ac.getId();
         return "";
       }
     );

@@ -40,6 +40,8 @@ services:
   database:
     container_name: "mongodtb-fl"
     image: mongo:3-xenial
+    logging:
+      driver: none
     restart: always
     environment:
       MONGO_INITDB_ROOT_USERNAME: root

@@ -1,6 +1,7 @@
 package com.controller;
 
 import com.App;
+import com.helper.LogUtils;
 import com.model.Account;
 import com.service.AccountService;
 
@@ -84,6 +85,20 @@ public class AccountController {
         return ResponseHandler.ok(res.get());
       }
       return ResponseHandler.unAuthorized(null);
+    }
+  }
+
+  @GetMapping("/getInfo")
+  public Response<Object> getInfo(
+    @RequestParam(name = "agentId", required = true) String agentId,
+    @RequestParam(name = "id", required = true) String accountId
+  ) {
+    var res = this.accountService.getAccount(accountId, agentId);
+
+    if (res == null) {
+      return ResponseHandler.error(null);
+    } else { 
+      return ResponseHandler.ok(res.get());
     }
   }
 }

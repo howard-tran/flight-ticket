@@ -4,15 +4,11 @@ import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
-import java.util.UUID;
-
 import com.dao.IMongoDBQueryLogic;
 import com.helper.Tuple2;
 import com.helper.UnixHelper;
 import com.model.Airline;
-import com.model.Ticket;
 import com.model.TicketSeatType;
-import com.model.TicketStatus;
 import com.model.TicketType;
 
 import org.joda.time.DateTime;
@@ -52,24 +48,21 @@ public class TicketRandUtils implements IMongoDBQueryLogic {
   }
 
   protected static Tuple2<Float, Float> getWeight() {
-    return new Tuple2<Float,Float>(7.0f, 18.0f);
+    return new Tuple2<Float,Float>(
+      (float)(new Random().nextInt(3) + 5), 
+      (float)(new Random().nextInt(8) + 18));
   }
 
-  protected static BigDecimal randomPrice(String seatClass) {
+  protected static BigDecimal randomPrice() {
     double scale = 500000.0;
     double rand = new Random().nextDouble();
     double price = (rand * scale) + scale;
 
-    if (seatClass.equals(TicketSeatType.BUSINESS.toString())) {
-      price *= 1.5;
-    } else if (seatClass.equals(TicketSeatType.PRENIUM.toString())) {
-      price *= 1.2;
-    }
     return new BigDecimal(price);
   }
 
   protected static int randomFlightCount() {
-    return new Random().nextInt(20) + 2;
+    return new Random().nextInt(3) + 1;
   }
 
   protected static int randomTicketCount(String seatClass) {

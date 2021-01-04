@@ -2,6 +2,7 @@ package com.dao;
 
 import com.google.gson.Gson;
 import com.helper.IFunction2;
+import com.helper.LogUtils;
 import com.model.MongoIdModel;
 import com.model.Ticket;
 import com.mongodb.client.MongoClient;
@@ -10,6 +11,7 @@ import com.mongodb.client.MongoDatabase;
 import java.nio.channels.ConnectionPendingException;
 import java.util.HashMap;
 import org.bson.Document;
+import org.bson.types.ObjectId;
 
 public interface IMongoDBQueryLogic {
   public default <T> T run(
@@ -39,6 +41,12 @@ public interface IMongoDBQueryLogic {
 
   public default Document toBsonDocument(Object obj) {
     return Document.parse(new Gson().toJson(obj));
+  }
+
+  public default Document toBsonDocumentWithId(Object obj) {
+    Document doc = Document.parse(new Gson().toJson(obj));
+    doc.remove("id");doc.remove("_id");
+    return doc;
   }
 
   public default <T> T parseWithId(Document doc, Class classOf) {

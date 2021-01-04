@@ -10,4 +10,6 @@ public interface IFlightDao extends IMongoDBQueryLogic {
   public Flight getFlight(String id) throws Exception;
   public List<Flight> getFlight(int isExpired, String supplierId, 
     String airlineStart, String airlineEnd, Long dateFlight) throws Exception;
+  
+  public List<Flight> getFlight(int isExpired, String airlineStart, String airlineEnd, Long dateFlight) throws Exception;
 }

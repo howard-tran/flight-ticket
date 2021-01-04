@@ -14,6 +14,12 @@ public class Account extends MongoIdModel {
   public Account() {
   }
 
+  public Account(String username, String password, String agencyId) {
+    this.username = username;
+    this.password = password;
+    this.agencyId = agencyId;
+  }
+
   public Account(String username, String password, String email, String phoneNumber, String agencyId, String status, String type) {
     this.username = username;
     this.password = password;

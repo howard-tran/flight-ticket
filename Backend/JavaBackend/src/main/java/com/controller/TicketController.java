@@ -60,22 +60,54 @@ public class TicketController implements LogService {
 
   @GetMapping("/get")
   public Response<Object> get(
-    @RequestParam(name = "index", required = true) int index,
-    @RequestParam(name = "option", required = true) String option,
+    @RequestParam(name = "index", required = true) int index, 
     @RequestParam(name = "airlineStart") String airlineStart,
     @RequestParam(name = "airlineEnd") String airlineEnd,
-    @RequestParam(name="dateTime") Long datetime
+    @RequestParam(name = "seatClass") String seatClass,
+    @RequestParam(name = "dateFlight") Long dateFlight,
+    @RequestParam(name="customerCount") int customerCount
   ) {
-    // var res = handleTicketParams(index, parseStringFromParams(airlineStart), 
-    //   parseStringFromParams(airlineEnd), datetime, option);
+    var res = this.ticketService.searchFlight(airlineStart, airlineEnd, seatClass, 
+      dateFlight, customerCount, index);
 
-    // if (res == null) {
-    //   return ResponseHandler.error(null);
-    // } else {
-    //   return ResponseHandler.ok(res.get());
-    // }
+    if (res == null) {
+      return ResponseHandler.error(null);
+    } else {
+      return ResponseHandler.ok(res.get());
+    }
+  }
 
-    return null;
+  @GetMapping("/getFilterSupplier")
+  public Response<Object> get(
+    @RequestParam(name = "index", required = true) int index, 
+    @RequestParam(name = "supplierId") String supplierId,
+    @RequestParam(name = "airlineStart") String airlineStart,
+    @RequestParam(name = "airlineEnd") String airlineEnd,
+    @RequestParam(name = "seatClass") String seatClass,
+    @RequestParam(name = "dateFlight") Long dateFlight,
+    @RequestParam(name="customerCount") int customerCount
+  ) {
+    var res = this.ticketService.searchFlight(supplierId, airlineStart, airlineEnd, seatClass, 
+      dateFlight, customerCount, index);
+
+    if (res == null) {
+      return ResponseHandler.error(null);
+    } else {
+      return ResponseHandler.ok(res.get());
+    }
+  }
+
+  @GetMapping("/getAirline")
+  public Response<Object> getAirline(
+    @RequestParam(name = "id", required = true) String id 
+  ) {
+    var res = this.ticketService.getAirline(id);
+
+    if (res == null) {
+      return ResponseHandler.error(null);
+    } else {
+      return ResponseHandler.ok(res.get());
+    }
   }
 
   @PostMapping("/addProfile")

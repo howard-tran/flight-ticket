@@ -58,7 +58,28 @@ public class FlightDao implements IFlightDao  {
       collection -> {
         var filter = new Document("isExpired", isExpired).append("supplierId", supplierId)
           .append("airlineStart", airlineStart).append("airlineEnd", airlineEnd);
+        
+        var res = new ArrayList<Flight>();
+        for (var doc : collection.find(filter)) {
+          Flight flight = this.parseWithId(doc, Flight.class);
 
+          if (UnixHelper.equalUnixDate(dateFlight, flight.getFlightDate()))
+            res.add(flight);
+        }
+        return res;
+      });
+  }
+
+  @Override
+  public List<Flight> getFlight(int isExpired, String airlineStart, String airlineEnd,
+      Long dateFlight) throws Exception {
+    //
+    return this.run(
+      PropertyHelper.getMongoDB(), "Flight", 
+      collection -> {
+        var filter = new Document("isExpired", isExpired).append("airlineStart", airlineStart)
+          .append("airlineEnd", airlineEnd);
+        
         var res = new ArrayList<Flight>();
         for (var doc : collection.find(filter)) {
           Flight flight = this.parseWithId(doc, Flight.class);

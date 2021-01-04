@@ -13,6 +13,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.helper.IFunction;
 import com.helper.IFunction2;
+import com.helper.IFunction3;
 import com.helper.IFunction4;
 import com.helper.PropertyHelper;
 import com.model.Agent;
@@ -189,8 +190,8 @@ public class updateSystem extends testCaseHandler {
     List<TicketSupplier> listSupplier = new ArrayList<>();
     List<Airline> listAirline = new ArrayList<>();
 
-    IFunction2<String, List<Route>> generateRoute_t = (supplier) -> {
-      List<Route> res = new ArrayList<>();
+    IFunction4<String, Integer, Integer, List<Route>> generateRoute_t = (supplier, currentSupplier, totalSupplier) -> {
+      List<Route> res = new ArrayList<>(), resFinal = new ArrayList<>();
   
       for (int i = 0; i < listAirline.size() - 1; i++) {
         for (int j = i + 1; j < listAirline.size(); j++) {
@@ -203,6 +204,7 @@ public class updateSystem extends testCaseHandler {
       }
   
       int size_t = res.size(); 
+      
       for (int i = 0; i < size_t; i++) {
         var airlineStart = res.get(i).getAirlineEnd();
         var airlineEnd = res.get(i).getAirlineStart();
@@ -210,13 +212,14 @@ public class updateSystem extends testCaseHandler {
         var route = new Route(airlineStart, airlineEnd, supplier); 
         res.add(route);
       }
+
       return res;
     };
   
     IFunction<List<Route>> generateRoute = () -> {
       List<Route> res = new ArrayList<>();
       for (int i = 0; i < listSupplier.size(); i++) {
-        res.addAll(generateRoute_t.run(listSupplier.get(i).getId()));
+        res.addAll(generateRoute_t.run(listSupplier.get(i).getId(), i, listSupplier.size()));
       }
       return res;
     };

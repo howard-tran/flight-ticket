@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { Route, Switch } from "react-router";
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
-//import Login from './components/Login';
 import "../src/resource/font-awesome/css/font-awesome.min.css";
 import "../node_modules/popper.js/dist/popper";
 import "../node_modules/bootstrap/dist/js/bootstrap";
@@ -14,6 +13,7 @@ import Header from "./components/header/header";
 import style from "./App.module.scss";
 import Footer from "./components/footer/footer";
 import SignIn from "./screen/signIn/signIn";
+import { Ticket } from "./screen/ticket/ticket";
 
 function App() {
   const dispatch = useDispatch();
@@ -22,11 +22,19 @@ function App() {
       <BrowserRouter>
         <Header></Header>
         {/* header tag */}
-
         <Switch>
           {/* apply routing */}
+
+          <Route path="/" exact>
+            <Ticket></Ticket>
+          </Route>
+
           <Route path="/login" exact>
             <SignIn></SignIn>
+          </Route>
+
+          <Route path="/ticket" exact>
+            <Ticket></Ticket>
           </Route>
         </Switch>
         

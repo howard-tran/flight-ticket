@@ -1,0 +1,53 @@
+.ticketComponent {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  height: 65px;
+  cursor: pointer;
+  
+  border-bottom: 1px black solid;
+
+  .supplier {
+    width: 180px;
+  }
+
+  .airplane {
+    width: 180px;
+  }
+
+  .timeFlight {
+    width: 250px;
+    h5 {
+      padding: 0px;
+      margin: 0px;
+      color: blue;
+      font-weight: bold;
+    }
+  }
+
+  .price {
+    width: 150px;
+
+    h5 {
+      padding: 0px;
+      margin: 0px;
+      color: red;
+      font-weight: bold;
+    }
+  }
+}
+
+.ticketComponent:hover {
+  background-color: whitesmoke;
+}
+
+.ticketListMain {
+  max-height: 850px;
+  border: 1px #00617E solid;
+  border-collapse: collapse;
+
+  .ticketList {
+    overflow-y: scroll;
+    height: 650px;
+  }
+}

@@ -1,5 +1,6 @@
 package com.model;
 
+import java.math.BigDecimal;
 import java.util.Objects;
 
 public class Flight extends MongoIdModel {
@@ -10,12 +11,14 @@ public class Flight extends MongoIdModel {
   private float checkInBaggage;
   private String airlineStart;
   private String airlineEnd;
+  private BigDecimal price;
   private Long flightDate;
+
 
   public Flight() {
   }
 
-  public Flight(String airplaneId, String supplierId, int isExpired, float carryOn, float checkInBaggage, String airlineStart, String airlineEnd, Long flightDate) {
+  public Flight(String airplaneId, String supplierId, int isExpired, float carryOn, float checkInBaggage, String airlineStart, String airlineEnd, BigDecimal price, Long flightDate) {
     this.airplaneId = airplaneId;
     this.supplierId = supplierId;
     this.isExpired = isExpired;
@@ -23,6 +26,7 @@ public class Flight extends MongoIdModel {
     this.checkInBaggage = checkInBaggage;
     this.airlineStart = airlineStart;
     this.airlineEnd = airlineEnd;
+    this.price = price;
     this.flightDate = flightDate;
   }
 
@@ -82,6 +86,14 @@ public class Flight extends MongoIdModel {
     this.airlineEnd = airlineEnd;
   }
 
+  public BigDecimal getPrice() {
+    return this.price;
+  }
+
+  public void setPrice(BigDecimal price) {
+    this.price = price;
+  }
+
   public Long getFlightDate() {
     return this.flightDate;
   }
@@ -125,6 +137,11 @@ public class Flight extends MongoIdModel {
     return this;
   }
 
+  public Flight price(BigDecimal price) {
+    this.price = price;
+    return this;
+  }
+
   public Flight flightDate(Long flightDate) {
     this.flightDate = flightDate;
     return this;
@@ -138,12 +155,12 @@ public class Flight extends MongoIdModel {
             return false;
         }
         Flight flight = (Flight) o;
-        return Objects.equals(airplaneId, flight.airplaneId) && Objects.equals(supplierId, flight.supplierId) && isExpired == flight.isExpired && carryOn == flight.carryOn && checkInBaggage == flight.checkInBaggage && Objects.equals(airlineStart, flight.airlineStart) && Objects.equals(airlineEnd, flight.airlineEnd) && Objects.equals(flightDate, flight.flightDate);
+        return Objects.equals(airplaneId, flight.airplaneId) && Objects.equals(supplierId, flight.supplierId) && isExpired == flight.isExpired && carryOn == flight.carryOn && checkInBaggage == flight.checkInBaggage && Objects.equals(airlineStart, flight.airlineStart) && Objects.equals(airlineEnd, flight.airlineEnd) && Objects.equals(price, flight.price) && Objects.equals(flightDate, flight.flightDate);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(airplaneId, supplierId, isExpired, carryOn, checkInBaggage, airlineStart, airlineEnd, flightDate);
+    return Objects.hash(airplaneId, supplierId, isExpired, carryOn, checkInBaggage, airlineStart, airlineEnd, price, flightDate);
   }
 
   @Override
@@ -156,8 +173,9 @@ public class Flight extends MongoIdModel {
       ", checkInBaggage='" + getCheckInBaggage() + "'" +
       ", airlineStart='" + getAirlineStart() + "'" +
       ", airlineEnd='" + getAirlineEnd() + "'" +
+      ", price='" + getPrice() + "'" +
       ", flightDate='" + getFlightDate() + "'" +
       "}";
   }
-
+  
 }

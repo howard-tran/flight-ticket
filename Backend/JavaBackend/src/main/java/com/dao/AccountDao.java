@@ -33,13 +33,16 @@ public class AccountDao implements IAccountDao {
   public Account getAccountByUsername(String username, String agentId) throws Exception {
     return this.run(PropertyHelper.getMongoDB(), "Account",
       collection -> {
-        var condition1 = new Document("agencyId", agentId);
-        var condition2 = new Document("username", username);
+        var condition = new Document("agencyId", agentId)
+          .append("username", username);
 
-        var condition = Document.parse(String.format("{$and: [%s, %s]}", 
-          condition1.toJson(), condition2.toJson()));
+        Document res = collection.find(condition).first();
+        if (res == null) {
+          LogUtils.LogInfo("signIn DAO null", null);
+          return null;
+        } 
         
-        return this.parseWithId(collection.find(condition).first(), Account.class);
+        return this.parseWithId(res, Account.class);
       });
   }
 
@@ -48,7 +51,11 @@ public class AccountDao implements IAccountDao {
     return this.run(PropertyHelper.getMongoDB(), "Account",
       collection -> {
         var filter = new Document("agencyId", agentId).append("email", email);
-        return this.parseWithId(collection.find(filter).first(), Account.class);
+
+        Document res = collection.find(filter).first();
+        if (res == null) return null;
+
+        return this.parseWithId(res, Account.class);
       }); 
   }
 

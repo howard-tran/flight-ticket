@@ -5,8 +5,9 @@ import java.util.Objects;
 public class TicketProfile extends MongoIdModel {
   private String ticketId;
   private Long updateStatusDate;
-  private String updateContent;
-
+  
+  // prefix = "#TICKETPROFILE#"
+  private String updateContent; 
 
   public TicketProfile() {
   }

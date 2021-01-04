@@ -1,15 +1,15 @@
 package com.model;
 
 import java.math.BigDecimal;
-import java.util.List;
 import java.util.Objects;
 
 public class Receipt extends MongoIdModel {
-  private List<Ticket> tickets;
+  private String flightId;
   private String userid;
   private String username;
   private String status;
-  private String agencyId;
+  private Integer ticketCount;
+  private Integer content;
   private Long createdDay;
   private BigDecimal total;
 
@@ -17,22 +17,23 @@ public class Receipt extends MongoIdModel {
   public Receipt() {
   }
 
-  public Receipt(List<Ticket> tickets, String userid, String username, String status, String agencyId, Long createdDay, BigDecimal total) {
-    this.tickets = tickets;
+  public Receipt(String flightId, String userid, String username, String status, Integer ticketCount, Integer content, Long createdDay, BigDecimal total) {
+    this.flightId = flightId;
     this.userid = userid;
     this.username = username;
     this.status = status;
-    this.agencyId = agencyId;
+    this.ticketCount = ticketCount;
+    this.content = content;
     this.createdDay = createdDay;
     this.total = total;
   }
 
-  public List<Ticket> getTickets() {
-    return this.tickets;
+  public String getFlightId() {
+    return this.flightId;
   }
 
-  public void setTickets(List<Ticket> tickets) {
-    this.tickets = tickets;
+  public void setFlightId(String flightId) {
+    this.flightId = flightId;
   }
 
   public String getUserid() {
@@ -59,12 +60,20 @@ public class Receipt extends MongoIdModel {
     this.status = status;
   }
 
-  public String getAgencyId() {
-    return this.agencyId;
+  public Integer getTicketCount() {
+    return this.ticketCount;
   }
 
-  public void setAgencyId(String agencyId) {
-    this.agencyId = agencyId;
+  public void setTicketCount(Integer ticketCount) {
+    this.ticketCount = ticketCount;
+  }
+
+  public Integer getContent() {
+    return this.content;
+  }
+
+  public void setContent(Integer content) {
+    this.content = content;
   }
 
   public Long getCreatedDay() {
@@ -83,8 +92,8 @@ public class Receipt extends MongoIdModel {
     this.total = total;
   }
 
-  public Receipt tickets(List<Ticket> tickets) {
-    this.tickets = tickets;
+  public Receipt flightId(String flightId) {
+    this.flightId = flightId;
     return this;
   }
 
@@ -103,8 +112,13 @@ public class Receipt extends MongoIdModel {
     return this;
   }
 
-  public Receipt agencyId(String agencyId) {
-    this.agencyId = agencyId;
+  public Receipt ticketCount(Integer ticketCount) {
+    this.ticketCount = ticketCount;
+    return this;
+  }
+
+  public Receipt content(Integer content) {
+    this.content = content;
     return this;
   }
 
@@ -126,22 +140,23 @@ public class Receipt extends MongoIdModel {
             return false;
         }
         Receipt receipt = (Receipt) o;
-        return Objects.equals(tickets, receipt.tickets) && Objects.equals(userid, receipt.userid) && Objects.equals(username, receipt.username) && Objects.equals(status, receipt.status) && Objects.equals(agencyId, receipt.agencyId) && Objects.equals(createdDay, receipt.createdDay) && Objects.equals(total, receipt.total);
+        return Objects.equals(flightId, receipt.flightId) && Objects.equals(userid, receipt.userid) && Objects.equals(username, receipt.username) && Objects.equals(status, receipt.status) && Objects.equals(ticketCount, receipt.ticketCount) && Objects.equals(content, receipt.content) && Objects.equals(createdDay, receipt.createdDay) && Objects.equals(total, receipt.total);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(tickets, userid, username, status, agencyId, createdDay, total);
+    return Objects.hash(flightId, userid, username, status, ticketCount, content, createdDay, total);
   }
 
   @Override
   public String toString() {
     return "{" +
-      " tickets='" + getTickets() + "'" +
+      " flightId='" + getFlightId() + "'" +
       ", userid='" + getUserid() + "'" +
       ", username='" + getUsername() + "'" +
       ", status='" + getStatus() + "'" +
-      ", agencyId='" + getAgencyId() + "'" +
+      ", ticketCount='" + getTicketCount() + "'" +
+      ", content='" + getContent() + "'" +
       ", createdDay='" + getCreatedDay() + "'" +
       ", total='" + getTotal() + "'" +
       "}";
