@@ -10,6 +10,7 @@ import com.dao.IFlightDao;
 import com.dao.ITicketDao;
 import com.helper.DatabaseSupplier;
 import com.model.Airline;
+import com.model.Airplane;
 import com.model.Flight;
 import com.model.Ticket;
 import com.model.ListData;
@@ -42,6 +43,14 @@ public class TicketService implements LogService {
     );
   }
 
+  public Optional<Airplane> getAirplane(String id) {
+    return this.runOptional(
+      () -> {
+        return this.flightDao.getAirplaneModel(id);
+      }
+    );
+  }
+
   public Optional<ListData<List<Flight>>> searchFlight(String supplierId, String airlineStart, String airlineEnd, 
     String seatClass, Long dateFlight, int customerCount, int index) {
 
@@ -58,7 +67,7 @@ public class TicketService implements LogService {
 
           if (tickets.size() == 0)
             continue;
-            
+
           if (tickets.get(0).getCount() >= customerCount) {
             list.add(checkList.get(i));
           }

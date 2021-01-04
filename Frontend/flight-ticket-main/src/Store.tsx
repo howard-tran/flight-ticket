@@ -2,11 +2,12 @@ import { applyMiddleware, combineReducers, createStore } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 import thunk from "redux-thunk";
 import { AccountInfoReducer } from "./reducers/AccountReducer";
-import { FlightSearchReducer } from "./reducers/FlightReducer";
+import { FlightInfoReducer, FlightSearchReducer } from "./reducers/FlightReducer";
 
 const reducer = combineReducers({
   accountInfo: AccountInfoReducer,
-  flightSearch: FlightSearchReducer
+  flightSearch: FlightSearchReducer,
+  flightInfo: FlightInfoReducer
 });
 export type AppState = ReturnType<typeof reducer>;
 

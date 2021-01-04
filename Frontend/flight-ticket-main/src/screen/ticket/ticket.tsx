@@ -10,7 +10,7 @@ export const Ticket: React.FC = () => {
 
   let defaultDate_t = new Date();
   defaultDate_t.setDate(defaultDate_t.getDate() + 1);
-  let defaultDate = defaultDate_t.toISOString().substr(0,10);
+  let defaultDate = defaultDate_t.toLocaleDateString("en-CA");
 
   const flightSearchState = useSelector((state: {flightSearch: FlightSearch}) => state.flightSearch);
 
@@ -52,6 +52,22 @@ export const Ticket: React.FC = () => {
     s.innerHTML = `!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='https://weatherwidget.io/js/widget.min.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','weatherwidget-io-js');`;
     let node = document.getElementsByClassName("weatherwidget-io")[0];
     node.parentNode.append(s);
+  }
+
+  const checkSubmitInfo = () => {
+    if (flightSearch.baby > flightSearch.adult) {
+      alert("each baby has to go with one adult");
+      return false;
+    }
+    if (flightSearch.adult + flightSearch.minor + flightSearch.baby > 9) {
+      alert("each customer by max 9 ticket for each flight");
+      return false;
+    } 
+    if (flightSearch.adult == 0 && flightSearch.minor > 0) {
+      alert("children must go with at least 1 adult");
+      return false;
+    }
+    return true;
   }
 
   useEffect(() => {
@@ -196,31 +212,61 @@ export const Ticket: React.FC = () => {
             <div>
               <div className={style.flightChoose}>
                 <h4 style={{width:"80px"}}>Adult</h4>
-                <input
+                <select
                   onChange={e => {setFlightSearch({...flightSearch, adult: Number.parseInt(e.target.value)})}}
-                  onKeyDown={e => {e.preventDefault()}}
-                  type="number" defaultValue={1} style={{width:"60px"}}>
-                </input>
+                  style={{width:"50px"}}
+                >
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option>
+                  <option value="7">7</option>
+                  <option value="8">8</option>
+                  <option value="9">9</option>
+                </select>
+                <p>{"(Age > 12)"}</p>
               </div>
 
               <div className={style.flightChoose}>
                 <h4 style={{width:"80px"}}>Minors</h4>
-                <input 
+                <select
                   onChange={e => {setFlightSearch({...flightSearch, minor: Number.parseInt(e.target.value)})}}
-                  onKeyDown={e => {e.preventDefault()}}
-                  type="number" defaultValue={0} style={{width:"60px"}}>
-
-                </input>
+                  style={{width:"50px"}}
+                >
+                  <option value="0">0</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option>
+                  <option value="7">7</option>
+                  <option value="8">8</option>
+                  <option value="9">9</option>
+                </select>
+                <p>{"(2 < Age < 12)"}</p>
             </div>
 
               <div className={style.flightChoose}>
                 <h4 style={{width:"80px"}}>Baby</h4>
-                <input 
+                <select
                   onChange={e => {setFlightSearch({...flightSearch, baby: Number.parseInt(e.target.value)})}}  
-                  onKeyDown={e => {e.preventDefault()}}
-                  type="number" defaultValue={0} style={{width:"60px"}}>
-
-                </input>
+                  style={{width:"50px"}}
+                >
+                  <option value="0">0</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option>
+                  <option value="7">7</option>
+                  <option value="8">8</option>
+                  <option value="9">9</option>
+                </select>
+                <p>{"(Age < 2)"}</p>
               </div>
             </div>
 
@@ -230,7 +276,9 @@ export const Ticket: React.FC = () => {
               <button type="submit" className="btn btn-success" 
                 onClick={e => {
                   e.preventDefault();
-                  dispatch(flightSearchAction(flightSearch));
+                  if (checkSubmitInfo()) {
+                    dispatch(flightSearchAction(flightSearch));
+                  }
                 }}>
                   
                 Search

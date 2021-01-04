@@ -1,61 +1,29 @@
-[2021-01-03 04:22:49] [http-nio-8081-exec-2] ERROR com.helper.LogUtils  - [ERROR]
-java.lang.RuntimeException: java.lang.NullPointerException
+[2021-01-05 00:51:57] [main] INFO  com.helper.LogUtils  - 
+========== Service Restarted ==========
+
+[2021-01-05 00:53:35] [main] INFO  com.helper.LogUtils  - 
+========== Service Restarted ==========
+
+[2021-01-05 00:54:25] [main] INFO  com.helper.LogUtils  - 
+========== Service Restarted ==========
+
+[2021-01-05 01:10:47] [main] INFO  com.helper.LogUtils  - 
+========== Service Restarted ==========
+
+[2021-01-05 01:23:49] [main] INFO  com.helper.LogUtils  - 
+========== Service Restarted ==========
+
+[2021-01-05 02:12:27] [main] INFO  com.helper.LogUtils  - 
+========== Service Restarted ==========
+
+[2021-01-05 03:32:17] [main] INFO  com.helper.LogUtils  - 
+========== Service Restarted ==========
+
+[2021-01-05 03:34:39] [http-nio-8081-exec-5] ERROR com.helper.LogUtils  - [ERROR]
+java.lang.RuntimeException: java.lang.IllegalArgumentException: invalid hexadecimal representation of an ObjectId: [VN-VA419]
 	at com.service.LogService.runOptional(LogService.java:14)
-	at com.service.AccountService.checkAccount(AccountService.java:71)
-	at com.controller.AccountController.signIn(AccountController.java:82)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
-	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:190)
-	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:138)
-	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:105)
-	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:878)
-	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:792)
-	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
-	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1040)
-	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:943)
-	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
-	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:909)
-	at javax.servlet.http.HttpServlet.service(HttpServlet.java:652)
-	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)
-	at javax.servlet.http.HttpServlet.service(HttpServlet.java:733)
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
-	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
-	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
-	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:202)
-	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97)
-	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:541)
-	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:143)
-	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
-	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78)
-	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
-	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:374)
-	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
-	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:868)
-	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1590)
-	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
-	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
-	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
-	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
-	at java.base/java.lang.Thread.run(Thread.java:834)
-Caused by: java.lang.NullPointerException
-	at java.base/java.util.Objects.requireNonNull(Objects.java:221)
-	at java.base/java.util.Optional.<init>(Optional.java:107)
-	at java.base/java.util.Optional.of(Optional.java:120)
-	at com.service.LogService.runOptional(LogService.java:11)
-	... 44 more
-[2021-01-04 13:54:03] [http-nio-8081-exec-1] ERROR com.helper.LogUtils  - [ERROR]
-java.lang.RuntimeException: java.lang.NullPointerException
-	at com.service.LogService.runOptional(LogService.java:14)
-	at com.service.TicketService.getAirline(TicketService.java:40)
-	at com.controller.TicketController.getAirline(TicketController.java:104)
+	at com.service.TicketService.getAirplane(TicketService.java:47)
+	at com.controller.TicketController.getAirplaneModel(TicketController.java:117)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -98,18 +66,20 @@ java.lang.RuntimeException: java.lang.NullPointerException
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
 	at java.base/java.lang.Thread.run(Thread.java:834)
-Caused by: java.lang.NullPointerException
-	at java.base/java.util.Objects.requireNonNull(Objects.java:221)
-	at java.base/java.util.Optional.<init>(Optional.java:107)
-	at java.base/java.util.Optional.of(Optional.java:120)
+Caused by: java.lang.IllegalArgumentException: invalid hexadecimal representation of an ObjectId: [VN-VA419]
+	at org.bson.types.ObjectId.parseHexString(ObjectId.java:529)
+	at org.bson.types.ObjectId.<init>(ObjectId.java:205)
+	at com.dao.FlightDao.lambda$2(FlightDao.java:47)
+	at com.dao.IMongoDBQueryLogic.run(IMongoDBQueryLogic.java:34)
+	at com.dao.FlightDao.getAirplaneModel(FlightDao.java:45)
+	at com.service.TicketService.lambda$1(TicketService.java:49)
 	at com.service.LogService.runOptional(LogService.java:11)
 	... 44 more
-[2021-01-04 13:59:55] [http-nio-8081-exec-1] INFO  com.helper.LogUtils  - fuck airline dao
-[2021-01-04 13:59:55] [http-nio-8081-exec-1] ERROR com.helper.LogUtils  - [ERROR]
-java.lang.RuntimeException: java.lang.NullPointerException
+[2021-01-05 03:35:11] [http-nio-8081-exec-9] ERROR com.helper.LogUtils  - [ERROR]
+java.lang.RuntimeException: java.lang.IllegalArgumentException: invalid hexadecimal representation of an ObjectId: [VN-VA419]
 	at com.service.LogService.runOptional(LogService.java:14)
-	at com.service.TicketService.getAirline(TicketService.java:38)
-	at com.controller.TicketController.getAirline(TicketController.java:104)
+	at com.service.TicketService.getAirplane(TicketService.java:47)
+	at com.controller.TicketController.getAirplaneModel(TicketController.java:117)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -152,18 +122,20 @@ java.lang.RuntimeException: java.lang.NullPointerException
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
 	at java.base/java.lang.Thread.run(Thread.java:834)
-Caused by: java.lang.NullPointerException
-	at java.base/java.util.Objects.requireNonNull(Objects.java:221)
-	at java.base/java.util.Optional.<init>(Optional.java:107)
-	at java.base/java.util.Optional.of(Optional.java:120)
+Caused by: java.lang.IllegalArgumentException: invalid hexadecimal representation of an ObjectId: [VN-VA419]
+	at org.bson.types.ObjectId.parseHexString(ObjectId.java:529)
+	at org.bson.types.ObjectId.<init>(ObjectId.java:205)
+	at com.dao.FlightDao.lambda$2(FlightDao.java:47)
+	at com.dao.IMongoDBQueryLogic.run(IMongoDBQueryLogic.java:34)
+	at com.dao.FlightDao.getAirplaneModel(FlightDao.java:45)
+	at com.service.TicketService.lambda$1(TicketService.java:49)
 	at com.service.LogService.runOptional(LogService.java:11)
 	... 44 more
-[2021-01-04 14:03:28] [http-nio-8081-exec-3] INFO  com.helper.LogUtils  - fuck airline dao
-[2021-01-04 14:03:28] [http-nio-8081-exec-3] ERROR com.helper.LogUtils  - [ERROR]
-java.lang.RuntimeException: java.lang.NullPointerException
+[2021-01-05 03:36:42] [http-nio-8081-exec-8] ERROR com.helper.LogUtils  - [ERROR]
+java.lang.RuntimeException: java.lang.IllegalArgumentException: invalid hexadecimal representation of an ObjectId: [VN-VA419]
 	at com.service.LogService.runOptional(LogService.java:14)
-	at com.service.TicketService.getAirline(TicketService.java:38)
-	at com.controller.TicketController.getAirline(TicketController.java:104)
+	at com.service.TicketService.getAirplane(TicketService.java:47)
+	at com.controller.TicketController.getAirplaneModel(TicketController.java:117)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -206,18 +178,23 @@ java.lang.RuntimeException: java.lang.NullPointerException
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
 	at java.base/java.lang.Thread.run(Thread.java:834)
-Caused by: java.lang.NullPointerException
-	at java.base/java.util.Objects.requireNonNull(Objects.java:221)
-	at java.base/java.util.Optional.<init>(Optional.java:107)
-	at java.base/java.util.Optional.of(Optional.java:120)
+Caused by: java.lang.IllegalArgumentException: invalid hexadecimal representation of an ObjectId: [VN-VA419]
+	at org.bson.types.ObjectId.parseHexString(ObjectId.java:529)
+	at org.bson.types.ObjectId.<init>(ObjectId.java:205)
+	at com.dao.FlightDao.lambda$2(FlightDao.java:47)
+	at com.dao.IMongoDBQueryLogic.run(IMongoDBQueryLogic.java:34)
+	at com.dao.FlightDao.getAirplaneModel(FlightDao.java:45)
+	at com.service.TicketService.lambda$1(TicketService.java:49)
 	at com.service.LogService.runOptional(LogService.java:11)
 	... 44 more
-[2021-01-04 14:03:28] [http-nio-8081-exec-4] INFO  com.helper.LogUtils  - fuck airline dao
-[2021-01-04 14:03:28] [http-nio-8081-exec-4] ERROR com.helper.LogUtils  - [ERROR]
-java.lang.RuntimeException: java.lang.NullPointerException
+[2021-01-05 03:38:35] [main] INFO  com.helper.LogUtils  - 
+========== Service Restarted ==========
+
+[2021-01-05 03:38:37] [http-nio-8081-exec-2] ERROR com.helper.LogUtils  - [ERROR]
+java.lang.RuntimeException: java.lang.IllegalArgumentException: invalid hexadecimal representation of an ObjectId: [VN-VA419]
 	at com.service.LogService.runOptional(LogService.java:14)
-	at com.service.TicketService.getAirline(TicketService.java:38)
-	at com.controller.TicketController.getAirline(TicketController.java:104)
+	at com.service.TicketService.getAirplane(TicketService.java:47)
+	at com.controller.TicketController.getAirplaneModel(TicketController.java:117)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -260,18 +237,20 @@ java.lang.RuntimeException: java.lang.NullPointerException
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
 	at java.base/java.lang.Thread.run(Thread.java:834)
-Caused by: java.lang.NullPointerException
-	at java.base/java.util.Objects.requireNonNull(Objects.java:221)
-	at java.base/java.util.Optional.<init>(Optional.java:107)
-	at java.base/java.util.Optional.of(Optional.java:120)
+Caused by: java.lang.IllegalArgumentException: invalid hexadecimal representation of an ObjectId: [VN-VA419]
+	at org.bson.types.ObjectId.parseHexString(ObjectId.java:529)
+	at org.bson.types.ObjectId.<init>(ObjectId.java:205)
+	at com.dao.FlightDao.lambda$2(FlightDao.java:47)
+	at com.dao.IMongoDBQueryLogic.run(IMongoDBQueryLogic.java:34)
+	at com.dao.FlightDao.getAirplaneModel(FlightDao.java:45)
+	at com.service.TicketService.lambda$1(TicketService.java:49)
 	at com.service.LogService.runOptional(LogService.java:11)
 	... 44 more
-[2021-01-04 14:03:28] [http-nio-8081-exec-5] INFO  com.helper.LogUtils  - fuck airline dao
-[2021-01-04 14:03:28] [http-nio-8081-exec-5] ERROR com.helper.LogUtils  - [ERROR]
-java.lang.RuntimeException: java.lang.NullPointerException
+[2021-01-05 03:38:38] [http-nio-8081-exec-3] ERROR com.helper.LogUtils  - [ERROR]
+java.lang.RuntimeException: java.lang.IllegalArgumentException: invalid hexadecimal representation of an ObjectId: [VN-VA419]
 	at com.service.LogService.runOptional(LogService.java:14)
-	at com.service.TicketService.getAirline(TicketService.java:38)
-	at com.controller.TicketController.getAirline(TicketController.java:104)
+	at com.service.TicketService.getAirplane(TicketService.java:47)
+	at com.controller.TicketController.getAirplaneModel(TicketController.java:117)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -314,1127 +293,18 @@ java.lang.RuntimeException: java.lang.NullPointerException
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
 	at java.base/java.lang.Thread.run(Thread.java:834)
-Caused by: java.lang.NullPointerException
-	at java.base/java.util.Objects.requireNonNull(Objects.java:221)
-	at java.base/java.util.Optional.<init>(Optional.java:107)
-	at java.base/java.util.Optional.of(Optional.java:120)
+Caused by: java.lang.IllegalArgumentException: invalid hexadecimal representation of an ObjectId: [VN-VA419]
+	at org.bson.types.ObjectId.parseHexString(ObjectId.java:529)
+	at org.bson.types.ObjectId.<init>(ObjectId.java:205)
+	at com.dao.FlightDao.lambda$2(FlightDao.java:47)
+	at com.dao.IMongoDBQueryLogic.run(IMongoDBQueryLogic.java:34)
+	at com.dao.FlightDao.getAirplaneModel(FlightDao.java:45)
+	at com.service.TicketService.lambda$1(TicketService.java:49)
 	at com.service.LogService.runOptional(LogService.java:11)
 	... 44 more
-[2021-01-04 14:03:28] [http-nio-8081-exec-6] INFO  com.helper.LogUtils  - fuck airline dao
-[2021-01-04 14:03:28] [http-nio-8081-exec-6] ERROR com.helper.LogUtils  - [ERROR]
-java.lang.RuntimeException: java.lang.NullPointerException
-	at com.service.LogService.runOptional(LogService.java:14)
-	at com.service.TicketService.getAirline(TicketService.java:38)
-	at com.controller.TicketController.getAirline(TicketController.java:104)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
-	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:190)
-	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:138)
-	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:105)
-	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:878)
-	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:792)
-	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
-	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1040)
-	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:943)
-	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
-	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:898)
-	at javax.servlet.http.HttpServlet.service(HttpServlet.java:626)
-	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)
-	at javax.servlet.http.HttpServlet.service(HttpServlet.java:733)
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
-	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
-	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
-	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:202)
-	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97)
-	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:541)
-	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:143)
-	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
-	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78)
-	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
-	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:374)
-	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
-	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:868)
-	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1590)
-	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
-	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
-	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
-	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
-	at java.base/java.lang.Thread.run(Thread.java:834)
-Caused by: java.lang.NullPointerException
-	at java.base/java.util.Objects.requireNonNull(Objects.java:221)
-	at java.base/java.util.Optional.<init>(Optional.java:107)
-	at java.base/java.util.Optional.of(Optional.java:120)
-	at com.service.LogService.runOptional(LogService.java:11)
-	... 44 more
-[2021-01-04 14:05:57] [http-nio-8081-exec-1] INFO  com.helper.LogUtils  - fuck airline dao
-[2021-01-04 14:05:57] [http-nio-8081-exec-1] ERROR com.helper.LogUtils  - [ERROR]
-java.lang.RuntimeException: java.lang.NullPointerException
-	at com.service.LogService.runOptional(LogService.java:14)
-	at com.service.TicketService.getAirline(TicketService.java:38)
-	at com.controller.TicketController.getAirline(TicketController.java:104)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
-	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:190)
-	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:138)
-	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:105)
-	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:878)
-	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:792)
-	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
-	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1040)
-	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:943)
-	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
-	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:898)
-	at javax.servlet.http.HttpServlet.service(HttpServlet.java:626)
-	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)
-	at javax.servlet.http.HttpServlet.service(HttpServlet.java:733)
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
-	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
-	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
-	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:202)
-	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97)
-	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:541)
-	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:143)
-	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
-	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78)
-	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
-	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:374)
-	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
-	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:868)
-	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1590)
-	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
-	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
-	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
-	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
-	at java.base/java.lang.Thread.run(Thread.java:834)
-Caused by: java.lang.NullPointerException
-	at java.base/java.util.Objects.requireNonNull(Objects.java:221)
-	at java.base/java.util.Optional.<init>(Optional.java:107)
-	at java.base/java.util.Optional.of(Optional.java:120)
-	at com.service.LogService.runOptional(LogService.java:11)
-	... 44 more
-[2021-01-04 14:05:57] [http-nio-8081-exec-2] INFO  com.helper.LogUtils  - fuck airline dao
-[2021-01-04 14:05:57] [http-nio-8081-exec-2] ERROR com.helper.LogUtils  - [ERROR]
-java.lang.RuntimeException: java.lang.NullPointerException
-	at com.service.LogService.runOptional(LogService.java:14)
-	at com.service.TicketService.getAirline(TicketService.java:38)
-	at com.controller.TicketController.getAirline(TicketController.java:104)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
-	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:190)
-	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:138)
-	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:105)
-	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:878)
-	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:792)
-	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
-	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1040)
-	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:943)
-	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
-	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:898)
-	at javax.servlet.http.HttpServlet.service(HttpServlet.java:626)
-	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)
-	at javax.servlet.http.HttpServlet.service(HttpServlet.java:733)
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
-	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
-	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
-	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:202)
-	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97)
-	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:541)
-	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:143)
-	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
-	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78)
-	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
-	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:374)
-	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
-	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:868)
-	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1590)
-	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
-	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
-	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
-	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
-	at java.base/java.lang.Thread.run(Thread.java:834)
-Caused by: java.lang.NullPointerException
-	at java.base/java.util.Objects.requireNonNull(Objects.java:221)
-	at java.base/java.util.Optional.<init>(Optional.java:107)
-	at java.base/java.util.Optional.of(Optional.java:120)
-	at com.service.LogService.runOptional(LogService.java:11)
-	... 44 more
-[2021-01-04 16:04:09] [main] INFO  com.helper.LogUtils  - 
+[2021-01-05 03:39:38] [main] INFO  com.helper.LogUtils  - 
 ========== Service Restarted ==========
 
-[2021-01-04 16:04:10] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:04:11] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:04:12] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:04:13] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:04:14] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:04:15] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:04:16] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:04:17] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:04:18] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:04:19] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:04:20] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:04:21] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:04:22] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:04:23] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:04:24] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:04:25] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:04:26] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:04:27] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:04:28] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:04:29] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:04:30] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:04:31] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:04:32] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:04:33] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:04:34] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:04:35] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:04:36] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:04:37] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:04:38] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:04:39] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:04:40] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:04:41] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:04:42] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:04:43] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:04:44] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:04:45] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:04:46] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:04:47] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:04:48] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:04:49] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:04:50] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:04:51] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:04:52] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:04:53] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:04:54] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:04:55] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:04:56] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:04:57] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:04:58] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:04:59] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:05:00] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:05:01] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:05:02] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:05:03] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:05:04] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:05:05] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:05:06] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:05:07] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:05:08] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:05:09] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:05:10] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:05:11] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:05:12] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:05:13] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:05:14] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:05:15] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:05:16] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:05:17] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:05:18] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:05:19] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:05:20] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:05:21] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:05:22] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:05:23] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:05:24] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:05:25] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:05:26] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:05:27] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:05:28] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:05:29] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:05:30] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:05:31] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:05:32] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:05:33] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:05:34] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:05:35] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:05:36] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:05:37] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:05:38] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:05:39] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:05:40] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:05:41] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:05:42] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:05:43] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:05:44] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:05:45] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:05:46] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:05:47] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:05:48] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:05:49] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:05:50] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:05:51] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:05:52] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:05:53] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:05:54] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:05:55] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:05:56] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:05:57] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:05:58] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:05:59] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:06:00] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:06:01] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:06:02] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:06:03] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:06:04] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:06:26] [main] INFO  com.helper.LogUtils  - 
-========== Service Restarted ==========
-
-[2021-01-04 16:06:26] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:06:27] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:06:28] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:06:29] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:06:30] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:06:31] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:06:32] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:06:33] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:06:34] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:06:35] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:06:36] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:06:37] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:06:38] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:06:39] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:06:40] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:06:41] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:06:42] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:06:43] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:06:44] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:06:45] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:06:46] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:06:47] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:06:48] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:06:49] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:06:50] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:06:51] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:06:52] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:06:53] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:06:54] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:06:55] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:06:56] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:06:57] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:06:58] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:06:59] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:07:00] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:07:01] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:07:02] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:07:03] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:07:04] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:07:05] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:07:06] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:07:07] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:07:08] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:07:09] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:07:10] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:07:11] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:07:12] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:07:13] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:07:14] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:07:15] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:07:16] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:07:17] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:07:18] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:07:19] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:07:20] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:07:21] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:07:22] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:07:23] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:07:24] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:07:25] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:07:26] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:07:27] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:07:28] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:07:29] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:07:30] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:07:31] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:07:32] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:07:33] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:07:34] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:07:35] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:07:36] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:07:37] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:07:38] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:07:39] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:07:40] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:07:41] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:07:42] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:07:43] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:07:44] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:07:45] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:07:46] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:07:47] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:07:48] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:07:49] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:07:50] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:07:51] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:07:52] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:07:53] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:07:54] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:07:55] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:07:56] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:07:57] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:07:58] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:07:59] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:08:00] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:08:01] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:08:02] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:08:03] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:08:04] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:08:05] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:08:06] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:08:07] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:08:08] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:08:09] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:08:10] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:08:11] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:08:12] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:08:13] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:08:14] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:08:15] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:08:16] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:08:17] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:08:18] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:08:19] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:08:20] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:08:21] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:08:22] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:08:23] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:08:24] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:08:25] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:08:26] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:08:27] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:08:28] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:08:29] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:08:30] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:08:31] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:08:32] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:08:33] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:08:34] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:08:35] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:08:36] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:08:37] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:08:38] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:08:39] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:08:40] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:08:41] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:08:42] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:08:43] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:08:44] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:08:45] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:08:46] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:08:47] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:08:48] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:08:49] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:08:50] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:08:51] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:08:52] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:08:53] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:08:54] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:08:55] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:08:56] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:08:57] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:08:58] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:08:59] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:09:00] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:09:01] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:09:02] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:09:03] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:09:04] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:09:05] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:09:06] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:09:07] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:09:08] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:09:09] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:09:10] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:09:11] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:09:12] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:09:13] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:09:14] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:09:15] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:09:16] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:09:17] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:09:18] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:09:19] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:09:20] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:09:21] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:09:22] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:09:23] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:09:24] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:09:25] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:09:26] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:09:27] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:09:28] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:09:29] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:09:30] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:09:31] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:09:32] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:09:33] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:09:34] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:09:35] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:09:36] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:09:37] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:09:38] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:09:39] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:09:40] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:09:41] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:09:42] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:09:43] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:09:44] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:09:46] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:09:47] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:09:48] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:09:49] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:09:50] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:09:51] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:09:52] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:09:53] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:09:54] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:09:55] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:09:56] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:09:57] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:09:58] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:09:59] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:10:00] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:10:01] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:10:02] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:10:03] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:10:04] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:10:05] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:10:06] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:10:07] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:10:08] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:10:09] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:10:10] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:10:11] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:10:12] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:10:13] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:10:14] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:10:15] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:10:16] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:10:17] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:10:18] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:10:19] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:10:20] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:10:21] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:10:22] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:10:23] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:10:24] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:10:25] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:10:26] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:10:27] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:10:28] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:10:29] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:10:30] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:10:31] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:10:32] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:10:33] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:10:34] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:10:35] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:10:36] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:10:37] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:10:38] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:10:39] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:10:40] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:10:41] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:10:42] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:10:43] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:10:44] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:10:45] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:10:46] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:10:47] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:10:48] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:10:49] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:10:50] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:10:51] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:10:52] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:10:53] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:10:54] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:10:55] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:10:56] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:10:57] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:10:58] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:10:59] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:11:00] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:11:01] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:11:02] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:11:03] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:11:04] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:11:05] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:11:06] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:11:07] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:11:08] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:11:09] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:11:10] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:11:11] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:11:12] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:11:13] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:11:14] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:11:15] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:11:16] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:11:17] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:11:18] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:11:19] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:11:20] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:11:21] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:11:22] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:11:23] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:11:24] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:11:25] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:11:26] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:11:27] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:11:28] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:11:29] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:11:30] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:11:31] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:11:32] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:11:33] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:11:34] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:11:35] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:11:36] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:11:37] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:11:38] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:11:39] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:11:40] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:11:41] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:11:42] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:11:43] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:11:44] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:11:45] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:11:46] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:11:47] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:11:48] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:11:49] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:11:50] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:11:51] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:11:52] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:11:53] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:11:54] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:11:55] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:11:56] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:11:57] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:11:58] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:11:59] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:12:00] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:12:01] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:12:02] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:12:03] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:12:04] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:12:05] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:12:06] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:12:07] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:12:08] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:12:09] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:12:10] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:12:11] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:12:12] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:12:13] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:12:14] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:12:15] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:12:16] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:12:17] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:12:18] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:12:19] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:12:20] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:12:21] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:12:22] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:12:23] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:12:24] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:12:25] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:12:26] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:12:27] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:12:28] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:12:29] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:12:30] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:12:31] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:12:32] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:12:33] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:12:34] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:12:35] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:12:36] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:12:37] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:12:38] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:12:39] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:12:40] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:12:41] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:12:42] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:12:43] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:12:44] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:12:45] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:12:46] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:12:47] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:12:48] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:12:49] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:12:50] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:12:51] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:12:52] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:12:53] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:12:54] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:12:55] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:12:56] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:12:57] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:12:58] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:12:59] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:13:00] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:13:01] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:13:02] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:13:03] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:13:04] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:13:05] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:13:06] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:13:07] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:13:08] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:13:09] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:13:10] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:13:11] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:13:12] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:13:13] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:13:14] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:13:15] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:13:16] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:13:17] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:13:18] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:13:19] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:13:20] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:13:21] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:13:22] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:13:23] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:13:24] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:13:25] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:13:26] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:13:27] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:13:28] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:13:29] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:13:30] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:13:31] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:13:32] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:13:33] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:13:34] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:13:35] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:13:36] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:13:37] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:13:38] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:13:39] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:13:40] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:13:41] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:13:42] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:13:43] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:13:44] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:13:45] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:13:46] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:13:47] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:13:48] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:13:49] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:13:50] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:13:51] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:13:52] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:13:53] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:13:54] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:13:55] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:13:56] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:13:57] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:13:58] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:13:59] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:14:00] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:14:01] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:14:02] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:14:03] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:14:04] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:14:05] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:14:06] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:14:07] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:14:08] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:14:09] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:14:10] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:14:11] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:14:12] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:14:13] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:14:14] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:14:15] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:14:16] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:14:17] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:14:18] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:14:19] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:14:20] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:14:21] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:14:22] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:14:23] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:14:24] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:14:25] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:14:26] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:14:27] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:14:28] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:14:29] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:14:30] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:14:31] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:14:32] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:14:33] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:14:34] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:14:35] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:14:36] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:14:37] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:14:38] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:14:39] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:14:40] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:14:41] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:14:42] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:14:43] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:14:44] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:14:45] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:14:46] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:14:47] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:14:48] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:14:49] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:14:50] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:14:51] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:14:52] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:14:53] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:14:54] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:14:55] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:14:56] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:14:57] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:14:58] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:14:59] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:15:00] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:15:01] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:15:02] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:15:03] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:15:04] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:15:05] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:15:06] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:15:07] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:15:08] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:15:09] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:15:10] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:15:11] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:15:12] [Thread-3] INFO  com.helper.LogUtils  - fuck
-[2021-01-04 16:15:19] [main] INFO  com.helper.LogUtils  - 
-========== Service Restarted ==========
-
-[2021-01-04 16:16:13] [main] INFO  com.helper.LogUtils  - 
-========== Service Restarted ==========
-
-[2021-01-04 16:17:48] [main] INFO  com.helper.LogUtils  - 
-========== Service Restarted ==========
-
-[2021-01-04 16:23:55] [main] INFO  com.helper.LogUtils  - 
-========== Service Restarted ==========
-
-[2021-01-04 16:29:54] [main] INFO  com.helper.LogUtils  - 
-========== Service Restarted ==========
-
-[2021-01-04 16:29:54] [Thread-3] INFO  com.helper.LogUtils  - {"airplaneId":"VN-VA470","supplierId":"VN-VA","isExpired":1,"carryOn":6.0,"checkInBaggage":24.0,"airlineStart":"VN-CD","airlineEnd":"VN-PC","price":868389.5520567026,"flightDate":1609740900000,"_id":{"timestamp":1609719521,"counter":4266674,"randomValue1":4792627,"randomValue2":2165},"id":"5ff25ee14921330875411ab2"}
-[2021-01-04 20:03:36] [main] INFO  com.helper.LogUtils  - 
-========== Service Restarted ==========
-
-[2021-01-04 20:06:25] [main] INFO  com.helper.LogUtils  - 
-========== Service Restarted ==========
-
-[2021-01-04 20:10:02] [main] INFO  com.helper.LogUtils  - 
-========== Service Restarted ==========
-
-[2021-01-04 22:27:54] [main] INFO  com.helper.LogUtils  - 
-========== Service Restarted ==========
-
-[2021-01-04 22:29:26] [main] INFO  com.helper.LogUtils  - 
-========== Service Restarted ==========
-
-[2021-01-04 23:53:30] [http-nio-8081-exec-1] ERROR com.helper.LogUtils  - [ERROR]
-java.lang.RuntimeException: java.lang.IndexOutOfBoundsException: Index 0 out of bounds for length 0
-	at com.service.LogService.runOptional(LogService.java:14)
-	at com.service.TicketService.searchFlight(TicketService.java:79)
-	at com.controller.TicketController.get(TicketController.java:70)
-	at jdk.internal.reflect.GeneratedMethodAccessor53.invoke(Unknown Source)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
-	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:190)
-	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:138)
-	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:105)
-	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:878)
-	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:792)
-	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
-	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1040)
-	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:943)
-	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
-	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:898)
-	at javax.servlet.http.HttpServlet.service(HttpServlet.java:626)
-	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)
-	at javax.servlet.http.HttpServlet.service(HttpServlet.java:733)
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
-	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
-	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
-	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:202)
-	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97)
-	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:541)
-	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:143)
-	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
-	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78)
-	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
-	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:374)
-	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
-	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:868)
-	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1590)
-	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
-	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
-	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
-	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
-	at java.base/java.lang.Thread.run(Thread.java:834)
-Caused by: java.lang.IndexOutOfBoundsException: Index 0 out of bounds for length 0
-	at java.base/jdk.internal.util.Preconditions.outOfBounds(Preconditions.java:64)
-	at java.base/jdk.internal.util.Preconditions.outOfBoundsCheckIndex(Preconditions.java:70)
-	at java.base/jdk.internal.util.Preconditions.checkIndex(Preconditions.java:248)
-	at java.base/java.util.Objects.checkIndex(Objects.java:372)
-	at java.base/java.util.ArrayList.get(ArrayList.java:459)
-	at com.service.TicketService.lambda$2(TicketService.java:88)
-	at com.service.LogService.runOptional(LogService.java:11)
-	... 43 more
-[2021-01-04 23:53:57] [http-nio-8081-exec-10] ERROR com.helper.LogUtils  - [ERROR]
-java.lang.RuntimeException: java.lang.IndexOutOfBoundsException: Index 0 out of bounds for length 0
-	at com.service.LogService.runOptional(LogService.java:14)
-	at com.service.TicketService.searchFlight(TicketService.java:79)
-	at com.controller.TicketController.get(TicketController.java:70)
-	at jdk.internal.reflect.GeneratedMethodAccessor53.invoke(Unknown Source)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
-	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:190)
-	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:138)
-	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:105)
-	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:878)
-	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:792)
-	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
-	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1040)
-	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:943)
-	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
-	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:898)
-	at javax.servlet.http.HttpServlet.service(HttpServlet.java:626)
-	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)
-	at javax.servlet.http.HttpServlet.service(HttpServlet.java:733)
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
-	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
-	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
-	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:202)
-	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97)
-	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:541)
-	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:143)
-	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
-	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78)
-	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
-	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:374)
-	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
-	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:868)
-	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1590)
-	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
-	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
-	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
-	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
-	at java.base/java.lang.Thread.run(Thread.java:834)
-Caused by: java.lang.IndexOutOfBoundsException: Index 0 out of bounds for length 0
-	at java.base/jdk.internal.util.Preconditions.outOfBounds(Preconditions.java:64)
-	at java.base/jdk.internal.util.Preconditions.outOfBoundsCheckIndex(Preconditions.java:70)
-	at java.base/jdk.internal.util.Preconditions.checkIndex(Preconditions.java:248)
-	at java.base/java.util.Objects.checkIndex(Objects.java:372)
-	at java.base/java.util.ArrayList.get(ArrayList.java:459)
-	at com.service.TicketService.lambda$2(TicketService.java:88)
-	at com.service.LogService.runOptional(LogService.java:11)
-	... 43 more
-[2021-01-04 23:59:52] [http-nio-8081-exec-3] ERROR com.helper.LogUtils  - [ERROR]
-java.lang.RuntimeException: java.lang.IndexOutOfBoundsException: Index 0 out of bounds for length 0
-	at com.service.LogService.runOptional(LogService.java:14)
-	at com.service.TicketService.searchFlight(TicketService.java:79)
-	at com.controller.TicketController.get(TicketController.java:70)
-	at jdk.internal.reflect.GeneratedMethodAccessor53.invoke(Unknown Source)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
-	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:190)
-	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:138)
-	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:105)
-	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:878)
-	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:792)
-	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
-	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1040)
-	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:943)
-	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
-	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:898)
-	at javax.servlet.http.HttpServlet.service(HttpServlet.java:626)
-	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)
-	at javax.servlet.http.HttpServlet.service(HttpServlet.java:733)
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
-	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
-	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
-	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:202)
-	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97)
-	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:541)
-	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:143)
-	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
-	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78)
-	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
-	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:374)
-	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
-	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:868)
-	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1590)
-	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
-	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
-	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
-	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
-	at java.base/java.lang.Thread.run(Thread.java:834)
-Caused by: java.lang.IndexOutOfBoundsException: Index 0 out of bounds for length 0
-	at java.base/jdk.internal.util.Preconditions.outOfBounds(Preconditions.java:64)
-	at java.base/jdk.internal.util.Preconditions.outOfBoundsCheckIndex(Preconditions.java:70)
-	at java.base/jdk.internal.util.Preconditions.checkIndex(Preconditions.java:248)
-	at java.base/java.util.Objects.checkIndex(Objects.java:372)
-	at java.base/java.util.ArrayList.get(ArrayList.java:459)
-	at com.service.TicketService.lambda$2(TicketService.java:88)
-	at com.service.LogService.runOptional(LogService.java:11)
-	... 43 more
-[2021-01-05 00:01:22] [http-nio-8081-exec-7] ERROR com.helper.LogUtils  - [ERROR]
-java.lang.RuntimeException: java.lang.IndexOutOfBoundsException: Index 0 out of bounds for length 0
-	at com.service.LogService.runOptional(LogService.java:14)
-	at com.service.TicketService.searchFlight(TicketService.java:79)
-	at com.controller.TicketController.get(TicketController.java:70)
-	at jdk.internal.reflect.GeneratedMethodAccessor53.invoke(Unknown Source)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
-	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:190)
-	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:138)
-	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:105)
-	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:878)
-	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:792)
-	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
-	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1040)
-	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:943)
-	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
-	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:898)
-	at javax.servlet.http.HttpServlet.service(HttpServlet.java:626)
-	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)
-	at javax.servlet.http.HttpServlet.service(HttpServlet.java:733)
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
-	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
-	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
-	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:202)
-	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97)
-	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:541)
-	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:143)
-	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
-	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78)
-	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
-	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:374)
-	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
-	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:868)
-	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1590)
-	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
-	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
-	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
-	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
-	at java.base/java.lang.Thread.run(Thread.java:834)
-Caused by: java.lang.IndexOutOfBoundsException: Index 0 out of bounds for length 0
-	at java.base/jdk.internal.util.Preconditions.outOfBounds(Preconditions.java:64)
-	at java.base/jdk.internal.util.Preconditions.outOfBoundsCheckIndex(Preconditions.java:70)
-	at java.base/jdk.internal.util.Preconditions.checkIndex(Preconditions.java:248)
-	at java.base/java.util.Objects.checkIndex(Objects.java:372)
-	at java.base/java.util.ArrayList.get(ArrayList.java:459)
-	at com.service.TicketService.lambda$2(TicketService.java:88)
-	at com.service.LogService.runOptional(LogService.java:11)
-	... 43 more
-[2021-01-05 00:01:53] [http-nio-8081-exec-10] ERROR com.helper.LogUtils  - [ERROR]
-java.lang.RuntimeException: java.lang.IndexOutOfBoundsException: Index 0 out of bounds for length 0
-	at com.service.LogService.runOptional(LogService.java:14)
-	at com.service.TicketService.searchFlight(TicketService.java:79)
-	at com.controller.TicketController.get(TicketController.java:70)
-	at jdk.internal.reflect.GeneratedMethodAccessor53.invoke(Unknown Source)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
-	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:190)
-	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:138)
-	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:105)
-	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:878)
-	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:792)
-	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
-	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1040)
-	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:943)
-	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
-	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:898)
-	at javax.servlet.http.HttpServlet.service(HttpServlet.java:626)
-	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)
-	at javax.servlet.http.HttpServlet.service(HttpServlet.java:733)
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
-	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
-	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
-	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:202)
-	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97)
-	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:541)
-	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:143)
-	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
-	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78)
-	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
-	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:374)
-	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
-	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:868)
-	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1590)
-	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
-	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
-	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
-	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
-	at java.base/java.lang.Thread.run(Thread.java:834)
-Caused by: java.lang.IndexOutOfBoundsException: Index 0 out of bounds for length 0
-	at java.base/jdk.internal.util.Preconditions.outOfBounds(Preconditions.java:64)
-	at java.base/jdk.internal.util.Preconditions.outOfBoundsCheckIndex(Preconditions.java:70)
-	at java.base/jdk.internal.util.Preconditions.checkIndex(Preconditions.java:248)
-	at java.base/java.util.Objects.checkIndex(Objects.java:372)
-	at java.base/java.util.ArrayList.get(ArrayList.java:459)
-	at com.service.TicketService.lambda$2(TicketService.java:88)
-	at com.service.LogService.runOptional(LogService.java:11)
-	... 43 more
-[2021-01-05 00:10:14] [main] INFO  com.helper.LogUtils  - 
+[2021-01-05 04:04:04] [main] INFO  com.helper.LogUtils  - 
 ========== Service Restarted ==========
 

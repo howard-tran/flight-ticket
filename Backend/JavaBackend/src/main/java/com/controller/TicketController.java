@@ -110,6 +110,19 @@ public class TicketController implements LogService {
     }
   }
 
+  @GetMapping("/getAirplaneModel")
+  public Response<Object> getAirplaneModel(
+    @RequestParam(name = "id", required = true) String id 
+  ) {
+    var res = this.ticketService.getAirplane(id);
+
+    if (res == null) {
+      return ResponseHandler.error(null);
+    } else {
+      return ResponseHandler.ok(res.get());
+    }
+  }
+
   @PostMapping("/addProfile")
   public Response<Object> addProfile(
     @RequestBody TicketProfile ticketProfile

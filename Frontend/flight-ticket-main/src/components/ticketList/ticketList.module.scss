@@ -16,7 +16,7 @@
   }
 
   .timeFlight {
-    width: 250px;
+    width: 200px;
     h5 {
       padding: 0px;
       margin: 0px;
@@ -26,13 +26,28 @@
   }
 
   .price {
-    width: 150px;
+    width: 200px;
 
     h5 {
       padding: 0px;
       margin: 0px;
       color: red;
       font-weight: bold;
+    }
+  }
+
+  .weight {
+    display: flex;
+    align-items: center;
+    width: 250px;
+
+    i {
+      margin-right: 5px;
+    }
+    h5 {
+      padding: 0px;
+      margin: 0px;
+      color: black;
     }
   }
 }
@@ -42,7 +57,7 @@
 }
 
 .ticketListMain {
-  max-height: 850px;
+  max-height: 880px;
   border: 1px #00617E solid;
   border-collapse: collapse;
 

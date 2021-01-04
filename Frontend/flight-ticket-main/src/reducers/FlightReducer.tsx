@@ -35,11 +35,26 @@ const initFlightSearch: FlightSearch = {
   seatClass: "", dateFlight: [0, 0], adult: 0, minor: 0, baby: 0
 }
 
+const initFlightInfo : FlightInfo = {
+  id: "", airlineEnd: "", airlineStart: "", airplaneId: "",
+  carryOn: 0, checkInBaggage: 0, flightDate: 0, isExpired: 0, price: 0,
+  supplierId: "" 
+}
+
 export let FlightSearchReducer: React.Reducer<FlightSearch, ActionType<any>> = (
   state = initFlightSearch, action
 ) => {
   switch (action.type) {
     case "search": return {...action.value};
+    default: return state;
+  }
+}
+
+export let FlightInfoReducer: React.Reducer<FlightInfo, ActionType<any>> = (
+  state = initFlightInfo, action
+) => {
+  switch (action.type) {
+    case "submitReceipt": return {...action.value};
     default: return state;
   }
 }

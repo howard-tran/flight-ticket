@@ -14,6 +14,7 @@ import style from "./App.module.scss";
 import Footer from "./components/footer/footer";
 import SignIn from "./screen/signIn/signIn";
 import { Ticket } from "./screen/ticket/ticket";
+import { SubmitReceipt } from "./screen/receipt/submitReceipt";
 
 function App() {
   const dispatch = useDispatch();
@@ -35,6 +36,9 @@ function App() {
 
           <Route path="/ticket" exact>
             <Ticket></Ticket>
+          </Route>
+
+          <Route path="/submitReceipt/:flightId" component={SubmitReceipt} exact>
           </Route>
         </Switch>
         

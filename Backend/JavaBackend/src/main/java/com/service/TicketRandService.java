@@ -23,6 +23,7 @@ import com.model.Route;
 import com.model.Ticket;
 import com.model.TicketSeatType;
 import com.model.TicketSupplier;
+import com.mongodb.client.FindIterable;
 
 import org.bson.Document;
 import org.bson.types.ObjectId;
@@ -126,13 +127,20 @@ public class TicketRandService extends TicketRandUtils implements LogService {
   IConsumer updateTask = () -> {
     this.run(PropertyHelper.getMongoDB(), "Flight", 
       collection -> {
-        for (var doc : collection.find(new Document("isExpired", 0))) {
+        FindIterable<Document> col = collection.find(new Document("isExpired", 0));
+
+        for (var doc : col.sort(new Document("_id", -1))) {
           Flight flight = this.parseWithId(doc, Flight.class);
+          
+          Long a = DateTime.now().getMillis();
+          Long b = flight.getFlightDate();
 
-          if (DateTime.now().getMillis() > flight.getFlightDate()) {
+          if (a.compareTo(b) > 0) {
             flight.setIsExpired(1);
+            
+            System.out.println("expired flight");
 
-            collection.replaceOne(new Document("_id", new ObjectId(flight.getId())), 
+            collection.updateOne(new Document("_id", new ObjectId(flight.getId())), 
               this.toBsonDocumentWithId(flight));
           }
         }
@@ -155,7 +163,6 @@ public class TicketRandService extends TicketRandUtils implements LogService {
         }
       }
     });
-    newThread.start();
     
     Thread updateFlightThread = new Thread(() -> {
 
@@ -165,12 +172,13 @@ public class TicketRandService extends TicketRandUtils implements LogService {
           e.printStackTrace();
         }
 
-        try {Thread.sleep(1000l);}
+        try {Thread.sleep(300000l);}
         catch (Exception e) {
           e.printStackTrace();
         }
       }
     });
+    newThread.start();
     updateFlightThread.start();
   }
 }

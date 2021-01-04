@@ -86,6 +86,46 @@ export const TicketList: React.FC<{ dateIndex: number }> = (par) => {
     });
   }
 
+  const sortOptionHandle = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    if (e.target.value == "") return;
+
+    let arr = [...listFlight];
+
+    if (e.target.value == "time:increase") {
+      arr.sort((a, b) => {
+        return a.flightDate - b.flightDate;
+      });
+    }
+    if (e.target.value == "time:decrease") {
+      arr = arr.sort((a, b) => {
+        return b.flightDate - a.flightDate;
+      });
+    }
+    
+    if (e.target.value == "price:increase") {
+      arr = arr.sort((a, b) => {
+        return a.price - b.price;
+      });
+    }
+    if (e.target.value == "price:decrease") {
+      arr = arr.sort((a, b) => {
+        return b.price - a.price;
+      });
+    }
+
+    if (e.target.value == "weight:increase") {
+      arr = arr.sort((a, b) => {
+        return a.checkInBaggage - b.checkInBaggage;
+      });
+    }
+    if (e.target.value == "weight:decrease") {
+      arr = arr.sort((a, b) => {
+        return b.checkInBaggage - a.checkInBaggage;
+      });
+    }
+    setListFlight(arr);
+  }
+
   useEffect(() => {
     requestHeading();
     requestFlight(0);
@@ -103,11 +143,32 @@ export const TicketList: React.FC<{ dateIndex: number }> = (par) => {
       <div style={{backgroundColor:"#00617E", padding:"5px", color:"white"}}>
         <h2 style={{marginLeft:"5px", marginTop:"5px", fontWeight:"bold"}}>{heading}</h2>
         <h3 style={{marginLeft:"5px", marginTop:"5px"}}>{localFlightDate()}</h3>
+
+        <label style={{fontSize:"20px", marginRight:"5px"}}>Sort by</label>
+        <select style={{fontSize:"20px", marginRight:"5px"}}
+          onChange={sortOptionHandle}>
+          <option value="">None</option>
+
+          <optgroup label="Time">
+            <option value="time:increase">Increase</option>
+            <option value="time:decrease">Decrease</option>
+          </optgroup>
+
+          <optgroup label="Price">
+            <option value="price:increase">Increase</option>
+            <option value="price:decrease">Decrease</option>
+          </optgroup>
+
+          <optgroup label="Weight">
+            <option value="weight:increase">Increase</option>
+            <option value="weight:decrease">Decrease</option>
+          </optgroup> 
+        </select>
       </div>
 
       <div className={style.ticketList} ref={setListFlightRef}>
         {listFlight.map(flight =>
-          <TicketComponent 
+          <TicketComponent
             id={flight.id}
             supplierId={flight.supplierId}
             price={flight.price}
@@ -117,7 +178,8 @@ export const TicketList: React.FC<{ dateIndex: number }> = (par) => {
             carryOn={flight.carryOn}
             checkInBaggage={flight.checkInBaggage}
             airlineStart={flight.airlineStart}
-            airlineEnd={flight.airlineEnd}>
+            airlineEnd={flight.airlineEnd}
+            seatClass={flightSearchState.seatClass}>
           </TicketComponent>)}
       </div>
       

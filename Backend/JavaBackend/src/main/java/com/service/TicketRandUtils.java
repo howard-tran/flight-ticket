@@ -67,9 +67,9 @@ public class TicketRandUtils implements IMongoDBQueryLogic {
 
   protected static int randomTicketCount(String seatClass) {
     if (seatClass.equals(TicketSeatType.BUSINESS.toString())) {
-      return new Random().nextInt(11) + 1;
+      return new Random().nextInt(5) + 0;
     } else if (seatClass.equals(TicketSeatType.PRENIUM.toString())) {
-      return new Random().nextInt(21) + 1;
+      return new Random().nextInt(8) + 0;
     } else {
       return new Random().nextInt(60) + 5;
     }

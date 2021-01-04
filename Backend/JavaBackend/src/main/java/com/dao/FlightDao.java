@@ -7,6 +7,7 @@ import com.google.gson.Gson;
 import com.helper.DatabaseSupplier;
 import com.helper.PropertyHelper;
 import com.helper.UnixHelper;
+import com.model.Airplane;
 import com.model.Flight;
 
 import org.bson.Document;
@@ -31,12 +32,25 @@ public class FlightDao implements IFlightDao  {
   @Override
   public Integer updateFlight(Flight flight) throws Exception {
     return this.run(PropertyHelper.getMongoDB(), "Flight",
-    collection -> {
-      var filter = new Document("_id", new ObjectId(flight.getId()));
-      
-      return (int)collection.updateOne(filter, this.toBsonDocument(flight))
-        .getMatchedCount();
-    });
+      collection -> {
+        var filter = new Document("_id", new ObjectId(flight.getId()));
+        
+        return (int)collection.updateOne(filter, this.toBsonDocument(flight))
+          .getMatchedCount();
+      });
+  }
+
+  @Override
+  public Airplane getAirplaneModel(String id) throws Exception {
+    return this.run(PropertyHelper.getMongoDB(), "Airplane",
+      collection -> {
+        var filter = new Document("id", id);
+        
+        Document doc = collection.find(filter).first();
+        if (doc == null) return null;
+
+        return this.parse(doc, Airplane.class);
+      });
   }
 
   @Override
