@@ -1,9 +1,10 @@
 import React from "react";
+import logo from "../../resource/images/icons/appIcon.png"
 
 const Header: React.FC = () => {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
-      <img className="mb-4" src="/cdn/cdn/7f3c2238cb73ebb949c1535b33d1bb0701012021.png" alt="" width="42" height="42"
+      <img className="mb-4" src={logo} alt="" width="42" height="42"
         style={{transform:"translateY(10px)", marginRight:"5px"}}></img>
       <a className="navbar-brand" href="#">AirBooking</a>
       <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

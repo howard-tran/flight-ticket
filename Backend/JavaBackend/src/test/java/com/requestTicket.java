@@ -1,4 +1,4 @@
-package com.service;
+package com;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -10,6 +10,7 @@ import com.dao.IFlightDao;
 import com.dao.ITicketDao;
 import com.helper.DatabaseSupplier;
 import com.helper.IConsumer;
+import com.helper.IFunction;
 import com.helper.IFunction2;
 import com.helper.IFunction3;
 import com.helper.IFunction4;
@@ -24,19 +25,25 @@ import com.model.Ticket;
 import com.model.TicketSeatType;
 import com.model.TicketSupplier;
 import com.mongodb.client.FindIterable;
+import com.service.AirplaneStatic;
+import com.service.RouteStatic;
+import com.service.UpdateSystemService;
+import com.service.TicketRandUtils;
 
 import org.bson.Document;
 import org.bson.types.ObjectId;
 import org.joda.time.DateTime;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-public class TicketRandService extends TicketRandUtils implements LogService {
+public class requestTicket extends testCaseHandler {
+
   private ITicketDao ticketDao;
   private IFlightDao flightDao;
   
-  public TicketRandService(
+  public requestTicket(
     @Qualifier(DatabaseSupplier.MongoDB.FlightTicket.Ticket) ITicketDao ticketDao,
     @Qualifier(DatabaseSupplier.MongoDB.FlightTicket.Flight) IFlightDao flightDao
   ) {
@@ -67,7 +74,7 @@ public class TicketRandService extends TicketRandUtils implements LogService {
   
   // need generate position
   IFunction3<String, String, Object> createTicket = (flightId, seatClass) -> {
-    int ticketCount = TicketRandService.randomTicketCount(seatClass);
+    int ticketCount = UpdateSystemService.randomTicketCount(seatClass);
 
     Ticket ticket = new Ticket(flightId, seatClass, ticketCount);
     this.ticketDao.insertTicket(ticket);
@@ -81,8 +88,8 @@ public class TicketRandService extends TicketRandUtils implements LogService {
       Flight flight = new Flight(airplane.getId(), supplier, 0, 
         TicketRandUtils.getWeight().get_1(), TicketRandUtils.getWeight().get_2(),
         route.getAirlineStart(), route.getAirlineEnd(), 
-        TicketRandService.randomPrice(), flightDate);
-
+        UpdateSystemService.randomPrice(), flightDate);
+      
       String flightId = this.flightDao.insertFlight(flight);
 
       this.createTicket.run(flightId, TicketSeatType.BUSINESS.toString());
@@ -124,61 +131,18 @@ public class TicketRandService extends TicketRandUtils implements LogService {
       });
   };
 
-  IConsumer updateTask = () -> {
-    this.run(PropertyHelper.getMongoDB(), "Flight", 
-      collection -> {
-        FindIterable<Document> col = collection.find(new Document("isExpired", 0));
-
-        for (var doc : col.sort(new Document("_id", -1))) {
-          Flight flight = this.parseWithId(doc, Flight.class);
-          
-          Long a = DateTime.now().getMillis();
-          Long b = flight.getFlightDate();
-
-          if (a.compareTo(b) > 0) {
-            flight.setIsExpired(1);
-            
-            System.out.println("expired flight");
-
-            collection.updateOne(new Document("_id", new ObjectId(flight.getId())), 
-              this.toBsonDocumentWithId(flight));
-          }
-        }
-        return null;
-      });
-  };
-  
-  public void start() {
-    Thread newThread = new Thread(() -> {
-
-      while (true) {
-        try {serviceTask.run();}
-        catch (Exception e) {
-          e.printStackTrace();
-        }
-
-        try {Thread.sleep(7200000l);}
-        catch (Exception e) {
-          e.printStackTrace();
-        }
+  @Test
+  public void entryPoint() throws Exception {
+    while (true) {
+      try {serviceTask.run();}
+      catch (Exception e) {
+        e.printStackTrace();
       }
-    });
-    
-    Thread updateFlightThread = new Thread(() -> {
 
-      while (true) {
-        try {updateTask.run();}
-        catch (Exception e) {
-          e.printStackTrace();
-        }
-
-        try {Thread.sleep(300000l);}
-        catch (Exception e) {
-          e.printStackTrace();
-        }
+      try {Thread.sleep(7200000l);}
+      catch (Exception e) {
+        e.printStackTrace();
       }
-    });
-    newThread.start();
-    updateFlightThread.start();
+    }
   }
 }

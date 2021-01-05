@@ -51,6 +51,7 @@ export const TicketList: React.FC<{ dateIndex: number }> = (par) => {
 
     Axios.get(url).then(response => {
       let arrayData: ArrayData<FlightInfo[]> = response.data.data as ArrayData<FlightInfo[]>;
+      console.log(arrayData.array);
       setListFlight(arrayData.array);
       setDtbSize(arrayData.dtbSize);
     });
